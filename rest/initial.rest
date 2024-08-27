@@ -2,12 +2,12 @@
 
 @json = application/json
 @localHost = http://localhost:1899
-@devHost = http://202.149.64.35:31245
+@devHost = https://gai.co.id/gai-ai-service
 @host = {{devHost}}
 @apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
 @ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNTJRRTM2UlgzUUtGRzNZWjU0WEpXQjIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI0Mzk2MjE2fQ.NOqfW3Ljg80ZvQuoZwHtFY2gVsMjHYvgNXneAq-AbiA
 @partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUoyWllYTjJSWVlHSzc2TlNCUTJSV0owMiIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzIxNDMzNTAyfQ.yomnaf9KczdgQEf7qBe4z3LU38uyZr4VO7kNOZxy7rU
-@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKMzJIMjMyOUZZS1owMUpLM0U3SlJUSkYiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzIzODA0MjkxfQ.E9HxT1l1MznCbG5OXhMpiDo3kydSKYaKzv2GLs4GTpA
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNTJTWVZYRVQwSjZDS0JQVk05Wlo1M0oiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI0ODIzNjc5fQ.bVGij6vBeuarzSai7PWEP5HeqiBJaKK6VEHS1rw53Iw
 @token = {{clientToken}}
 
 
@@ -191,7 +191,7 @@ authorization: {{token}}
 Api-Key: {{apiKey}}
 
 ### get client by code, name, phone, email, status, waNumber
-GET {{host}}/v1/root/org/by?phone=62811223344 HTTP/1.1
+GET {{host}}/v1/root/org/by?phone=628152233201 HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 

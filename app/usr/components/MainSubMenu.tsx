@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { MenusList } from "@@/src/types/menustypes"
 import Link from "next/link"
 import { Icon } from '@iconify/react';
 import { usePathname } from "next/navigation";
+import { MenusList } from "@@/src/types/types";
 
 export default function MainSubMenu({
     active,
@@ -21,7 +21,7 @@ export default function MainSubMenu({
             const filter = menus.filter(res => res.parent === split)
             setSubMenu(filter)
         }
-    }, [active])
+    }, [active, menus])
 
     if(submenu.length > 0)
   return (

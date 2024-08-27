@@ -40,3 +40,10 @@ export const tryLogout = async () => {
     const responseData = result.data
     return responseData
 }
+
+
+export const getOrg = async () => {
+    const result = await axios.get(`${baseURL}/root/org`)
+    const responseData = result.data
+    return responseData
+}

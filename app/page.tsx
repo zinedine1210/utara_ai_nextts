@@ -2,23 +2,23 @@
 'use client'
 import { useGlobalContext } from '@@/src/context/GlobalContext';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function Home() {
   const { state, setState } = useGlobalContext();
   const data = state?.dataCollection
 
-  const getData = async () => {
+  const getData: any = useCallback(async () => {
     const result = await axios.get('/api/data')
     console.log(result)
     setState({ ...state, dataCollection: result.data })
-  }
+  }, [state, setState])
 
   useEffect(() => {
     if(!state?.dataCollection){
       getData()
     }
-  }, [state]);
+  }, [getData, state]);
 
   return (
     <div>

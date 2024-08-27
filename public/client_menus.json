@@ -50,6 +50,18 @@
   {
     "description": "",
     "feature": "",
+    "icon": "material-symbols:linked-services-outline",
+    "parent": "clm_knowledge",
+    "sortnumber": 303,
+    "id": "clm_knowledge_services",
+    "route": "/usr/knowledge/services",
+    "name": "Services",
+    "flag": "Knowledge Builder",
+    "show": true
+  },
+  {
+    "description": "",
+    "feature": "",
     "icon": "ic:outline-integration-instructions",
     "parent": "",
     "sortnumber": 20,

@@ -1,24 +1,24 @@
 'use client'
-import { MenusList } from "@@/src/types/menustypes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import MainSubMenu from "./MainSubMenu";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { MenusList } from "@@/src/types/types";
 
 export default function Sidebar() {
   const [menus, setMenus] = useState<MenusList[]>([]);
   const pathname = usePathname()
   const [isActive, setActive] = useState('')
 
-  const isActivePageID = () => {
+  const isActivePageID = useCallback(() => {
     const storedMenus: string | null = localStorage.getItem('client_menus')
     if(!storedMenus) return false
 
     const menuslist = JSON.parse(storedMenus)
     const findIndex: number = menuslist.findIndex((res: MenusList) => res.route === pathname)
     setActive(menuslist[findIndex].id)
-  }
+  }, [pathname])
 
   useEffect(() => {
     const storedMenus = localStorage.getItem('client_menus');
@@ -29,7 +29,7 @@ export default function Sidebar() {
 
   useEffect(() => {
     isActivePageID()
-  }, [pathname])
+  }, [pathname, isActivePageID])
 
   const LoopingMenus = (): ReactNode => {
     let dataFinal: any = {}

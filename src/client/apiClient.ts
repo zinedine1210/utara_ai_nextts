@@ -33,9 +33,8 @@ const client = async (urlSuffix: string, options: OptionsClient, abortSignal: Ab
       success: false,
       data: null,
       status: 404,
-      message: 'error bro'
+      message: error.message
     }
-    throw error
   }
 }
 

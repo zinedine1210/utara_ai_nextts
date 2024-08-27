@@ -1,6 +1,5 @@
 // app/admin/page.tsx
 'use client'
-
 import { tryLogout } from "@@/src/hooks/CollectionAPI";
 import { ResponseData } from "@@/src/types/apitypes";
 import { Notify } from "@@/src/utils/script";
@@ -15,7 +14,6 @@ export default function AdminPage() {
       router.push('/auth')
     }else Notify('Something went wrong', 'error')
   }
-
 
   return (
     <div>
