@@ -2,7 +2,7 @@
 
 const nextConfig = {
     env: {
-        PUBLIC_API_URL: 'https://konekgpt.gnusa.id/service',
+        PUBLIC_API_URL: 'https://gai.co.id/gai-ai-service/v1',
         BASE_API_URL: 'http://localhost:3000/api'
     },
     reactStrictMode: false,

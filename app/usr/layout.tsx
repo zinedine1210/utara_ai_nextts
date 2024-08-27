@@ -1,5 +1,5 @@
 // app/admin/layout.tsx
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 
