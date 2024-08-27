@@ -25,7 +25,6 @@ const baseURL = process.env.BASE_API_URL ?? finalBaseDomainAPI;
 export const tryLogin = async (payload: any) => {
     const result = await axios.post(`${baseURL}/auth/login`, payload)
     const responseData = result.data
-    console.log(result)
     if(responseData.success){
         if(responseData.data.access_token){
             setCookies('auth_token', responseData.data.access_token)

@@ -1,5 +1,4 @@
 import axios from "axios";
-import cbor from 'cbor';
 import { OptionsClient } from "../types/apitypes";
 
 const client = async (urlSuffix: string, options: OptionsClient, abortSignal: AbortSignal) => {
@@ -7,8 +6,8 @@ const client = async (urlSuffix: string, options: OptionsClient, abortSignal: Ab
     const baseUrl = process.env.PUBLIC_API_URL
     
     const defaultHeaders = {
-      'Accept': 'application/cbor',
-      'Content-Type': 'application/cbor'
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     }
 
     const config = {
@@ -17,14 +16,11 @@ const client = async (urlSuffix: string, options: OptionsClient, abortSignal: Ab
         ...defaultHeaders,
         ...options.headers
       },
-      responseType: 'arraybuffer',
       signal: abortSignal,
       ...(options?.body && { data: options?.body })
     }
     
     const response = await axios(`${baseUrl}${urlSuffix}`, config)
-    response.data = cbor.decode(response.data)
-
     if (response.status === 200) {
       return response.data
     }
@@ -37,8 +33,9 @@ const client = async (urlSuffix: string, options: OptionsClient, abortSignal: Ab
       success: false,
       data: null,
       status: 404,
-      message: error.message
+      message: 'error bro'
     }
+    throw error
   }
 }
 
