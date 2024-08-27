@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Quicksand:wght@300;400;500;600;700&family=Space+Mono&display=swap');
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Poppins', sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.font-monospace {
+	font-family: 'Space Mono', sans-serif;
+}
+
+@layer utilities {
+	.contain {
+		@apply container mx-auto;
+	}
+	.full-hover {
+		@apply w-full hover:bg-blue-50 duration-300 text-start
+	}
+	.btn-primary {
+		@apply flex items-center justify-center px-3 xl:px-3 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600 disabled:bg-zinc-500 disabled:cursor-not-allowed;
+	}
+
+	.btn-secondary {
+		@apply px-3 xl:px-5 py-2 text-sm text-zinc-800 transition-colors duration-200 bg-white border rounded-lg w-auto dark:hover:bg-zinc-800 dark:bg-zinc-900 hover:bg-zinc-100 dark:text-white dark:border-zinc-700 flex items-center justify-center gap-x-2 disabled:bg-zinc-300 disabled:cursor-not-allowed;
+	}
+
+	.input-style {
+		@apply bg-zinc-50 text-sm py-3 px-5 transition-colors duration-300 disabled:bg-zinc-300 disabled:placeholder:text-black disabled:text-black outline-none border-2 hover:bg-zinc-100 focus:bg-white focus:border-light dark:bg-dark2 dark:border-none rounded-md;
+	}
+
+	.user-avatar {
+		@apply flex items-center justify-center rounded-full shadow-md font-bold;
+	}
+
+	.editable-text {
+		@apply inline-block dark:focus:bg-black dark:hover:bg-black py-0.5 rounded-sm focus:outline-none hover:bg-zinc-100 focus:bg-zinc-200 duration-300 transition-colors editable;
+	}
+
+	.badge-blue {
+		@apply bg-blue-100 rounded-md text-xs font-bold py-1.5 px-4 text-blue-500 hover:bg-blue-200 transition-colors duration-300 flex items-center gap-1;
+	}
+	.filter-label {
+		@apply w-fit min-w-fit text-xs rounded-xl dark:bg-dark py-2 px-3 flex items-center border border-blue-500 dark:text-zinc-300;
+	}
+}
+
+.nav-shadow {
+	background: linear-gradient(
+		rgb(255, 255, 255) 5%,
+		rgba(255, 255, 255, 75%) 45%,
+		rgba(255, 255, 255, 20%) 80%,
+		transparent
+	);
+}
+
+.editable:empty:before {
+	content: attr(data-placeholder);
+	color: #9e9e9e;
+	font-weight: 400;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+.reactmarkdown ul {
+	list-style: circle;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #fff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #1986f3;
+	border-radius: 20px;
+	width: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(3, 179, 255, 0.8);
+}
