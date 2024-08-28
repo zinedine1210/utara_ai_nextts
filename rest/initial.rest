@@ -68,9 +68,9 @@ Accept: {{json}}
 content-type: {{json}}
 
 {
-  "userName": "test10",
+  "userName": "halo",
   "password": "123456",
-  "email": "test10@gmail.com",
+  "email": "halo@gmail.com",
   "phone": "62816112233"
 }
 
@@ -185,7 +185,7 @@ authorization: {{token}}
 }
 
 ### find organization by id
-GET {{host}}/v1/root/org/id/01J32H2329FYKZ01JK3E7JRTJF HTTP/1.1
+GET {{host}}/v1/root/org/id/01J52SSP071GNM8624YZWABTJW HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 Api-Key: {{apiKey}}

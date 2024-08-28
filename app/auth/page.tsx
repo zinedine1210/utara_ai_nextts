@@ -7,6 +7,7 @@ import { ResponseData } from '@@/src/types/apitypes';
 import { Notify } from '@@/src/utils/script';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import myImageLoader from '@@/src/utils/loader';
 
 export default function LoginPage() {
   const [value, setValue] = useState({
@@ -42,8 +43,16 @@ export default function LoginPage() {
     <section className='flex items-center justify-center w-screen h-screen'>
       <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
         <div className="px-6 py-4">
-            <div className="flex justify-center mx-auto">
-                <Image className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="" />
+            <div className="flex justify-center mx-auto relative">
+                <Image
+                  src="https://merakiui.com/images/logo.svg" 
+                  alt="Gambar login"
+                  width={50} 
+                  height={50}
+                  placeholder={`data:image/${myImageLoader(50, 50)}`}
+                  // placeholder='blur'
+                  // blurDataURL={myImageLoader(300, 500)}
+                />
             </div>
 
             <h3 className="mt-3 text-xl font-medium text-center text-gray-600 dark:text-gray-200">Welcome Back</h3>

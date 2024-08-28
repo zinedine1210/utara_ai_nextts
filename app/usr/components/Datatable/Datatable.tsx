@@ -117,9 +117,10 @@ export default function Datatable({
     
   return (
     <>
-        <div className="relative overflow-x-auto shadow-md rounded-md">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="bg-white dark:bg-dark text-sm text-gray-700 uppercase dark:text-gray-400">
+        <div className="relative overflow-x-auto">
+            <h1 className="mb-5 dark:text-white">Showing { showing } to { showingTo } of {totalCount} Entries</h1>
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-xl">
+                <thead className="bg-white dark:bg-dark text-sm text-gray-700 uppercase dark:text-gray-400 rounded-xl">
 
                     {/* HEADERS LOOPING */}
                     <tr className="bg-white border-b-2 border-black">
@@ -197,7 +198,7 @@ export default function Datatable({
                 </tbody>
             </table>
         </div>
-        <div className="md:flex items-center justify-between mt-5 hidden">
+        {/* <div className="xl:flex items-center justify-between mt-5 hidden">
             <h1 className="text-sm text-cText dark:text-white">Showing { showing } to { showingTo } of {totalCount} Entries</h1>
             <div className="flex items-center gap-5">
                 <div className="flex items-center ">
@@ -212,17 +213,18 @@ export default function Datatable({
                         }
                     </select>
                 </div>
-
-                <Pagination
-                    handleNext={handleNext} 
-                    handlePrev={handlePrev} 
-                    handleForward={handleForward}
-                    handleBackward={handleBackward}
-                    handleClickPage={(e: any) => handleClickPage(e)}
-                    page={page} 
-                    pagerList={Math.ceil(totalCount/display)}
-                />
             </div>
+        </div> */}
+        <div className="mt-5">
+            <Pagination
+                handleNext={handleNext} 
+                handlePrev={handlePrev} 
+                handleForward={handleForward}
+                handleBackward={handleBackward}
+                handleClickPage={(e: any) => handleClickPage(e)}
+                page={page} 
+                pagerList={Math.ceil(totalCount/display)}
+            />
         </div>
     </>
   )

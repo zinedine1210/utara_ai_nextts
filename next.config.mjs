@@ -17,6 +17,17 @@ const nextConfig = {
     // experimental: {
     //     missingSuspenseWithCSRBailout: false,
     // },
+    images: {
+        // loader: 'custom',
+        // loaderFile: './loader.js',
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'merakiui.com',
+                port: ''
+            }
+        ]
+    }
 };
 
 export default nextConfig;

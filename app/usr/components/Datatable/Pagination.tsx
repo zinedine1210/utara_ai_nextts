@@ -38,48 +38,45 @@ const Pagination = ({page, pagerList, handleNext, handlePrev, handleBackward, ha
     }
 
     return (
-        <div className="flex space-x-1">
-            {
-                    page > 1 ?
-                    <button type="button" onClick={handleBackward} className="w-8 h-8 rounded-md flex items-center justify-center">
-                        <span title="previous" >
-                            <Icon icon={'prime:backward'} className="text-2xl"/>
-                        </span>
-                    </button>:""
-            }
-            {
-                    page > 1 ?
-                    <button type="button" onClick={handlePrev}>
-                        <span title="previous" className="w-8 h-8 flex items-center justify-center">
-                            <Icon icon={'tabler:chevron-left'} className="text-2xl"/>
-                        </span>
-                    </button>
-                :""
-            }
-            {
-                arrayPages && arrayPages.length > 0 ? arrayPages.map((e, i) => {
-                        return <button key={i} onClick={() => handleClickPage(e)}><div className={`cursor-pointer flex items-center justify-center w-8 h-8 rounded-md dark:text-white ${page === e ? 'bg-blue-500 text-white':''}`} key={i}><span className={`page-link ${page === e ? '':''}`}>{e}</span></div></button>
-                }):''
-            }
-            {
-                page < pagerList ? 
+        <div className="flex justify-between">
+            <div className="flex items-center space-x-1">
+                <button type="button" disabled={!(page > 1)} onClick={handleBackward} className="disabled:bg-zinc-300 py-2 px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm flex items-center">
+                    <span title="previous" >
+                        <Icon icon={'system-uicons:backward'} className="text-2xl"/>
+                    </span>
+                    Backward
+                </button>
+                <button type="button" onClick={handlePrev} disabled={!(page > 1)} className="disabled:bg-zinc-300 py-2 px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm flex items-center">
+                    <span title="previous">
+                        <Icon icon={'fluent:arrow-previous-20-filled'} className="text-2xl"/>
+                    </span>
+                    Previous
+                </button>
+            </div>
 
-                <button type="button" onClick={handleNext}>
-                    <span title="previous" className="w-8 h-8 rounded-md flex items-center justify-center">
-                        <Icon icon={'tabler:chevron-right'} className="text-2xl"/>
+            <div className="flex items-center space-x-1">
+                {
+                    arrayPages && arrayPages.length > 0 ? arrayPages.map((e, i) => {
+                            return <button key={i} onClick={() => handleClickPage(e)}><div className={`cursor-pointer flex items-center justify-center w-9 h-9 rounded-md dark:text-white ${page === e ? 'bg-blue-100 text-blue-500 border border-blue-200':''}`} key={i}><span className={`page-link ${page === e ? '':''}`}>{e}</span></div></button>
+                    }):''
+                }
+            </div>
+
+            <div className="flex items-center space-x-1">
+                <button type="button" onClick={handleNext} disabled={!(page < pagerList)} className="disabled:bg-zinc-300 py-2 px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm flex items-center">
+                    Next
+                    <span title="next" >
+                        <Icon icon={'fluent:arrow-next-20-filled'} className="text-2xl"/>
                     </span>
                 </button>
-                :"" 
-            }
-            {
-                page < pagerList ?
-                <button type="button" onClick={handleForward}>
-                    <span title="previous" className="w-8 h-8 rounded-md flex items-center justify-center">
-                        <Icon icon={'prime:forward'} className="text-2xl"/>
+                <button type="button" disabled={!(page < pagerList)} onClick={handleForward} className="disabled:bg-zinc-300 py-2 px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm flex items-center">
+                    Forward
+                    <span title="forward">
+                        <Icon icon={'system-uicons:forward'} className="text-2xl"/>
                     </span>
                 </button>
-                    :""
-            }
+
+            </div>
         </div>
     );
 };
