@@ -1,6 +1,6 @@
-import { useGlobalContext } from "@@/src/context/GlobalContext"
+import { useGlobalContext } from "@@/src/providers/GlobalContext"
 import Pagination from "./Pagination"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { StateType } from "@@/src/types/types"
 import { displayListNumber } from "../../../../src/constant/table"
 import { Icon } from "@iconify/react/dist/iconify.js"
@@ -16,12 +16,16 @@ export default function Datatable({
     const [status, setStatus] = useState<string>('')
     const property: StateType<any> = state[statename]
     // property 
-    const display = property.display
-    const headers = property.headers
-    const data = property.data
-    const columns = property.columns
-    const page = property.page
-    const totalCount = property.totalCount
+    const display = property?.display
+    const headers = property?.headers
+    const data = property?.data
+    const columns = property?.columns
+    const page = property?.page
+    const totalCount = property?.totalCount
+    const bulk = property?.bulk
+    const isLoading = property?.isLoading ?? true
+
+    useEffect(() => {},[isLoading])
 
     const handleNext = async () => {
         const totalCount = property?.totalCount
@@ -115,10 +119,12 @@ export default function Datatable({
 
     const showing = totalCount > 0 ? (display * page) - display + 1 : 0
     const showingTo = display * page > totalCount ? totalCount: display * page
+
+    const skeletonLoading = Array.from({ length: Number(display) }, (_, i) => i + 1);
     
   return (
     <div>
-        <div className={`${property.isLoading && 'pointer-events-none'} relative overflow-x-auto`}>
+        <div className={`${isLoading && !data && 'pointer-events-none'} relative overflow-x-auto`}>
             <div className="flex items-center justify-between mb-5 ">
                 <h1 className="dark:text-white">Showing { showing } to { showingTo } of {totalCount} Entries</h1>
                 <div className="flex items-center ">
@@ -140,7 +146,7 @@ export default function Datatable({
                     {/* HEADERS LOOPING */}
                     <tr className="bg-white border-b-2 border-black">
                         {
-                            headers.map((head, key) => {
+                            headers && headers.map((head, key) => {
                                 if(head.sort)
                                 return (
                                     <th scope="col" key={key} className="px-5 py-4 group">
@@ -163,7 +169,7 @@ export default function Datatable({
                             })
                         }
                         {
-                            property.bulk && (
+                            bulk && (
                                 <th className={`px-5 py-4`}>
                                     Bulk Action
                                 </th>
@@ -175,8 +181,8 @@ export default function Datatable({
 
                     {/* DATA LOOPING */}
                     {
-                        property.isLoading && !data ?
-                            new Array(Number(display)).fill("loaders").map((load, loadIndex) => {
+                        isLoading ?
+                            skeletonLoading.map((load, loadIndex) => {
                                 return (
                                     <SkeletonTable key={loadIndex} headers={headers} />
                                 )
@@ -203,9 +209,9 @@ export default function Datatable({
                                             })
                                         }
                                         {
-                                            property.bulk && (
+                                            bulk && (
                                                 <td className="relative">
-                                                    <Dropdown id={item.id} options={property.bulk}/>
+                                                    <Dropdown id={item.id} options={bulk}/>
                                                 </td>
                                             )
                                         }

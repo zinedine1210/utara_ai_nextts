@@ -25,6 +25,7 @@ const baseURL = process.env.BASE_API_URL ?? finalBaseDomainAPI;
 export const tryLogin = async (payload: any) => {
     const result = await axios.post(`${baseURL}/auth/login`, payload)
     const responseData = result.data
+    console.log(result)
     if(responseData.success){
         if(responseData.data.access_token){
             setCookies('auth_token', responseData.data.access_token)
@@ -49,6 +50,23 @@ export const getOrg = async () => {
 
 export const getTraining = async () => {
     const result = await axios.get(`${baseURL}/data/knowledge/training`)
+    const responseData = result.data
+    return responseData
+}
+
+export const getAttachment = async () => {
+    const result = await axios.get(`${baseURL}/data/knowledge/attachment`)
+    const responseData = result.data
+    return responseData
+}
+
+export const getChannel = async () => {
+    const result = await axios.get(`${baseURL}/data/channel`)
+    const responseData = result.data
+    return responseData
+}
+export const getDetailTraining = async (id: string) => {
+    const result = await axios.get(`${baseURL}/data/knowledge/training/${id}`)
     const responseData = result.data
     return responseData
 }

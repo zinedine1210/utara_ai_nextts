@@ -16,6 +16,13 @@ export const tableTraining: TableHeader[] = [
     { label: "User ID", property: "user_id", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
 ]
 
+export const tableAttachment: TableHeader[] = [
+    { label: "File Name", property: "original_name", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Type", property: "type", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Size", property: "size", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "URL", property: "url_substring", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+]
+
 export const displayListNumber = [
     { value :10, label:10 },
     { value :20, label:20 },

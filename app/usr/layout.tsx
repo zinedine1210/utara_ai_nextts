@@ -13,7 +13,8 @@ export default function UserLayout({
       <Navbar />
       <main className='flex-1 w-full xl:flex overflow-hidden h-full'>
         <Sidebar />
-        <div className='w-full h-full overflow-y-auto bg-zinc-100'>
+        <div className='w-full h-full overflow-y-auto bg-zinc-100 dark:bg-darkSecondary relative'>
+          <div id="modal-usr"></div>
           {children}
         </div>
       </main>

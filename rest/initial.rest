@@ -2,7 +2,8 @@
 
 @json = application/json
 @localHost = http://localhost:1899
-@devHost = https://gai.co.id/gai-ai-service
+# @devHost = https://gai.co.id/gai-ai-service
+@devHost = http://127.0.0.1:1899
 @host = {{devHost}}
 @apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
 @ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNTJRRTM2UlgzUUtGRzNZWjU0WEpXQjIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI0Mzk2MjE2fQ.NOqfW3Ljg80ZvQuoZwHtFY2gVsMjHYvgNXneAq-AbiA
@@ -648,7 +649,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 ### fing by originalFileName, status
-GET {{host}}/v1/client/file/by?originalFileName=Pemberitahuan Biaya PNBP.txt HTTP/1.1
+GET {{host}}/v1/client/file/by?originalFileName=halo HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 

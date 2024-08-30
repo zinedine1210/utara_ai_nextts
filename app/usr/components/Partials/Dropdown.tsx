@@ -4,10 +4,10 @@ import { DropdownOptions } from "@@/src/types/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useEffect, useRef, useState } from "react";
 
-export default function Dropdown({ button, options, id }: {
+export default function Dropdown({ button, options, id = 'id' }: {
     button?: React.ReactNode,
     options: DropdownOptions[],
-    id: string | number
+    id?: string | number
 }) {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -38,11 +38,11 @@ export default function Dropdown({ button, options, id }: {
             </button>
             
             {isOpen && (
-                <div className="absolute top-full right-0 backdrop-blur-md border shadow-lg rounded z-50 min-w-32 max-w-full w-full">
+                <div className="absolute top-full right-0 bg-white border shadow-lg rounded z-50 min-w-44 max-w-96 w-full">
                     {
                         options.map((opt, index) => {
                             return (
-                                <button key={index} onClick={() => opt.action(id, index)} className="p-2 hover:bg-gray-200 cursor-pointer flex items-center gap-2 w-full text-start">
+                                <button key={index} onClick={() => opt.action(id, index)} className="p-2 dark:text-black hover:bg-gray-200 cursor-pointer flex items-center gap-2 w-full text-start text-black">
                                     <Icon icon={opt.icon} className="text-zinc-500 text-lg"/>
                                     {opt.name}
                                 </button>

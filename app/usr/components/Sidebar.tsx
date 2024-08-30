@@ -1,10 +1,12 @@
 'use client'
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { notFound, usePathname } from "next/navigation";
 import { ReactNode, useCallback, useEffect, useState } from "react";
 import MainSubMenu from "./MainSubMenu";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { MenusList } from "@@/src/types/types";
+import Breadcrumb from "./Breadcrumb";
+// import Breadcrumb from "./Breadcrumb";
 
 export default function Sidebar() {
   const [menus, setMenus] = useState<MenusList[]>([]);
@@ -17,7 +19,9 @@ export default function Sidebar() {
 
     const menuslist = JSON.parse(storedMenus)
     const findIndex: number = menuslist.findIndex((res: MenusList) => res.route === pathname)
-    setActive(menuslist[findIndex].id)
+    let activefind: string | null = menuslist?.[findIndex]?.id
+    if(!activefind) activefind = ''
+    setActive(activefind)
   }, [pathname])
 
   useEffect(() => {
@@ -51,7 +55,7 @@ export default function Sidebar() {
             return (
               <div key={index}>
                 <div className="p-2">
-                  <h1 className="text-zinc-500 text-sm capitalize">{item[0]}</h1>
+                  <h1 className="text-zinc-500 text-sm capitalize dark:text-white">{item[0]}</h1>
                 </div>
                 <div className="">
                   {
@@ -60,8 +64,8 @@ export default function Sidebar() {
                       if(menu.show)
                       return (
                         <Link key={index2} href={menu.route}>
-                          <button disabled={!menu.show} className={`full-hover text-sm flex items-center gap-2 py-3 px-5 relative ${menu.id == splitActive && 'bg-blue-200 hover:bg-blue-200'}`}>
-                            <Icon icon={menu.icon} className="text-blue-500 text-xl"/>
+                          <button disabled={!menu.show} className={`full-hover text-sm flex items-center gap-2 py-3 px-5 relative hover:bg-primary/20 ${menu.id == splitActive && 'bg-primary/25 hover:bg-primary/25'}`}>
+                            <Icon icon={menu.icon} style={{color: item.iconColor}} className={`text-xl ${!item?.iconColor && 'text-primary'}`}/>
                             {menu.name}
                           </button>
                         </Link>
@@ -78,16 +82,21 @@ export default function Sidebar() {
   }
 
   return (
-    <div className="w-full xl:w-auto flex">
-      <div className='w-full xl:w-56 xl:max-w-56 xl:min-w-56 border-r flex flex-col'>
-        {/* <header className='px-2 py-5'>
-          <h1>Menus</h1>
-        </header> */}
-        <div className='flex-1 space-y-2 overflow-y-auto'>
-          {LoopingMenus()}
+    <div className="flex-1 h-ful flex flex-col dark:bg-darkPrimary">
+      <div className="w-full xl:w-auto flex flex-1">
+        <div className='w-full xl:w-56 xl:max-w-56 xl:min-w-56 border-r dark:border-darkSecondary flex flex-col'>
+          {/* <header className='px-2 py-5'>
+            <h1>Menus</h1>
+          </header> */}
+          <div className='flex-1 space-y-2 overflow-y-auto'>
+            {LoopingMenus()}
+          </div>
         </div>
+        <MainSubMenu active={isActive} menus={menus}/>
       </div>
-      <MainSubMenu active={isActive} menus={menus}/>
+      <div className="border-t py-2 px-5">
+        {/* <Breadcrumb /> */}
+      </div>
     </div>
   )
 }

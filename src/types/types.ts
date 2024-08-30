@@ -3,6 +3,7 @@ export interface MenusList {
     feature: string
     flag: string
     icon: string
+    iconColor?: string
     id: string
     name: string
     parent: string

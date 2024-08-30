@@ -57,7 +57,7 @@ const Pagination = ({page, pagerList, handleNext, handlePrev, handleBackward, ha
             <div className="flex items-center space-x-1">
                 {
                     arrayPages && arrayPages.length > 0 ? arrayPages.map((e, i) => {
-                            return <button key={i} onClick={() => handleClickPage(e)}><div className={`cursor-pointer flex items-center justify-center w-9 h-9 rounded-md dark:text-white ${page === e ? 'bg-blue-100 text-blue-500 border border-blue-200':''}`} key={i}><span className={`page-link ${page === e ? '':''}`}>{e}</span></div></button>
+                            return <button key={i} onClick={() => handleClickPage(e)}><div className={`cursor-pointer flex items-center justify-center w-9 h-9 rounded-md dark:text-white ${page === e ? 'bg-primary/20 text-primary border border-primary/50':''}`} key={i}><span className={`page-link ${page === e ? '':''}`}>{e}</span></div></button>
                     }):''
                 }
             </div>

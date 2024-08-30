@@ -47,7 +47,7 @@ export default function LoginPage() {
     console.log("page", result)
     if(result.success){
       Notify(result.message, 'success')
-      Notify('Welcome Zinedine', 'info', 5000)
+      Notify(`Welcome ${value.email}`, 'info', 5000)
       setTimeout(() => {
         router.push('/usr')
       }, 2000);

@@ -1,5 +1,5 @@
 'use client'
-import { useGlobalContext } from "@@/src/context/GlobalContext";
+import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import { useCallback, useEffect } from "react"
 import { tableTraining } from "@@/src/constant/table";
 import { StateType } from "@@/src/types/types";
@@ -7,11 +7,12 @@ import Datatable from "../../components/Datatable/Datatable";
 import { getTraining } from "@@/src/hooks/CollectionAPI";
 import { TrainingType } from "./lib/types";
 import { TrainingDataModel } from "./lib/model";
+import { useRouter } from "next/navigation";
 
 export default function TrainingPage() {
   const { state, setState } = useGlobalContext();
   const statename = 'training'
-  
+  const router = useRouter()
 
   const initialMount = useCallback(async () => {
     const result = await getTraining()
@@ -34,15 +35,29 @@ export default function TrainingPage() {
       onGet: () => {
         
       },
-      bulk: [
-        {
-          name: 'Delete',
-          icon: 'ph:trash',
-          action: (id, index) => {
-            console.log(id, index)
-          }
-        }
-      ]
+      // bulk: [
+      //   {
+      //     name: 'Trained',
+      //     icon: 'material-symbols:model-training',
+      //     action: (id, index) => {
+      //       router.push(`/usr/knowledge/training/information/${id}`)
+      //     }
+      //   },
+      //   {
+      //     name: 'Inbox',
+      //     icon: 'solar:inbox-broken',
+      //     action: (id, index) => {
+      //       router.push(`usr/inbox/${id}`)
+      //     }
+      //   },
+      //   {
+      //     name: 'Simulation AI',
+      //     icon: 'hugeicons:ai-chat-02',
+      //     action: (id, index) => {
+      //       alert('simulation'+id)
+      //     }
+      //   },
+      // ]
     }
     setState({ ...state, [statename]: { ...defaultValue, data: value, totalCount: total }})
   }, [state, setState])
@@ -53,17 +68,13 @@ export default function TrainingPage() {
     }
   }, [initialMount, state])
 
-  const dataState: StateType<TrainingType> | null = state?.[statename] ?? null
-
   return (
     <div className="w-full h-full p-5">
-      <h1 className="font-bold text-xl">Training Data</h1>
-      <p className="text-zinc-600">Input your file business here to create knowledge</p>
+      <h1 className="font-bold text-xl">Knowledge Base</h1>
+      <p className="text-zinc-600">Your AI understands many topics, but you can add specific knowledge about your company or products to supplement it.</p>
 
       <div className="py-10">
-        {
-          dataState && <Datatable statename={statename} />
-        }
+        <Datatable statename={statename} />
       </div>
     </div>
   )

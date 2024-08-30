@@ -1,23 +1,19 @@
-// app/error.tsx
-'use client';
-
-import { useEffect } from 'react';
+'use client'
+import CodeTerminal from "./components/CodeTerminal";
 
 export default function Error({
   error,
   reset,
 }: {
-  error: Error;
+  error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
-
   return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <button onClick={() => reset()}>Try again</button>
+    <div className="flex items-center justify-center w-full h-full">
+      <div className="mx-auto w-1/4 ">
+        <CodeTerminal text={error.message} />
+        <button className="btn-primary mt-5" onClick={() => reset()}>Try Again</button>
+      </div>
     </div>
   );
 }

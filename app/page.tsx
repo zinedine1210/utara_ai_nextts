@@ -1,8 +1,8 @@
 // app/page.tsx
 'use client'
-import { useGlobalContext } from '@@/src/context/GlobalContext';
+import { useGlobalContext } from '@@/src/providers/GlobalContext';
 import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
 export default function Home() {
   const { state, setState } = useGlobalContext();
