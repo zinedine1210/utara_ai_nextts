@@ -1,15 +1,12 @@
 export interface AttachmentType {
-    doctype: string
-    filename: string
-    filestat: {[key: string]: any}
-    folderId: string
-    folderPath: string
+    description: string
     id: string
-    metadata: {[key: string]: string}
-    org_id: string
-    refKey: {[key: string]: any}
-    _cb: string
-    _cd: {[key: string]: any}
-    _dmsversion: string
-    _rk: string
+    location: string
+    modby: null | any
+    moddate: null | any
+    originalfilename: string
+    originalfilesize: number
+    recby: string
+    recdate: string
+    status: string
 }

@@ -17,10 +17,10 @@ export const tableTraining: TableHeader[] = [
 ]
 
 export const tableAttachment: TableHeader[] = [
-    { label: "File Name", property: "original_name", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
-    { label: "Type", property: "type", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
-    { label: "Size", property: "size", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
-    { label: "URL", property: "url_substring", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "File Name", property: "originalfilename", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Type", property: "typeFile", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Size", property: "originalfilesize", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Date", property: "createAt", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
 ]
 
 export const displayListNumber = [

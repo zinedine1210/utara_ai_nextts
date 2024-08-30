@@ -19,29 +19,29 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // const payload = {
-    //   userName: value.email,
-    //   password: value.password
-    // }
+    const payload = {
+      userName: value.email,
+      password: value.password
+    }
 
-    let uus = G().enc(
-      JSON.stringify({
-        user: value.email,
-        pass: value.password,
-      }),
-      2,
-      6
-    );
+    // let uus = G().enc(
+    //   JSON.stringify({
+    //     user: value.email,
+    //     pass: value.password,
+    //   }),
+    //   2,
+    //   6
+    // );
 
-    const pwd = G()
-      .rndStr(uus.length, 1, 6)
-      .substring(0, uus.length)
-      .replace(/\W/g, "");
+    // const pwd = G()
+    //   .rndStr(uus.length, 1, 6)
+    //   .substring(0, uus.length)
+    //   .replace(/\W/g, "");
 
-    let payload = {
-      us: uus,
-      pass: pwd,
-    };
+    // let payload = {
+    //   us: uus,
+    //   pass: pwd,
+    // };
 
     const result: ResponseData = await tryLogin(payload)
     console.log("page", result)

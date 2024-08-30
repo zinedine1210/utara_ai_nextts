@@ -8,9 +8,9 @@ export async function GET(request: NextRequest) {
     const timoutInterval = 60000;
     let abortSignal = AbortSignal.timeout(timoutInterval)
     const token = request.cookies.get('auth_token')
-    const requestPromise = await client('/gpt-konek/knowledge/list-files', {
+    const requestPromise = await client('/client/file/by', {
       headers: {
-        XA: token?.value
+        Authorization: 'Bearer '+ token?.value
       }
     }, abortSignal)
     const timeoutPromise = new Promise((resolve, reject) => {
