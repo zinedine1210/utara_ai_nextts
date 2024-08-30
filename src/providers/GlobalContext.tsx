@@ -1,7 +1,8 @@
 // src/providers/GlobalContext.tsx
 'use client'
 import { useRouter, usePathname } from 'next/navigation';
-import { createContext, useContext, useState, ReactNode, Suspense } from 'react';
+import { createContext, useContext, useState, ReactNode, Suspense, useEffect } from 'react';
+import { getDictionary } from '@@/src/dictionaries/dictionaries'
 type GlobalContextType = {
   state: {[key: string]: any};
   setState: (state: {[key: string]: any}) => void;
@@ -9,11 +10,11 @@ type GlobalContextType = {
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
-export const GlobalProvider = ({ children }: { children: ReactNode }) => {
+export const GlobalProvider = ({ children, lang }: { children: ReactNode, lang: string }) => {
   const [state, setState] = useState<{[key: string]: any}>({});
   // const searchParams = useSearchParams();
-  const router = useRouter()
-  const pathname = usePathname()
+  // const router = useRouter()
+  // const pathname = usePathname()
 
   // useEffect(() => {
   //   if (searchParams.get('redirected') === 'true') {
@@ -21,6 +22,15 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   //     router.push(pathname, { scroll: false, })
   //   }
   // }, [searchParams, pathname, router])
+
+  const getdata = async () => {
+    const coba = await getDictionary(lang)
+    setState({ ...state, language: coba })
+  }
+
+  useEffect(() => {
+    getdata()
+  }, [lang])
 
   
   return (

@@ -2,21 +2,8 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-let locales = ['en', 'id']
-
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  )
- 
-  if (!pathnameHasLocale) {
-    const locale = 'id'
-    const url = request.nextUrl.clone()
-    url.pathname = `/${locale}${pathname}`
-    return NextResponse.redirect(url)
-  }
- 
 
   // cek lolos jika login dan logout
   if (pathname.startsWith('/auth')) {

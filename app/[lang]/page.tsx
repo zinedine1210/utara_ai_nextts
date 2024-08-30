@@ -2,8 +2,8 @@
 'use client'
 import { useGlobalContext } from '@@/src/providers/GlobalContext';
 import axios from 'axios';
-import { useCallback, useEffect } from 'react';
-import {getDictionary} from './dictionaries'
+import { useCallback, useEffect, useState } from 'react';
+
 
 export default function Home({ params }: {
   params: {
@@ -14,12 +14,10 @@ export default function Home({ params }: {
   const data = state?.dataCollection
 
   const getData: any = useCallback(async () => {
-    const lang = await getDictionary(params.lang)
-    console.log(lang)
     const result = await axios.get('/api/data')
-    console.log(result)
+    // console.log(result)
     setState({ ...state, dataCollection: result.data })
-  }, [state, setState, params])
+  }, [state, setState])
 
   useEffect(() => {
     if(!state?.dataCollection){
@@ -27,12 +25,15 @@ export default function Home({ params }: {
     }
   }, [getData, state]);
 
+
+  const langgg = state?.language
+
   return (
     <div>
-      <h1>Welcome to Admin Dashboard</h1>
       <div className='bg-red-500 sm:bg-violet-500 md:bg-yellow-500 lg:bg-gray-500 xl:bg-green-500 2xl:bg-blue-500 w-56 h-56'>
 
       </div>
+      <h1>{langgg?.products?.cart}</h1>
       {/* {
         data && data.map((item: any) => {
           return item

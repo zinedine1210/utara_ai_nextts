@@ -56,14 +56,19 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
+  params
 }: {
-  children: ReactNode;
+  children: ReactNode,
+  params: {
+    lang: string
+  }
 }) {
+  console.log(params.lang)
   return (
       <html lang="en">
         <body>
           <ToastContainer />
-          <GlobalProvider>
+          <GlobalProvider lang={params.lang}>
             <NextThemes>
               {children}
               <div id="modal-root"></div>
