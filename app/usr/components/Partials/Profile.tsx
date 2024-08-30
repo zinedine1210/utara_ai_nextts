@@ -35,7 +35,7 @@ export default function Profile() {
 
     const ButtonProfile = () => {
         return (
-            <div className="w-10 h-10 rounded-full flex items-center justify-center border border-white bg-primary/50">X</div>
+            <div className="w-8 h-8 2xl:w-10 2xl:h-10 rounded-full flex items-center justify-center border border-white bg-primary/50">X</div>
         )
     }
   return (

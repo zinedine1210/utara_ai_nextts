@@ -23,11 +23,14 @@ export default function Home() {
   return (
     <div>
       <h1>Welcome to Admin Dashboard</h1>
-      {
+      <div className='bg-red-500 sm:bg-violet-500 md:bg-yellow-500 lg:bg-gray-500 xl:bg-green-500 2xl:bg-blue-500 w-56 h-56'>
+
+      </div>
+      {/* {
         data && data.map((item: any) => {
           return item
         })
-      }
+      } */}
     </div>
   );
 }

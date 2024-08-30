@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
         Authorization: 'Bearer '+ token?.value
       }
     }, abortSignal)
+    console.log(requestPromise)
     const timeoutPromise = new Promise((resolve, reject) => {
       timeoutId = setTimeout(() => {
         reject({ "status": -1, "data": "Timeout" });

@@ -19,7 +19,7 @@ export default function RootLayout({
   children: ReactNode;
 }) {
   return (
-      <html lang="en" className='scroll-smooth'>
+      <html lang="en">
         <body>
           <ToastContainer />
           <GlobalProvider>

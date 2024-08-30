@@ -55,7 +55,7 @@ export default function Sidebar() {
             return (
               <div key={index}>
                 <div className="p-2">
-                  <h1 className="text-zinc-500 text-sm capitalize dark:text-white">{item[0]}</h1>
+                  <h1 className="text-zinc-500 text-sm xl:text-[10px] 2xl:text-sm capitalize dark:text-white">{item[0]}</h1>
                 </div>
                 <div className="">
                   {
@@ -64,8 +64,8 @@ export default function Sidebar() {
                       if(menu.show)
                       return (
                         <Link key={index2} href={menu.route}>
-                          <button disabled={!menu.show} className={`full-hover text-sm flex items-center gap-2 py-3 px-5 relative hover:bg-primary/20 ${menu.id == splitActive && 'bg-primary/25 hover:bg-primary/25'}`}>
-                            <Icon icon={menu.icon} style={{color: item.iconColor}} className={`text-xl ${!item?.iconColor && 'text-primary'}`}/>
+                          <button disabled={!menu.show} className={`full-hover text-sm xl:text-[11px] 2xl:text-sm flex items-center gap-2 px-3 py-2.5 xl:py-2 xl:px-4 2xl:px-5 2xl:py-3 relative hover:bg-primary/20 ${menu.id == splitActive && 'bg-primary/25 hover:bg-primary/25'}`}>
+                            <Icon icon={menu.icon} style={{color: item.iconColor}} className={`text-sm xl:text-sm 2xl:text-xl ${!item?.iconColor && 'text-primary'}`}/>
                             {menu.name}
                           </button>
                         </Link>
@@ -84,7 +84,7 @@ export default function Sidebar() {
   return (
     <div className="flex-1 h-ful flex flex-col dark:bg-darkPrimary">
       <div className="w-full xl:w-auto flex flex-1">
-        <div className='w-full xl:w-56 xl:max-w-56 xl:min-w-56 border-r dark:border-darkSecondary flex flex-col'>
+        <div className='w-full xl:max-w-40 xl:min-w-40 2xl:max-w-56 2xl:min-w-56 border-r dark:border-darkSecondary flex flex-col'>
           {/* <header className='px-2 py-5'>
             <h1>Menus</h1>
           </header> */}
@@ -94,9 +94,9 @@ export default function Sidebar() {
         </div>
         <MainSubMenu active={isActive} menus={menus}/>
       </div>
-      <div className="border-t py-2 px-5">
-        {/* <Breadcrumb /> */}
-      </div>
+      {/* <div className="border-t py-2 px-5">
+        <Breadcrumb />
+      </div> */}
     </div>
   )
 }

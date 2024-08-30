@@ -40,15 +40,15 @@ const Pagination = ({page, pagerList, handleNext, handlePrev, handleBackward, ha
     return (
         <div className="flex justify-between">
             <div className="flex items-center space-x-1">
-                <button type="button" disabled={!(page > 1)} onClick={handleBackward} className="disabled:cursor-not-allowed disabled:bg-zinc-300 py-2 px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm flex items-center">
+                <button type="button" disabled={!(page > 1)} onClick={handleBackward} className="disabled:cursor-not-allowed disabled:bg-zinc-300 py-1.5 2xl:py-2 xl:px-3 px-4 2xl:px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm xl:text-[11px] 2xl:text-sm flex items-center">
                     <span title="previous" >
-                        <Icon icon={'system-uicons:backward'} className="text-2xl"/>
+                        <Icon icon={'system-uicons:backward'} className="text-sm xl:text-xl 2xl:text-2xl"/>
                     </span>
                     Backward
                 </button>
-                <button type="button" onClick={handlePrev} disabled={!(page > 1)} className="disabled:cursor-not-allowed disabled:bg-zinc-300 py-2 px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm flex items-center">
+                <button type="button" onClick={handlePrev} disabled={!(page > 1)} className="disabled:cursor-not-allowed disabled:bg-zinc-300 py-1.5 2xl:py-2 xl:px-3 px-4 2xl:px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm xl:text-[11px] 2xl:text-sm flex items-center">
                     <span title="previous">
-                        <Icon icon={'fluent:arrow-previous-20-filled'} className="text-2xl"/>
+                        <Icon icon={'fluent:arrow-previous-20-filled'} className="text-sm xl:text-xl 2xl:text-2xl"/>
                     </span>
                     Previous
                 </button>
@@ -57,22 +57,22 @@ const Pagination = ({page, pagerList, handleNext, handlePrev, handleBackward, ha
             <div className="flex items-center space-x-1">
                 {
                     arrayPages && arrayPages.length > 0 ? arrayPages.map((e, i) => {
-                            return <button key={i} onClick={() => handleClickPage(e)}><div className={`cursor-pointer flex items-center justify-center w-9 h-9 rounded-md dark:text-white ${page === e ? 'bg-primary/20 text-primary border border-primary/50':''}`} key={i}><span className={`page-link ${page === e ? '':''}`}>{e}</span></div></button>
+                            return <button key={i} onClick={() => handleClickPage(e)}><div className={`cursor-pointer flex items-center justify-center w-8 h-8 xl:w-7 xl:h-7 2xl:w-9 2xl:h-9 rounded-md dark:text-white ${page === e ? 'bg-primary/20 text-primary border border-primary/50':''}`} key={i}><span className={`page-link ${page === e ? '':''}`}>{e}</span></div></button>
                     }):''
                 }
             </div>
 
             <div className="flex items-center space-x-1">
-                <button type="button" onClick={handleNext} disabled={!(page < pagerList)} className="disabled:cursor-not-allowed disabled:bg-zinc-300 py-2 px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm flex items-center">
+                <button type="button" onClick={handleNext} disabled={!(page < pagerList)} className="disabled:cursor-not-allowed disabled:bg-zinc-300 py-1.5 2xl:py-2 xl:px-3 px-4 2xl:px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm xl:text-[11px] 2xl:text-sm flex items-center">
                     Next
                     <span title="next" >
-                        <Icon icon={'fluent:arrow-next-20-filled'} className="text-2xl"/>
+                        <Icon icon={'fluent:arrow-next-20-filled'} className="text-sm xl:text-xl 2xl:text-2xl"/>
                     </span>
                 </button>
-                <button type="button" disabled={!(page < pagerList)} onClick={handleForward} className="disabled:cursor-not-allowed disabled:bg-zinc-300 py-2 px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm flex items-center">
+                <button type="button" disabled={!(page < pagerList)} onClick={handleForward} className="disabled:cursor-not-allowed disabled:bg-zinc-300 py-1.5 2xl:py-2 xl:px-3 px-4 2xl:px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm xl:text-[11px] 2xl:text-sm flex items-center">
                     Forward
                     <span title="forward">
-                        <Icon icon={'system-uicons:forward'} className="text-2xl"/>
+                        <Icon icon={'system-uicons:forward'} className="text-sm xl:text-xl 2xl:text-2xl"/>
                     </span>
                 </button>
 

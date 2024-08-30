@@ -126,9 +126,9 @@ export default function Datatable({
     <div>
         <div className={`${isLoading && !data && 'pointer-events-none'} relative overflow-x-auto`}>
             <div className="flex items-center justify-between mb-5 ">
-                <h1 className="dark:text-white">Showing { showing } to { showingTo } of {totalCount} Entries</h1>
+                <h1 className="dark:text-white text-sm xl:text-xs 2xl:text-base">Showing { showing } to { showingTo } of {totalCount} Entries</h1>
                 <div className="flex items-center ">
-                    <h1 className=" dark:text-white">Display </h1>
+                    <h1 className=" dark:text-white text-sm xl:text-xs 2xl:text-base">Display </h1>
                     <select onChange={(e) => handleDisplay(Number(e.target.value))} name="display" id="displaySelect" className="bg-transparent px-2 outline-none">
                         {
                             displayListNumber.map((item, index) => {
@@ -140,8 +140,8 @@ export default function Datatable({
                     </select>
                 </div>
             </div>
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-xl">
-                <thead className="bg-white dark:bg-dark text-sm text-gray-700 uppercase dark:text-gray-400 rounded-xl">
+            <table className="w-full text-sm xl:text-xs 2xl:text-base text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-xl">
+                <thead className="bg-white dark:bg-dark text-sm xl:text-xs 2xl:text-base text-gray-700 uppercase dark:text-gray-400 rounded-xl">
 
                     {/* HEADERS LOOPING */}
                     <tr className="bg-white border-b-2 border-black">
@@ -149,8 +149,8 @@ export default function Datatable({
                             headers && headers.map((head, key) => {
                                 if(head.sort)
                                 return (
-                                    <th scope="col" key={key} className="px-5 py-4 group">
-                                        <div className="flex items-center gap-2">
+                                    <th scope="col" key={key} className="px-3 xl:px-3 2xl:px-5 py-2.5 xl:py-3 2xl:py-4 group text-sm xl:text-xs 2xl:text-base">
+                                        <div className="flex items-center gap-2 ">
                                             {head.label}
                                             <button onClick={() => handleSort(head.sort)} className={`${columns.find((res: any) => res.data == head.sort) ? "bg-blue-200 rounded-full w-6 h-6 flex items-center justify-center visible opacity-100 dark:text-black" : "dark:text-white opacity-0 invisible"} group-hover:visible duration-300 group-hover:opacity-100`}>
                                                 {
@@ -191,14 +191,14 @@ export default function Datatable({
                         data.length > 0 ?
                             data.slice(showing - 1, showingTo).map((item, key) => {
                                 return (
-                                    <tr key={key} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 odd:dark:bg-dark2 odd:bg-dark2 odd:bg-opacity-20 even:dark:bg-dark">
+                                    <tr key={key} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 border-b dark:border-gray-700 odd:dark:bg-dark2 odd:bg-dark2 odd:bg-opacity-20 even:dark:bg-dark">
                                         {
                                             headers.map((head: any, headIndex) => {
                                                 return (
-                                                    <td key={headIndex} onClick={() => handleCopy(item[head.copy], head.label, head.copy)} className={`px-5 py-4 ${head.cssRow} ${head.copy && "select-all"}`}>
+                                                    <td key={headIndex} onClick={() => handleCopy(item[head.copy], head.label, head.copy)} className={`px-3 xl:px-3 2xl:px-5 py-2.5 xl:py-3 2xl:py-4 text-sm xl:text-xs 2xl:text-base ${head.cssRow} ${head.copy && "select-all"}`}>
                                                         { 
                                                             head.status ?
-                                                            <div style={{backgroundColor:`${head.status[item[head.property]]}`}} className={`text-center rounded-xl my-1 text-sm py-1.5 px-4 w-fit text-white font-bold`}>
+                                                            <div style={{backgroundColor:`${head.status[item[head.property]]}`}} className={`text-center rounded-xl my-1 text-sm xl:text-xs 2xl:text-base py-1.5 px-4 w-fit text-white font-bold`}>
                                                                 { item?.[head.property] }
                                                             </div>
                                                             :

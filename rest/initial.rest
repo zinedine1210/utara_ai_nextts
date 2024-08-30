@@ -2,13 +2,14 @@
 
 @json = application/json
 @localHost = http://localhost:1899
-# @devHost = https://gai.co.id/gai-ai-service
-@devHost = http://127.0.0.1:1899
+# @devHost = http://polres.localhost
+@devHost = https://gai.co.id/gai-ai-service
+# @devHost = http://127.0.0.1:1899
 @host = {{devHost}}
 @apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
 @ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNTJRRTM2UlgzUUtGRzNZWjU0WEpXQjIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI0Mzk2MjE2fQ.NOqfW3Ljg80ZvQuoZwHtFY2gVsMjHYvgNXneAq-AbiA
 @partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUoyWllYTjJSWVlHSzc2TlNCUTJSV0owMiIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzIxNDMzNTAyfQ.yomnaf9KczdgQEf7qBe4z3LU38uyZr4VO7kNOZxy7rU
-@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNTJTWVZYRVQwSjZDS0JQVk05Wlo1M0oiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI0ODIzNjc5fQ.bVGij6vBeuarzSai7PWEP5HeqiBJaKK6VEHS1rw53Iw
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNTJTWVZYRVQwSjZDS0JQVk05Wlo1M0oiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI1MDczOTUyfQ.bdkvi66xZ_f1o3Fb-dezAQYtxae1VS-5IC0PPlLegeM
 @token = {{clientToken}}
 
 
@@ -36,7 +37,7 @@ Accept: {{json}}
 content-type: {{json}}
 
 {
-  "userName": "gnusa",
+  "userName": "owner",
   "password": "123456"
 }
 
@@ -69,10 +70,10 @@ Accept: {{json}}
 content-type: {{json}}
 
 {
-  "userName": "halo",
-  "password": "123456",
-  "email": "halo@gmail.com",
-  "phone": "62816112233"
+  "userName": "zinedine",
+  "password": "admin",
+  "email": "zinedine@gmail.com",
+  "phone": "6288918218209"
 }
 
 
@@ -649,7 +650,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 ### fing by originalFileName, status
-GET {{host}}/v1/client/file/by?originalFileName=halo HTTP/1.1
+GET {{host}}/v1/client/file/by HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
@@ -693,7 +694,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 ### fing by description, status
-GET {{host}}/v1/client/data/by?description=base HTTP/1.1
+GET {{host}}/v1/client/data/by HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 

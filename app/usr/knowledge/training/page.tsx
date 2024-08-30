@@ -16,6 +16,7 @@ export default function TrainingPage() {
 
   const initialMount = useCallback(async () => {
     const result = await getTraining()
+    console.log(result)
     const value: TrainingDataModel[] = TrainingDataModel.toDatatableResponse(result.data)
     // console.log(value[0])
     const total = value.length
@@ -69,9 +70,9 @@ export default function TrainingPage() {
   }, [initialMount, state])
 
   return (
-    <div className="w-full h-full p-5">
-      <h1 className="font-bold text-xl">Knowledge Base</h1>
-      <p className="text-zinc-600">Your AI understands many topics, but you can add specific knowledge about your company or products to supplement it.</p>
+    <div className="w-full h-full p-2 xl:px-4 2xl:p-5">
+      <h1 className="font-bold text-sm xl:text-base 2xl:text-lg">Knowledge Base</h1>
+      <p className="text-zinc-600 text-sm xl:text-xs 2xl:text-sm">Your AI understands many topics, but you can add specific knowledge about your company or products to supplement it.</p>
 
       <div className="py-10">
         <Datatable statename={statename} />

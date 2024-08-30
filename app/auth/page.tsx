@@ -11,7 +11,7 @@ import myImageLoader from '@@/src/utils/loader';
 import { G } from '@@/src/client/global.min.js'
 
 export default function LoginPage() {
-  const [value, setValue] = useState({
+  const [value, setValue] = useState({ 
     email: '',
     password: ''
   })
