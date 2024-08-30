@@ -3,16 +3,23 @@
 import { useGlobalContext } from '@@/src/providers/GlobalContext';
 import axios from 'axios';
 import { useCallback, useEffect } from 'react';
+import {getDictionary} from './dictionaries'
 
-export default function Home() {
+export default function Home({ params }: {
+  params: {
+    lang: string
+  }
+}) {
   const { state, setState } = useGlobalContext();
   const data = state?.dataCollection
 
   const getData: any = useCallback(async () => {
+    const lang = await getDictionary(params.lang)
+    console.log(lang)
     const result = await axios.get('/api/data')
     console.log(result)
     setState({ ...state, dataCollection: result.data })
-  }, [state, setState])
+  }, [state, setState, params])
 
   useEffect(() => {
     if(!state?.dataCollection){
