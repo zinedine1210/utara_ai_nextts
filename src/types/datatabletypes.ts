@@ -25,3 +25,30 @@ export interface TrainingType {
     user_id: string
     _files: string[]
 }
+
+export type WhatsappList = {
+    name: string,
+    number: number
+}
+export type TelegramList = {
+    name: string,
+    number: number
+}
+export type EmailList = {
+    name: string,
+    number: number
+}
+export interface ProfileType {
+    name: string;
+    legal_name: string
+    address: string
+    phone: string
+    email: string
+    npwp: string
+    channel: {
+        whatsapp: string[] | null,
+        telegram: string[] | null,
+        email: string[] | null
+    },
+    status: string
+}

@@ -1,36 +1,32 @@
-import { formatDateData } from "@@/src/utils/script";
-export class WhatsappModel {
-    private description: string
-    private id: string
-    private location: string
-    private modby: null | any
-    private moddate: null | any
-    private originalfilename: string
-    private originalfilesize: number
-    private recby: string
-    private recdate: string
+import { EmailList, ProfileType, TelegramList, WhatsappList } from "@@/src/types/datatabletypes";
+export class ProfileModel {
+    private name: string;
+    private legal_name: string
+    private address: string
+    private phone: string
+    private email: string
+    private npwp: string
+    private whatsapp: any[] | null
+    private telegram: any[] | null
+    private channelEmail: any[] | null
     private status: string
-    private createAt: string
-    private typeFile: string
 
-    constructor(props: AttachmentType){
-        this.description = props.description
-        this.id = props.id
-        this.location = props.location
-        this.modby = props.modby
-        this.moddate = props.moddate
-        this.originalfilename = props.originalfilename
-        this.originalfilesize = props.originalfilesize
-        this.recby = props.recby
-        this.recdate = props.recdate
+    constructor(props: ProfileType){
+        this.name = props.name
+        this.legal_name = props.legal_name
+        this.address = props.address
+        this.phone = props.phone
+        this.email = props.email
+        this.npwp = props.npwp
+        this.whatsapp = props.channel.whatsapp
+        this.telegram = props.channel.telegram
+        this.channelEmail = props.channel.email
         this.status = props.status
-        this.createAt = formatDateData(props.recdate)
-        this.typeFile = 'application/' + props.description.split(".")[1]
     }
 
-    static toDatatableResponse = (array: AttachmentType[]) => {
-        return array.map((item: AttachmentType) => {
-            return new AttachmentDataModel(item)
+    static toDatatableResponse = (array: ProfileType[]) => {
+        return array.map((item: ProfileType) => {
+            return new ProfileModel(item)
         })
     }
 }

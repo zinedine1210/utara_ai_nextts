@@ -1,5 +1,6 @@
 import { setCookies } from "@@/app/actions";
 import axios from "axios"
+import { Notify } from "../utils/script";
 let protocol = '';
 let host = '';
 let port = '';
@@ -68,5 +69,18 @@ export const getProfile = async () => {
 export const getDetailTraining = async (id: string) => {
     const result = await axios.get(`${baseURL}/data/knowledge/training/${id}`)
     const responseData = result.data
+    return responseData
+}
+export const postChannel = async (payload: string[], target: string) => {
+    let objPayload = {
+        channel: {
+            [target]: payload
+        }
+    }
+    const result = await axios.put(`${baseURL}/data/channel`, objPayload)
+    const responseData = result.data
+    if(!responseData.success){
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+    }
     return responseData
 }

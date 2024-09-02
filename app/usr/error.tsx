@@ -1,5 +1,5 @@
 'use client'
-import CodeTerminal from "./components/CodeTerminal";
+import CodeTerminal from "../components/CodeTerminal";
 
 export default function Error({
   error,

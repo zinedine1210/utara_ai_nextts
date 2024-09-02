@@ -3,7 +3,7 @@ import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import { useCallback, useEffect } from "react"
 import { tableTraining } from "@@/src/constant/table";
 import { StateType } from "@@/src/types/types";
-import Datatable from "../../components/Datatable/Datatable";
+import Datatable from "../../../components/Datatable/Datatable";
 import { getTraining } from "@@/src/hooks/CollectionAPI";
 import { TrainingDataModel } from "./lib/model";
 import { useRouter } from "next/navigation";

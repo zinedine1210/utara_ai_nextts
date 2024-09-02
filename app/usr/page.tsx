@@ -5,9 +5,9 @@ import { ResponseData } from "@@/src/types/apitypes";
 import { Notify } from "@@/src/utils/script";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRouter } from "next/navigation";
-import DonatChart from "./components/Chart/DonatChart"
-import BasicBar from "./components/Chart/BasicBar"
-import StackedADP from "./components/Chart/StackedADP"
+import DonatChart from "../components/Chart/DonatChart"
+import BasicBar from "../components/Chart/BasicBar"
+import StackedADP from "../components/Chart/StackedADP"
 
 export default function AdminPage() {
   const router = useRouter()

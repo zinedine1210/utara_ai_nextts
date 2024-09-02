@@ -3,7 +3,7 @@ import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import { useCallback, useEffect } from "react"
 import { tableAttachment } from "@@/src/constant/table";
 import { StateType } from "@@/src/types/types";
-import Datatable from "../../components/Datatable/Datatable";
+import Datatable from "../../../components/Datatable/Datatable";
 import { getAttachment } from "@@/src/hooks/CollectionAPI";
 import { useRouter } from "next/navigation";
 import { AttachmentDataModel } from "./lib/model";

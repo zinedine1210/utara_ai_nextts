@@ -1,7 +1,7 @@
 // app/admin/layout.tsx
 import { ReactNode, Suspense } from 'react';
-import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
+import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
 
 export default function UserLayout({
   children

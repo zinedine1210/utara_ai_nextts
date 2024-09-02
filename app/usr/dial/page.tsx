@@ -4,7 +4,7 @@ import { useCallback, useEffect } from "react"
 import { tableDial } from "@@/src/constant/table"
 import axios from "axios";
 import { DialList, StateType } from "@@/src/types/types";
-import Datatable from "../components/Datatable/Datatable";
+import Datatable from "../../components/Datatable/Datatable";
 
 export default function AttachmentPage() {
   const { state, setState } = useGlobalContext();
