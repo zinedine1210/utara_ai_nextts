@@ -7,5 +7,5 @@ export async function deleteCookies(data: any) {
 }
 
 export async function setCookies(name: string, data: string){
-    cookies().set(name, data)
+  cookies().set(name, data)
 }

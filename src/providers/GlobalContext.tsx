@@ -23,14 +23,14 @@ export const GlobalProvider = ({ children, lang }: { children: ReactNode, lang: 
   //   }
   // }, [searchParams, pathname, router])
 
-  const getdata = async () => {
-    const coba = await getDictionary(lang)
-    setState({ ...state, language: coba })
-  }
+  // const getdata = async () => {
+  //   const coba = await getDictionary(lang)
+  //   setState({ ...state, language: coba })
+  // }
 
-  useEffect(() => {
-    getdata()
-  }, [lang])
+  // useEffect(() => {
+  //   getdata()
+  // }, [lang])
 
   
   return (

@@ -1,6 +1,5 @@
-import { AttachmentType } from "@@/src/types/datatabletypes";
 import { formatDateData } from "@@/src/utils/script";
-export class AttachmentDataModel {
+export class WhatsappModel {
     private description: string
     private id: string
     private location: string

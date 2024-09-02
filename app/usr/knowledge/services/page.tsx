@@ -5,9 +5,9 @@ import { tableTraining } from "@@/src/constant/table";
 import { StateType } from "@@/src/types/types";
 import Datatable from "../../components/Datatable/Datatable";
 import { getTraining } from "@@/src/hooks/CollectionAPI";
-import { TrainingType } from "./lib/types";
 import { TrainingDataModel } from "./lib/model";
 import { useRouter } from "next/navigation";
+import { TrainingType } from "@@/src/types/datatabletypes";
 
 export default function TrainingPage() {
   const { state, setState } = useGlobalContext();

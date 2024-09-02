@@ -1,8 +1,9 @@
 'use client'
 import Modal from "@@/app/components/Modal";
-import { getChannel } from "@@/src/hooks/CollectionAPI";
+import { getProfile } from "@@/src/hooks/CollectionAPI";
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import myImageLoader from "@@/src/utils/loader";
+import { Notify } from "@@/src/utils/script";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
@@ -13,8 +14,12 @@ export default function WhatsappOfficial() {
   const data: any[] | undefined = state?.[statename]
 
   const initialMount = useCallback(async () => {
-    const result = await getChannel()
+    const result = await getProfile()
     console.log(result)
+    if(!result.success){
+      Notify(result.message ?? "Something went wrong when get data", 'Info', 3000)
+      return false
+    }
     setState({ ...state, [statename]: [] })
   }, [state, setState])
 

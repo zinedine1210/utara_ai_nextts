@@ -60,8 +60,8 @@ export const getAttachment = async () => {
     return responseData
 }
 
-export const getChannel = async () => {
-    const result = await axios.get(`${baseURL}/data/channel`)
+export const getProfile = async () => {
+    const result = await axios.get(`${baseURL}/auth/profile`)
     const responseData = result.data
     return responseData
 }

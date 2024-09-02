@@ -70,7 +70,6 @@ export default function RootLayout({
           <GlobalProvider lang={params.lang}>
             <NextThemes>
               {children}
-              <div id="modal-root"></div>
             </NextThemes>
           </GlobalProvider>
         </body>

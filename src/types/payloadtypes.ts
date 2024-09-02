@@ -1,4 +1,4 @@
-export interface AttachmentType {
+export interface PayloadAttachmentType {
     originalFileName?: string
     status?: string
     id?: string

@@ -6,10 +6,11 @@ import { StateType } from "@@/src/types/types";
 import Datatable from "../../components/Datatable/Datatable";
 import { getAttachment } from "@@/src/hooks/CollectionAPI";
 import { useRouter } from "next/navigation";
-import { AttachmentType } from "./lib/types";
 import { AttachmentDataModel } from "./lib/model";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
+import { Notify } from "@@/src/utils/script";
+import { AttachmentType } from "@@/src/types/datatabletypes";
 
 export default function AttachmentPage() {
   const { state, setState } = useGlobalContext();
@@ -18,6 +19,10 @@ export default function AttachmentPage() {
 
   const initialMount = useCallback(async () => {
     const result = await getAttachment()
+    if(!result.success){
+      Notify(result.message ?? "Something went wrong when get data", 'Info', 3000)
+      return false
+    }
     const value: AttachmentDataModel[] = AttachmentDataModel.toDatatableResponse(result.data)
     const total = value.length
     let defaultValue: StateType<AttachmentType> = {

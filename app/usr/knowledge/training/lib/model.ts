@@ -1,5 +1,5 @@
 import { trainingTypeStatus } from "@@/src/constant/status";
-import { TrainingType } from "./types";
+import { TrainingType } from "@@/src/types/datatabletypes";
 export class TrainingDataModel {
     private code: string;
     private description: string;

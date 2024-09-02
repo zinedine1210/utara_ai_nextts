@@ -7,7 +7,7 @@
 @apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
 @ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNkoxUURNNktUN00yRjlXOEU1QjBDVDQiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI1MTIxNTc1fQ.6Bk91aFnXlIILuQbmkIzIpYoe5ytlF_6cnAzkHEe5D8
 @partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUo2SjFWODIzUUZGRVdFMEJQV1ZUMUU3NiIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzI1MTIxNjk5fQ.kS-bq1DKi_1kgkhwsMULxEFBs35F6UQnu6RiNVwIJUI
-@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNktHNDFUQkNGNkNKN1o1U0M5S1lDUVIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI1MTg4MDQ2fQ.iaBf6Ul3lNYmVZGhBAZLqp91e0KxghW_Nqccs1dE7lg
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNktHNDFUQkNGNkNKN1o1U0M5S1lDUVIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI1MzMxMDExfQ.0fuRSI_L6seMUfCVKMXx4NrDIhfdHEqPapOt4s1_bC4
 @token = {{clientToken}}
 
 
@@ -662,7 +662,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 ### fing by originalFileName, status
-GET {{host}}/v1/client/file/by?originalFileName=Pemberitahuan Biaya PNBP.txt HTTP/1.1
+GET {{host}}/v1/client/file/by HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
