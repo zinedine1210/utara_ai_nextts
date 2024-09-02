@@ -1,4 +1,4 @@
-import { setCookies } from "@@/app/[lang]/actions";
+import { setCookies } from "@@/app/actions";
 import axios from "axios"
 let protocol = '';
 let host = '';

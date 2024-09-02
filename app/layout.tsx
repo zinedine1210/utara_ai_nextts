@@ -63,7 +63,6 @@ export default function RootLayout({
     lang: string
   }
 }) {
-  console.log(params.lang)
   return (
       <html lang="en">
         <body>

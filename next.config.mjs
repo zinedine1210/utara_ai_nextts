@@ -11,7 +11,7 @@ const withPWA = withPWAInit({
 
 const nextConfig = {
     env: {
-        PUBLIC_API_URL: 'http://127.0.0.1:1899/v1',
+        PUBLIC_API_URL: 'https://gai.co.id/gai-ai-service/v1',
         BASE_API_URL: 'http://localhost:3000/api',
         WHATSAPP_API_URL: 'https://wa.gnscenter.com',
         SERVER: 'production'

@@ -20,7 +20,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const payload = {
-      userName: value.email,
+      username: value.email,
       password: value.password
     }
 

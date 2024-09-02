@@ -1,5 +1,5 @@
 'use client'
-import Modal from "@@/app/[lang]/components/Modal";
+import Modal from "@@/app/components/Modal";
 import { getChannel } from "@@/src/hooks/CollectionAPI";
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import myImageLoader from "@@/src/utils/loader";
