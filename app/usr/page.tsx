@@ -5,9 +5,10 @@ import { ResponseData } from "@@/src/types/apitypes";
 import { Notify } from "@@/src/utils/script";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRouter } from "next/navigation";
-import DonatChart from "../components/Chart/DonatChart"
-import BasicBar from "../components/Chart/BasicBar"
-import StackedADP from "../components/Chart/StackedADP"
+// import DonatChart from "../components/Chart/DonatChart"
+// import BasicBar from "../components/Chart/BasicBar"
+// import StackedADP from "../components/Chart/StackedADP"
+
 
 export default function AdminPage() {
   const router = useRouter()
@@ -16,7 +17,7 @@ export default function AdminPage() {
     if(result.success){
       Notify(result.message, 'info', 5000)
       router.push('/auth')
-    }else Notify('Something went wrong', 'error')
+    }
   }
 
   return (

@@ -6,6 +6,7 @@ import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import { Notify } from "@@/src/utils/script";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import { ProfileModel } from "../lib/model";
 
 export default function ModalCreateWhatsapp({
     name
@@ -33,7 +34,8 @@ export default function ModalCreateWhatsapp({
         // action to add to database
         const array = [ ...modaldata.data, value ]
         const result = await postChannel(array, 'whatsapp')
-        setState({ ...state, profile: result.data, modal: null })
+        const valueModel = new ProfileModel(result.data)
+        setState({ ...state, profile: valueModel, modal: null })
         Notify("Berhasil authenticated", 'success')
         setQR('')
         setValue('')

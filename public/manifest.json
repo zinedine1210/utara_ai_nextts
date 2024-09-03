@@ -1,12 +1,12 @@
 {
-  "name": "Starter Kit",
-  "short_name": "Starter Kit",
-  "theme_color": "#ffffff",
+  "name": "Polres Utara AI",
+  "short_name": "Utara AI",
+  "theme_color": "#00526c",
   "background_color": "#ffffff",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/",
-  "start_url": "/",
+  "scope": "/auth",
+  "start_url": "/auth",
   "icons": [
     {
       "src": "/icongen/android-chrome-192x192.png",

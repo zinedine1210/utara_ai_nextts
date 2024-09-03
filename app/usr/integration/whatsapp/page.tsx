@@ -2,7 +2,6 @@
 import { getProfile } from "@@/src/hooks/CollectionAPI";
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import myImageLoader from "@@/src/utils/loader";
-import { Notify } from "@@/src/utils/script";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 import { useCallback, useEffect } from "react";
@@ -20,10 +19,6 @@ export default function WhatsappOfficial() {
 
   const initialMount = useCallback(async () => {
     const result = await getProfile()
-    if(!result.success){
-      Notify(result.message ?? "Something went wrong when get data", 'Info', 3000)
-      return false
-    }
     const value = new ProfileModel(result.data)
     setState({ ...state, [statename]: value })
   }, [state, setState])

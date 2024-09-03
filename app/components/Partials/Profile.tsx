@@ -30,7 +30,7 @@ export default function Profile() {
         if(result.success){
             Notify(result.message, 'info', 5000)
             router.push('/auth')
-        }else Notify('Something went wrong', 'error')
+        }
     }
 
     const ButtonProfile = () => {

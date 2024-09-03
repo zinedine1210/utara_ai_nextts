@@ -26,7 +26,6 @@ const baseURL = process.env.BASE_API_URL ?? finalBaseDomainAPI;
 export const tryLogin = async (payload: any) => {
     const result = await axios.post(`${baseURL}/auth/login`, payload)
     const responseData = result.data
-    console.log(result)
     if(responseData.success){
         if(responseData.data.access_token){
             setCookies('auth_token', responseData.data.access_token)
@@ -40,35 +39,70 @@ export const tryLogin = async (payload: any) => {
 export const tryLogout = async () => {
     const result = await axios.post(`${baseURL}/auth/logout`, {})
     const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
     return responseData
 }
 
 export const getOrg = async () => {
     const result = await axios.get(`${baseURL}/root/org`)
     const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
     return responseData
 }
 
 export const getTraining = async () => {
     const result = await axios.get(`${baseURL}/data/knowledge/training`)
     const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+export const getServices = async () => {
+    const result = await axios.get(`${baseURL}/data/knowledge/services`)
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
     return responseData
 }
 
 export const getAttachment = async () => {
     const result = await axios.get(`${baseURL}/data/knowledge/attachment`)
     const responseData = result.data
+    console.log(responseData)
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
     return responseData
 }
 
 export const getProfile = async () => {
     const result = await axios.get(`${baseURL}/auth/profile`)
     const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
     return responseData
 }
 export const getDetailTraining = async (id: string) => {
     const result = await axios.get(`${baseURL}/data/knowledge/training/${id}`)
     const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
     return responseData
 }
 export const postChannel = async (payload: string[], target: string) => {
@@ -94,5 +128,9 @@ export const postFile = async (formData: FormData) => {
     })
     console.log(result)
     const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
     return responseData
 }

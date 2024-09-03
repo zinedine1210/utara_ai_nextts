@@ -4,6 +4,7 @@ import { checkSessionWhatsapp } from "@@/src/hooks/WhatsappCollection"
 import { useGlobalContext } from "@@/src/providers/GlobalContext"
 import { Icon } from "@iconify/react/dist/iconify.js"
 import { useCallback, useEffect, useState } from "react"
+import { ProfileModel } from "../lib/model"
 
 export default function CardWhatsapp({ id }: { id: string }) {
   const [status, setStatus] = useState<string>('connected')
@@ -29,7 +30,8 @@ export default function CardWhatsapp({ id }: { id: string }) {
     let array = state['profile']['whatsapp']
     array = array.filter((res: string) => res !== id)
     const result = await postChannel(array, 'whatsapp')
-    setState({ ...state, profile: result.data })
+    const valueModel = new ProfileModel(result.data)
+    setState({ ...state, profile: valueModel })
   }
     
   return (
