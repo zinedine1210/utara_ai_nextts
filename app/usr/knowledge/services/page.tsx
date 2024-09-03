@@ -9,7 +9,7 @@ import { TrainingDataModel } from "./lib/model";
 import { useRouter } from "next/navigation";
 import { TrainingType } from "@@/src/types/datatabletypes";
 
-export default function TrainingPage() {
+export default function ServicesPage() {
   const { state, setState } = useGlobalContext();
   const statename = 'services'
   const router = useRouter()
@@ -70,8 +70,8 @@ export default function TrainingPage() {
 
   return (
     <div className="w-full h-full p-5">
-      <h1 className="font-bold text-xl">Knowledge Base</h1>
-      <p className="text-zinc-600">Your AI understands many topics, but you can add specific knowledge about your company or products to supplement it.</p>
+      <h1 className="font-bold text-xl">Services</h1>
+      <p className="text-zinc-600">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique, sint?</p>
 
       <div className="py-10">
         <Datatable statename={statename} />

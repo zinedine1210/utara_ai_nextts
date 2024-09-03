@@ -124,22 +124,22 @@ export default function Datatable({
     
   return (
     <div>
-        <div className={`${isLoading && !data && 'pointer-events-none'} relative overflow-x-auto`}>
-            <div className="flex items-center justify-between mb-5 ">
-                <h1 className="dark:text-white text-sm xl:text-xs 2xl:text-base">Showing { showing } to { showingTo } of {totalCount} Entries</h1>
-                <div className="flex items-center ">
-                    <h1 className=" dark:text-white text-sm xl:text-xs 2xl:text-base">Display </h1>
-                    <select onChange={(e) => handleDisplay(Number(e.target.value))} name="display" id="displaySelect" className="bg-transparent px-2 outline-none">
-                        {
-                            displayListNumber.map((item, index) => {
-                                return (
-                                    <option className="dark:text-black" disabled={totalCount < item.value} key={index} value={item.value}>{item.label}</option>
-                                )
-                            })
-                        }
-                    </select>
-                </div>
+        <div className="flex items-center justify-between mb-5 ">
+            <h1 className="dark:text-white text-sm xl:text-xs 2xl:text-base">Showing { showing } to { showingTo } of {totalCount} Entries</h1>
+            <div className="flex items-center">
+                <h1 className=" dark:text-white text-sm xl:text-xs 2xl:text-base">Display </h1>
+                <select onChange={(e) => handleDisplay(Number(e.target.value))} name="display" id="displaySelect" className="bg-transparent px-2 outline-none">
+                    {
+                        displayListNumber.map((item, index) => {
+                            return (
+                                <option className="dark:text-black" disabled={totalCount < item.value} key={index} value={item.value}>{item.label}</option>
+                            )
+                        })
+                    }
+                </select>
             </div>
+        </div>
+        <div className={`${isLoading && !data && 'pointer-events-none'} relative overflow-x-auto`}>
             <table className="w-full text-sm xl:text-xs 2xl:text-base text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-xl">
                 <thead className="bg-white dark:bg-dark text-sm xl:text-xs 2xl:text-base text-gray-700 uppercase dark:text-gray-400 rounded-xl">
 

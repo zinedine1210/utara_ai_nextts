@@ -1,50 +1,63 @@
 'use client'
+import { postFile } from '@@/src/hooks/CollectionAPI'
 import { Notify } from '@@/src/utils/script'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
 export default function AttachmentCreatePage() {
-  const [files, setFiles] = useState<File[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
+    const [files, setFiles] = useState<File[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
 
-  const handlerSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log(files)
-  }
-
-  const handlerUploadPDF = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const filestarget = e.target.files ?? []
-    console.log(filestarget)
-    for (let index = 0; index < filestarget.length; index++) {
-        const file = filestarget[index];
-        const allowedExtensions = /(\.pdf)$/i;
-        const maxSize = 5 * 1024 * 1024; // 5MB
-    
-        // Validasi ekstensi file
-        // if (!allowedExtensions.exec(e.target.value)) {
-        //     Swal.fire({
-        //         icon:"info",
-        //         title:"Alert",
-        //         text:"File harus berupa PDF!"
-        //     })
-        //     e.target.value = '';
-        //     return false;
-        // }
+    const handlerSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if(files.length === 0) return Notify("Files null can't upload", 'info')
+        console.log(files)
+        const formData = new FormData();
+        Array.from(files).forEach(file => {
+          formData.append('files', file);
+        });
+        formData.append('description', 'Ini descriptions')
         
-        // Validasi ukuran file
-        if (file.size > maxSize) {
-            Notify(`${file.name} - File terlalu besar, maksimal 5MB!`, 'error')
-            e.target.value = '';
-            return false;
-        }
-        
-        // setFiles([ ...files, file ])
-        files.push(file)
-        setFiles([ ...files ])
+        const result = postFile(formData)
     }
 
-}
+    const handlerUploadPDF = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const filestarget = e.target.files ?? []
+        console.log(filestarget)
+        for (let index = 0; index < filestarget.length; index++) {
+            const file = filestarget[index];
+            const allowedExtensions = /(\.pdf)$/i;
+            const maxSize = 5 * 1024 * 1024; // 5MB
+        
+            // Validasi ekstensi file
+            // if (!allowedExtensions.exec(e.target.value)) {
+            //     Swal.fire({
+            //         icon:"info",
+            //         title:"Alert",
+            //         text:"File harus berupa PDF!"
+            //     })
+            //     e.target.value = '';
+            //     return false;
+            // }
+            
+            // Validasi ukuran file
+            if (file.size > maxSize) {
+                Notify(`${file.name} - File terlalu besar, maksimal 5MB!`, 'error')
+                e.target.value = '';
+                return false;
+            }
+            
+            // setFiles([ ...files, file ])
+            files.push(file)
+            setFiles([ ...files ])
+        }
+    }
+
+    const handleDeleteFile = (index: number) => {
+        const filterdelete = [...files.slice(0, index), ...files.slice(index + 1)];
+        setFiles(filterdelete)
+    }
 
   return (
       <div className="w-full xl:w-3/4 relative h-screen overflow-y-auto">
@@ -61,20 +74,24 @@ export default function AttachmentCreatePage() {
                 <div className="w-full">
                     {
                         files.length > 0 ?
-                        <div className='flex items-center justify-between border p-2'>
-                            <div className='flex items-center gap-2 w-full'>
-                                <div className='w-10 h-10 rounded-md flex items-center justify-center text-white uppercase bg-red-500 text-sm font-bold'>
-                                    <Icon icon={'basil:document-outline'} className='w-5 h-5'/>
+                        files.map((file: File, index: number) => {
+                            return (
+                                <div className='flex items-center justify-between border p-2' key={index}>
+                                    <div className='flex items-center gap-2 w-full'>
+                                        <div className='w-10 h-10 rounded-md flex items-center justify-center text-white uppercase bg-red-500 text-sm font-bold'>
+                                            <Icon icon={'basil:document-outline'} className='w-5 h-5'/>
+                                        </div>
+                                        <div>
+                                            <h1 className='text-sm xl:text-base text-zinc-600'>{file.name}</h1>
+                                            <p className='text-zinc-500 text-xs xl:text-sm'>{file.size} KB</p>
+                                        </div>
+                                    </div>
+                                    <button type='button' onClick={() => handleDeleteFile(index)} className='w-10 h-10 rounded-md hover:bg-red-100 flex items-center justify-center transition-colors duration-300'>
+                                        <Icon icon={'iconoir:trash'} className='text-red-500'/>
+                                    </button>
                                 </div>
-                                <div>
-                                    <h1 className='text-sm xl:text-base text-zinc-600'>{files.length} {files.length > 1 ? "Files":"File"} Selected</h1>
-                                    {/* <p className='text-zinc-500 text-xs xl:text-sm'>{file.size} Byte</p> */}
-                                </div>
-                            </div>
-                            <button type='button' onClick={() => setFiles([])} className='w-10 h-10 rounded-md hover:bg-red-100 flex items-center justify-center transition-colors duration-300'>
-                                <Icon icon={'iconoir:trash'} className='text-red-500'/>
-                            </button>
-                        </div>
+                            )
+                        })
                         
                         :
                         <label
@@ -108,7 +125,7 @@ export default function AttachmentCreatePage() {
                         <span className="sr-only">Loading...</span>
                     </div>
                     :
-                    <button className='btn-primary'>Submit</button>
+                    <button className='btn-primary' disabled={files.length == 0}>Submit</button>
                 }
             </form>
         </div>

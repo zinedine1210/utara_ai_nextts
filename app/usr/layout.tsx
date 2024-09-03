@@ -9,7 +9,7 @@ export default function UserLayout({
   children: ReactNode
 }) {
   return (
-    <div className='flex flex-col w-full min-h-screen h-screen overflow-hidden'>
+    <div className='flex flex-col w-full min-h-screen h-screen overflow-hidden relative'>
       <main className='flex-1 w-full lg:flex overflow-hidden h-full'>
         {/* <div className='bg-red-500 sm:bg-violet-500 md:bg-yellow-500 lg:bg-gray-500 xl:bg-green-500 2xl:bg-blue-500 w-14 h-full'></div> */}
         <Sidebar />

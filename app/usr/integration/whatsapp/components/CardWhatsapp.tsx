@@ -18,7 +18,7 @@ export default function CardWhatsapp({ id }: { id: string }) {
   const getStatus = useCallback(async () => {
     const result = await checkSessionWhatsapp(id)
     setStatus(result.data.status ?? 'disconnected')
-  }, [])
+  }, [id])
 
   useEffect(() => {
     getStatus()

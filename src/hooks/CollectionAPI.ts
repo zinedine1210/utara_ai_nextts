@@ -84,3 +84,15 @@ export const postChannel = async (payload: string[], target: string) => {
     }
     return responseData
 }
+
+export const postFile = async (formData: FormData) => {
+    const result = await axios.post(`http://polres.localhost/v1/client/file`, formData, {
+        headers: {
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNktHNDFUQkNGNkNKN1o1U0M5S1lDUVIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI1MzU5OTQ5fQ.WgFS8PFDRj6jfwgWWjoAZ-rJ_qRn2F4kbk-lVE6kTvo',
+            'Content-Type': 'multipart/form-data',
+        }
+    })
+    console.log(result)
+    const responseData = result.data
+    return responseData
+}

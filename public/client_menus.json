@@ -50,6 +50,30 @@
   {
     "description": "",
     "feature": "",
+    "icon": "mingcute:attachment-line",
+    "parent": "clm_knowledge",
+    "sortnumber": 302,
+    "id": "clm_knowledge_dial",
+    "route": "/usr/knowledge/dial",
+    "name": "Dial",
+    "flag": "Knowledge Builder",
+    "show": true
+  },
+  {
+    "description": "",
+    "feature": "",
+    "icon": "mingcute:attachment-line",
+    "parent": "clm_knowledge_attachment",
+    "sortnumber": 302,
+    "id": "clm_knowledge_attachment_create",
+    "route": "/usr/knowledge/attachment/create",
+    "name": "Upload Attachment",
+    "flag": "Knowledge Builder",
+    "show": true
+  },
+  {
+    "description": "",
+    "feature": "",
     "icon": "material-symbols:linked-services-outline",
     "parent": "clm_knowledge",
     "sortnumber": 303,
