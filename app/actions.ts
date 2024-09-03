@@ -9,3 +9,7 @@ export async function deleteCookies(data: any) {
 export async function setCookies(name: string, data: string){
   cookies().set(name, data)
 }
+
+export async function getCookies(name: string){
+  return cookies().get(name)
+}

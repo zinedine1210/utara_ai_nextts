@@ -1,13 +1,13 @@
 'use client'
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import { useCallback, useEffect } from "react"
-import { tableTraining } from "@@/src/constant/table";
 import { StateType } from "@@/src/types/types";
 import Datatable from "../../../components/Datatable/Datatable";
-import { getTraining } from "@@/src/hooks/CollectionAPI";
-import { TrainingDataModel } from "./lib/model";
+import { getServices } from "@@/src/hooks/CollectionAPI";
 import { useRouter } from "next/navigation";
-import { TrainingType } from "@@/src/types/datatabletypes";
+import { ServicesModel } from "./lib/model";
+import { ServicesType } from "@@/src/types/datatabletypes";
+import { tableServices } from "@@/src/constant/table";
 
 export default function ServicesPage() {
   const { state, setState } = useGlobalContext();
@@ -15,13 +15,13 @@ export default function ServicesPage() {
   const router = useRouter()
 
   const initialMount = useCallback(async () => {
-    const result = await getTraining()
-    const value: TrainingDataModel[] = TrainingDataModel.toDatatableResponse(result.data)
+    const result = await getServices()
+    const value: ServicesModel[] = ServicesModel.toDatatableResponse(result.data)
     // console.log(value[0])
     const total = value.length
-    let defaultValue: StateType<TrainingType> = {
+    let defaultValue: StateType<ServicesType> = {
       isLoading: false,
-      headers: tableTraining,
+      headers: tableServices,
       filter: [],
       page: 1,
       display: 10,

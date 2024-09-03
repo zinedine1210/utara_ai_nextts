@@ -44,7 +44,6 @@ export default function LoginPage() {
     // };
 
     const result: ResponseData = await tryLogin(payload)
-    console.log("page", result)
     if(result.success){
       Notify(result.message, 'success')
       Notify(`Welcome ${value.email}`, 'info', 5000)

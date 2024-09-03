@@ -27,6 +27,7 @@ export interface StateType<T> {
     groupBy: string
     onGet: (refresh?: boolean) => void,
     bulk?: DropdownOptions[]
+    bulkButton?: DropdownOptions[]
 }
 
 export interface TableHeader {
@@ -49,5 +50,6 @@ export interface DialList {
 export interface DropdownOptions {
     name: string
     icon: string
+    customCss?: string
     action: (id: number | string, index: number) => void
 }

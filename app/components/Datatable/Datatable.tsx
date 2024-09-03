@@ -1,7 +1,7 @@
 import { useGlobalContext } from "@@/src/providers/GlobalContext"
 import Pagination from "./Pagination"
 import { useEffect, useState } from "react"
-import { StateType } from "@@/src/types/types"
+import { DropdownOptions, StateType } from "@@/src/types/types"
 import { displayListNumber } from "../../../src/constant/table"
 import { Icon } from "@iconify/react/dist/iconify.js"
 import { Notify } from "@@/src/utils/script"
@@ -23,6 +23,7 @@ export default function Datatable({
     const page = property?.page
     const totalCount = property?.totalCount
     const bulk = property?.bulk
+    const bulkButton = property?.bulkButton
     const isLoading = property?.isLoading ?? true
 
     useEffect(() => {},[isLoading])
@@ -149,7 +150,7 @@ export default function Datatable({
                             headers && headers.map((head, key) => {
                                 if(head.sort)
                                 return (
-                                    <th scope="col" key={key} className="px-3 xl:px-3 2xl:px-5 py-2.5 xl:py-3 2xl:py-4 group text-sm xl:text-xs 2xl:text-base">
+                                    <th scope="col" key={key} className="px-3 xl:px-3 2xl:px-5 py-2.5 xl:py-3 2xl:py-4 group text-sm xl:text-xs 2xl:text-sm">
                                         <div className="flex items-center gap-2 ">
                                             {head.label}
                                             <button onClick={() => handleSort(head.sort)} className={`${columns.find((res: any) => res.data == head.sort) ? "bg-blue-200 rounded-full w-6 h-6 flex items-center justify-center visible opacity-100 dark:text-black" : "dark:text-white opacity-0 invisible"} group-hover:visible duration-300 group-hover:opacity-100`}>
@@ -162,15 +163,15 @@ export default function Datatable({
                                 )
 
                                 return (
-                                    <th key={key} scope="col" className={`px-5 py-4 ${head.cssHead}`}>
+                                    <th key={key} scope="col" className={`px-5 py-4 text-sm xl:text-xs 2xl:text-sm ${head.cssHead}`}>
                                         {head.label}
                                     </th>
                                 )
                             })
                         }
                         {
-                            bulk && (
-                                <th className={`px-5 py-4`}>
+                            (bulk || bulkButton) && (
+                                <th className={`px-5 py-4 text-sm xl:text-xs 2xl:text-sm`}>
                                     Bulk Action
                                 </th>
                             )
@@ -195,7 +196,7 @@ export default function Datatable({
                                         {
                                             headers.map((head: any, headIndex) => {
                                                 return (
-                                                    <td key={headIndex} onClick={() => handleCopy(item[head.copy], head.label, head.copy)} className={`px-3 xl:px-3 2xl:px-5 py-2.5 xl:py-3 2xl:py-4 text-sm xl:text-xs 2xl:text-base ${head.cssRow} ${head.copy && "select-all"}`}>
+                                                    <td key={headIndex} onClick={() => handleCopy(item[head.copy], head.label, head.copy)} className={`px-3 xl:px-3 2xl:px-5 py-2.5 xl:py-3 2xl:py-4 text-sm xl:text-xs 2xl:text-sm ${head.cssRow} ${head.copy && "select-all"}`}>
                                                         { 
                                                             head.status ?
                                                             <div style={{backgroundColor:`${head.status[item[head.property]]}`}} className={`text-center rounded-xl my-1 text-sm xl:text-xs 2xl:text-base py-1.5 px-4 w-fit text-white font-bold`}>
@@ -212,6 +213,21 @@ export default function Datatable({
                                             bulk && (
                                                 <td className="relative">
                                                     <Dropdown id={item.id} options={bulk}/>
+                                                </td>
+                                            )
+                                        }
+                                        {
+                                            bulkButton && (
+                                                <td className="flex items-center gap-2">
+                                                    { bulkButton.map((btn: any, index: number) => {
+                                                        const customCss = btn.customCss ?? 'bg-gradient-to-r from-blue-600 to-blue-400 text-white rounded-md'
+                                                        return (
+                                                            <button onClick={() => btn.action(item.id, index)} key={index} className={`${customCss} py-1.5 px-3 text-sm flex items-center gap-2`}>
+                                                                <Icon icon={btn.icon} />
+                                                                {btn.name}
+                                                            </button>
+                                                        )
+                                                    })}
                                                 </td>
                                             )
                                         }

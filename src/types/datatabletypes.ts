@@ -52,3 +52,21 @@ export interface ProfileType {
     },
     status: string
 }
+
+export interface ServicesType {
+    type: string
+    loc: string[]
+    msg: string
+    input: {
+        type: string
+        description: string
+        serviceId: string
+        channel_id: string
+        channel: string
+        prompt: string
+        properties: {
+            data: string
+        }
+        status: string
+    }
+}

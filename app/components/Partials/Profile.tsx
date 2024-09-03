@@ -25,6 +25,21 @@ export default function Profile() {
         }
     ]
 
+    function getInitials() {
+        let name = ''
+        const storedMenus: string | null = localStorage.getItem('auth_info')
+        if(!storedMenus) return false
+
+        name = storedMenus.toString()
+        // Memecah nama menjadi array kata-kata
+        const nameParts = name.split(' ');
+      
+        // Mengambil huruf pertama dari setiap kata
+        const initials = nameParts.map(part => part[0].toLowerCase()).join('');
+      
+        return initials
+      }
+
     const handleLogout = async () => {
         const result: ResponseData = await tryLogout()
         if(result.success){
@@ -35,7 +50,9 @@ export default function Profile() {
 
     const ButtonProfile = () => {
         return (
-            <div className="w-8 h-8 2xl:w-10 2xl:h-10 rounded-full flex items-center justify-center border border-white bg-primary/50">X</div>
+            <div className="w-9 h-9 2xl:w-10 2xl:h-10 rounded-full flex items-center justify-center border border-primary bg-primary/30 capitalize">
+                {getInitials()}
+            </div>
         )
     }
   return (

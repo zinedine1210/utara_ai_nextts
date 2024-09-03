@@ -29,6 +29,7 @@ export const tryLogin = async (payload: any) => {
     if(responseData.success){
         if(responseData.data.access_token){
             setCookies('auth_token', responseData.data.access_token)
+            localStorage.setItem("auth_info", payload.username)
         }
         const clientMenus = await axios.get(`http://localhost:3000/client_menus.json`)
         localStorage.setItem('client_menus', JSON.stringify(clientMenus.data))

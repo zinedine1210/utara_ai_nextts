@@ -5,11 +5,12 @@ import { tableDial } from "@@/src/constant/table"
 import axios from "axios";
 import { DialList, StateType } from "@@/src/types/types";
 import Datatable from "../../../components/Datatable/Datatable";
+import { useRouter } from "next/navigation";
 
 export default function ServicesPage() {
   const { state, setState } = useGlobalContext();
-  const statename = 'services'
-  
+  const statename = 'dials'
+  const router = useRouter()
 
   const getData = useCallback(async () => {
     const result = await axios.get('http://localhost:3000/dial_international.json')
@@ -28,6 +29,29 @@ export default function ServicesPage() {
       totalCount: 0,
       payload: null,
       groupBy: "t_ie_ca",
+      bulkButton: [
+        {
+          name: 'Trained',
+          icon: 'material-symbols:model-training',
+          action: (id, index) => {
+            router.push(`/usr/knowledge/training/information/${id}`)
+          }
+        },
+        {
+          name: 'Inbox',
+          icon: 'solar:inbox-broken',
+          action: (id, index) => {
+            router.push(`usr/inbox/${id}`)
+          }
+        },
+        {
+          name: 'Simulation AI',
+          icon: 'hugeicons:ai-chat-02',
+          action: (id, index) => {
+            alert('simulation'+id)
+          }
+        },
+      ],
       onGet: () => {
         
       }
@@ -45,7 +69,7 @@ export default function ServicesPage() {
 
   return (
     <div className="w-full h-full p-5">
-      <h1 className="font-bold text-xl">Services</h1>
+      <h1 className="font-bold text-xl">Dial</h1>
       <p className="text-zinc-600">Dial International</p>
 
       <div className="py-10">

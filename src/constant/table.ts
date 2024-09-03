@@ -23,6 +23,15 @@ export const tableAttachment: TableHeader[] = [
     { label: "Date", property: "createAt", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
 ]
 
+export const tableServices: TableHeader[] = [
+    { label: "Type", property: "type", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Description", property: "descriptionInput", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Channel ID", property: "channelIdInput", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Data", property: "propertiesData", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+]
+
+
+
 export const displayListNumber = [
     { value :10, label:10 },
     { value :20, label:20 },
