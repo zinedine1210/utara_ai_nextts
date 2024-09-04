@@ -1,6 +1,7 @@
 import { setCookies } from "@@/app/actions";
 import axios from "axios"
 import { Notify } from "../utils/script";
+import { AttachmentType } from "../types/datatabletypes";
 let protocol = '';
 let host = '';
 let port = '';
@@ -121,17 +122,21 @@ export const postChannel = async (payload: string[], target: string) => {
 }
 
 export const postFile = async (formData: FormData) => {
-    const result = await axios.post(`http://polres.localhost/v1/client/file`, formData, {
-        headers: {
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNktHNDFUQkNGNkNKN1o1U0M5S1lDUVIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI1MzU5OTQ5fQ.WgFS8PFDRj6jfwgWWjoAZ-rJ_qRn2F4kbk-lVE6kTvo',
-            'Content-Type': 'multipart/form-data',
-        }
-    })
-    console.log(result)
+    const result = await axios.post(`${baseURL}/files`, formData)
     const responseData = result.data
-    if(!responseData.success) {
+    if(!responseData.success){
         Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
-        responseData.data = responseData.data ?? []
     }
+    responseData.data.map((item: any, index: number) => {
+        const splittype = item.original_file_name.split(".")
+        const filetype = splittype[splittype.length]
+        item['rec_date'] = item['rec_date'] ?? new Date().toISOString()
+        item['description'] = item['description'] ?? item['id'] + filetype
+        item['location'] = item['location'] ?? "data/files/tmp/" + item['id'] + filetype
+        item['status'] = item['status'] ?? 'ACTIVE'
+        item['rec_by'] = item['rec_by'] ?? '128ASJKAJ112NANSKJA1212'
+        item['original_file_size'] = item['original_file_size'] ?? 10
+        
+    })
     return responseData
 }

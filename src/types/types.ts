@@ -53,3 +53,8 @@ export interface DropdownOptions {
     customCss?: string
     action: (id: number | string, index: number) => void
 }
+
+export interface Options {
+    label: string,
+    value: any
+}

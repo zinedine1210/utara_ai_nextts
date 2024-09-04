@@ -3,27 +3,38 @@ import { MenusList } from "@@/src/types/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react";
 
 export default function Breadcrumb() {
     const pathname = usePathname()
+    const [clientMenus, setClientMenus] = useState<MenusList[]>([])
     function generateCombinations(input: string): MenusList[] {
-        const getlocal: string | null = localStorage.getItem('client_menus') ?? null
-        const clientMenus: MenusList[] = getlocal ? JSON.parse(getlocal) : []
-        const parts = input.split('/');
         const result: MenusList[] = [];
-        for (let i = parts.length; i > 2; i--) {
-            const pathRoute = parts.slice(0, i).join('/')
-            let findIndex = clientMenus.findIndex(res => res.route == pathRoute)
-            if(findIndex == -1){
-                findIndex = clientMenus.findIndex(res => res.id == `clm_${parts.slice(2, 3)}`)
+        if(clientMenus.length > 0){
+            const parts = input.split('/');
+            for (let i = parts.length; i > 2; i--) {
+                const pathRoute = parts.slice(0, i).join('/')
+                let findIndex = clientMenus.findIndex(res => res.route == pathRoute)
+                if(findIndex == -1){
+                    findIndex = clientMenus.findIndex(res => res.id == `clm_${parts.slice(2, 3)}`)
+                }
+                result.push(clientMenus[findIndex])
             }
-            result.push(clientMenus[findIndex])
         }
-
         return result;
     }
 
-    const breadcrumblist: MenusList[] = generateCombinations(pathname)
+    useEffect(() => {
+        const getlocal: string | null = localStorage.getItem('client_menus') ?? null
+
+        if(getlocal){
+            const parseMenus: MenusList[] = JSON.parse(getlocal)
+            setClientMenus(parseMenus)
+        }
+    }, [])
+
+    const breadcrumblist: MenusList[] | null = generateCombinations(pathname)
+
   return (
         <nav className="flex" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">

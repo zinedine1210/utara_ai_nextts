@@ -40,13 +40,13 @@ const Pagination = ({page, pagerList, handleNext, handlePrev, handleBackward, ha
     return (
         <div className="flex justify-between">
             <div className="flex items-center space-x-1">
-                <button type="button" disabled={!(page > 1)} onClick={handleBackward} className="disabled:cursor-not-allowed disabled:bg-zinc-300 py-2 2xl:py-2 xl:px-3 px-3 2xl:px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm xl:text-[11px] 2xl:text-sm flex items-center">
+                <button type="button" disabled={!(page > 1)} onClick={handleBackward} className="dark:bg-darkPrimary dark:hover:bg-darkPrimary/50 disabled:cursor-not-allowed disabled:bg-zinc-300 py-2 2xl:py-2 xl:px-3 px-3 2xl:px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm xl:text-[11px] 2xl:text-sm flex items-center dark:disabled:bg-black">
                     <span title="previous" >
                         <Icon icon={'system-uicons:backward'} className="text-sm xl:text-xl 2xl:text-2xl"/>
                     </span>
                     <h1 className="hidden md:block">Backward</h1>
                 </button>
-                <button type="button" onClick={handlePrev} disabled={!(page > 1)} className="disabled:cursor-not-allowed disabled:bg-zinc-300 py-2 2xl:py-2 xl:px-3 px-3 2xl:px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm xl:text-[11px] 2xl:text-sm flex items-center">
+                <button type="button" onClick={handlePrev} disabled={!(page > 1)} className="dark:bg-darkPrimary dark:hover:bg-darkPrimary/50 disabled:cursor-not-allowed disabled:bg-zinc-300 py-2 2xl:py-2 xl:px-3 px-3 2xl:px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm xl:text-[11px] 2xl:text-sm flex items-center dark:disabled:bg-black">
                     <span title="previous">
                         <Icon icon={'fluent:arrow-previous-20-filled'} className="text-sm xl:text-xl 2xl:text-2xl"/>
                     </span>
@@ -63,13 +63,13 @@ const Pagination = ({page, pagerList, handleNext, handlePrev, handleBackward, ha
             </div>
 
             <div className="flex items-center space-x-1">
-                <button type="button" onClick={handleNext} disabled={!(page < pagerList)} className="disabled:cursor-not-allowed disabled:bg-zinc-300 py-2 2xl:py-2 xl:px-3 px-3 2xl:px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm xl:text-[11px] 2xl:text-sm flex items-center">
+                <button type="button" onClick={handleNext} disabled={!(page < pagerList)} className="dark:bg-darkPrimary dark:hover:bg-darkPrimary/50 disabled:cursor-not-allowed disabled:bg-zinc-300 py-2 2xl:py-2 xl:px-3 px-3 2xl:px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm xl:text-[11px] 2xl:text-sm flex items-center dark:disabled:bg-black">
                     <h1 className="hidden md:block">Next</h1>
                     <span title="next" >
                         <Icon icon={'fluent:arrow-next-20-filled'} className="text-sm xl:text-xl 2xl:text-2xl"/>
                     </span>
                 </button>
-                <button type="button" disabled={!(page < pagerList)} onClick={handleForward} className="disabled:cursor-not-allowed disabled:bg-zinc-300 py-2 2xl:py-2 xl:px-3 px-3 2xl:px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm xl:text-[11px] 2xl:text-sm flex items-center">
+                <button type="button" disabled={!(page < pagerList)} onClick={handleForward} className="dark:bg-darkPrimary dark:hover:bg-darkPrimary/50 disabled:cursor-not-allowed disabled:bg-zinc-300 py-2 2xl:py-2 xl:px-3 px-3 2xl:px-5 gap-2 bg-white hover:bg-zinc-200 duration-300 ease-in-out rounded-md text-sm xl:text-[11px] 2xl:text-sm flex items-center dark:disabled:bg-black">
                     <h1 className="hidden md:block">Forward</h1>
                     <span title="forward">
                         <Icon icon={'system-uicons:forward'} className="text-sm xl:text-xl 2xl:text-2xl"/>

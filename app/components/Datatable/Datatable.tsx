@@ -6,6 +6,8 @@ import { displayListNumber } from "../../../src/constant/table"
 import { Icon } from "@iconify/react/dist/iconify.js"
 import { Notify } from "@@/src/utils/script"
 import Dropdown from "../Partials/Dropdown"
+import Image from "next/image"
+import myImageLoader from "@@/src/utils/loader"
 
 export default function Datatable({
     statename
@@ -145,7 +147,7 @@ export default function Datatable({
                 <thead className="bg-white dark:bg-dark text-sm xl:text-xs 2xl:text-base text-gray-700 uppercase dark:text-gray-400 rounded-xl">
 
                     {/* HEADERS LOOPING */}
-                    <tr className="bg-white border-b-2 border-black">
+                    <tr className="bg-white dark:bg-dark border-b-2 border-black">
                         {
                             headers && headers.map((head, key) => {
                                 if(head.sort)
@@ -192,7 +194,7 @@ export default function Datatable({
                         data.length > 0 ?
                             data.slice(showing - 1, showingTo).map((item, key) => {
                                 return (
-                                    <tr key={key} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 border-b dark:border-gray-700 odd:dark:bg-dark2 odd:bg-dark2 odd:bg-opacity-20 even:dark:bg-dark">
+                                    <tr key={key} className="even:bg-gray-50 border-b dark:border-gray-700 odd:dark:bg-darkPrimary odd:bg-darkPrimary odd:bg-opacity-20 even:dark:bg-darkSecondary">
                                         {
                                             headers.map((head: any, headIndex) => {
                                                 return (
@@ -218,7 +220,7 @@ export default function Datatable({
                                         }
                                         {
                                             bulkButton && (
-                                                <td className="flex items-center gap-2">
+                                                <td className="h-auto py-2 flex items-center gap-2 relative ">
                                                     { bulkButton.map((btn: any, index: number) => {
                                                         const customCss = btn.customCss ?? 'bg-gradient-to-r from-blue-600 to-blue-400 text-white rounded-md'
                                                         return (
@@ -238,9 +240,11 @@ export default function Datatable({
                         <tr className="col-span-full h-56 w-full">
                             <th className="col-span-full w-full" colSpan={11}>
                                 <div className="relative w-72 mx-auto">
-                                    <p className="w-36 pb-12 ml-10 text-light font-bold absolute top-1/2 -translate-y-1/2 ">Oops, no data match your filters</p>
-                                    {/* <img src="/images/internal/notfound.png" alt="Not Found" className="block dark:hidden ml-auto" />
-                                    <img src="/images/internal/notfound_dark.png" alt="Not Found" className="hidden dark:block ml-auto" /> */}
+                                    <p className="w-32 text-lg text-light font-bold absolute top-1/2 -translate-y-1/2 ">Oops, no data match your filters</p>
+                                    <Image alt="NO DATA" width={150} height={150} src={'/images/no-data.png'} 
+                                        className="block ml-auto"
+                                        placeholder={`data:image/${myImageLoader(150, 150)}`}
+                                    />
                                 </div>
                             </th>
                         </tr>
@@ -272,7 +276,7 @@ function SkeletonTable ({ headers }: {
             {
                 headers.map((head, index) => {
                     return (
-                        <th key={index} className="px-5 py-1 blur-sm rounded-xl dark:bg-dark2 bg-zinc-200 select-none whitespace-nowrap">
+                        <th key={index} className="px-5 py-1 blur-sm rounded-xl dark:bg-darkPrimary bg-zinc-200 select-none whitespace-nowrap">
                             Lorem, ipsum dolor.
                         </th>
                     )

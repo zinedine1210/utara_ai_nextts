@@ -2,12 +2,12 @@
 
 @json = application/json
 @localHost = http://localhost:1899
-@devHost = http://202.149.64.36:31245
+@devHost = https://gai.co.id/gai-ai-service
 @host = {{devHost}}
 @apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
 @ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNkoxUURNNktUN00yRjlXOEU1QjBDVDQiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI1MTIxNTc1fQ.6Bk91aFnXlIILuQbmkIzIpYoe5ytlF_6cnAzkHEe5D8
 @partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUo2SjFWODIzUUZGRVdFMEJQV1ZUMUU3NiIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzI1MTIxNjk5fQ.kS-bq1DKi_1kgkhwsMULxEFBs35F6UQnu6RiNVwIJUI
-@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNktHNDFUQkNGNkNKN1o1U0M5S1lDUVIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI1NDI0NjA2fQ.DAtfivop-m_I38Sj3KY-zEXTFD9hb4utp57bLIW5bwY
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNktHNDFUQkNGNkNKN1o1U0M5S1lDUVIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI1NTA4NDUyfQ.gGHzpcyml9M0EWEd5bO5XwnTQpUMcq4vY6CybUO7Xuc
 @token = {{clientToken}}
 
 
@@ -657,12 +657,12 @@ curl {{host}}/v1/client/file/ \
   -F "description=Description of the files"
 
 ### find by id
-GET {{host}}/v1/client/file/id/01J582JF3Q1VYXEM3SJHAWAEZJ HTTP/1.1
+GET {{host}}/v1/client/file/id/01J6XNQ3KFWXQ9NT79ZK0D7K8V HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
 ### fing by originalFileName, status
-GET {{host}}/v1/client/file/by HTTP/1.1
+GET {{host}}/v1/client/file/by?status=ACTIVE HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
@@ -706,7 +706,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 ### fing by description, status
-GET {{host}}/v1/client/data/by?description=base HTTP/1.1
+GET {{host}}/v1/client/data/by HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 

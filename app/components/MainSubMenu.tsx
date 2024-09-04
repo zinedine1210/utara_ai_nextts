@@ -25,7 +25,7 @@ export default function MainSubMenu({
 
     if(submenu.length > 0)
   return (
-    <div className="hidden md:block xl:max-w-40 xl:min-w-40 2xl:max-w-56 2xl:min-w-56 w-full overflow-hidden border-r dark:border-darkSecondary duration-300 ease-in-out transition-all">
+    <div className="hidden md:block xl:max-w-44 xl:min-w-44 2xl:max-w-56 2xl:min-w-56 w-full overflow-hidden border-r dark:border-darkSecondary duration-300 ease-in-out transition-all">
         {
             submenu.map((item: MenusList, index: number) => {
                 if(item.show)

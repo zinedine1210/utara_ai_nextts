@@ -5,6 +5,9 @@ import { ResponseData } from "@@/src/types/apitypes";
 import { Notify } from "@@/src/utils/script";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRouter } from "next/navigation";
+import InputText from "../components/Input/InputText";
+import { useState } from "react";
+import Select from "../components/Input/Select";
 // import DonatChart from "../components/Chart/DonatChart"
 // import BasicBar from "../components/Chart/BasicBar"
 // import StackedADP from "../components/Chart/StackedADP"
@@ -20,8 +23,21 @@ export default function AdminPage() {
     }
   }
 
+  const [coba, setCoba] = useState('')
+
   return (
     <div className="p-5">
+      <InputText 
+        id="inputcoba"
+        name="inputcoba"
+        onChange={(value) => setCoba(value)}
+        value={coba}
+        placeholder="Ini placeholder"
+        label="Coba Input"
+        // errorMessage="haskahkshakhakshakshak"
+        prefixIcon="ph:user-light"
+        disabled={true}
+      />
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-5">
               <div
                 className="bg-no-repeat relative bg-cover bg-center p-4 rounded-md shadow-md h-full"

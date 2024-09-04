@@ -2,14 +2,19 @@
 import { postFile } from '@@/src/hooks/CollectionAPI'
 import { Notify } from '@@/src/utils/script'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import Link from 'next/link'
 import React, { useState } from 'react'
+import { AttachmentDataModel } from '../lib/model'
+import { useGlobalContext } from '@@/src/providers/GlobalContext'
+import { useRouter } from 'next/navigation'
 
 export default function AttachmentCreatePage() {
     const [files, setFiles] = useState<File[]>([])
     const [loading, setLoading] = useState<boolean>(false)
+    const { state, setState } = useGlobalContext()
+    const router = useRouter()
 
     const handlerSubmit = async (e: React.FormEvent) => {
+        setLoading(true)
         e.preventDefault()
         if(files.length === 0) return Notify("Files null can't upload", 'info')
         console.log(files)
@@ -19,7 +24,19 @@ export default function AttachmentCreatePage() {
         });
         formData.append('description', 'Ini descriptions')
         
-        const result = postFile(formData)
+        const result = await postFile(formData)
+        const tomodel = AttachmentDataModel.toDatatableResponse(result.data)
+        if(state.attachment){
+            setState((prev: any) => ({
+                ...prev,
+                attachment: {
+                    ...prev.attachment,
+                    data: [ ...prev.attachment.data, ...tomodel ]
+                }
+            }))
+        }
+        router.push('/usr/knowledge/attachment')
+        setLoading(false)
     }
 
     const handlerUploadPDF = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +87,7 @@ export default function AttachmentCreatePage() {
                 Upload your file business first here to teach the AI ChatBot
             </p>
 
-            <form onSubmit={e => handlerSubmit(e)} className='my-5 space-y-4'>
+            <form onSubmit={e => handlerSubmit(e)} className={`${loading && 'pointer-events-none'} my-5 space-y-4`}>
                 <div className="w-full">
                     {
                         files.length > 0 ?
@@ -125,7 +142,7 @@ export default function AttachmentCreatePage() {
                         <span className="sr-only">Loading...</span>
                     </div>
                     :
-                    <button className='btn-primary' disabled={files.length == 0}>Submit</button>
+                    <button className='btn-primary' disabled={files.length == 0 || loading}>Submit</button>
                 }
             </form>
         </div>

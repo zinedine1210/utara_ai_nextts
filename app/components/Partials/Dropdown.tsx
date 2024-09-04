@@ -36,21 +36,18 @@ export default function Dropdown({ button, options, id = 'id' }: {
                     </div>
                 )}
             </button>
-            
-            {isOpen && (
-                <div className="absolute top-full right-0 bg-white border shadow-lg rounded z-50 min-w-44 max-w-96 w-full">
-                    {
-                        options.map((opt, index) => {
-                            return (
-                                <button key={index} onClick={() => opt.action(id, index)} className="p-2 dark:text-black hover:bg-gray-200 cursor-pointer flex items-center gap-2 w-full text-start text-black">
-                                    <Icon icon={opt.icon} className="text-zinc-500 text-lg"/>
-                                    {opt.name}
-                                </button>
-                            )
-                        })
-                    }
-                </div>
-            )}
+            <div className={`${isOpen ? 'visible translate-y-0 opacity-100':'invisible -translate-y-5 opacity-0'} duration-300 ease-in-out absolute top-full right-0 bg-white shadow-lg rounded z-50 min-w-44 max-w-96 w-full dark:bg-dark`}>
+                {
+                    options.map((opt, index) => {
+                        return (
+                            <button key={index} onClick={() => opt.action(id, index)} className="p-2 hover:bg-primary/20 dark:text-white text-black dark:hover:bg-darkSecondary cursor-pointer flex items-center gap-2 w-full text-start">
+                                <Icon icon={opt.icon} className="text-primary text-lg"/>
+                                {opt.name}
+                            </button>
+                        )
+                    })
+                }
+            </div>
         </div>
     );
 }

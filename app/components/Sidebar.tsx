@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link";
-import { notFound, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ReactNode, useCallback, useEffect, useState } from "react";
 import MainSubMenu from "./MainSubMenu";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -150,9 +150,9 @@ export default function Sidebar() {
       <div onClick={() => setState({ ...state, view: false })} className={`${state.view ? "visible opacity-30 translate-x-0":"invisible -translate-x-full opacity-0"} delay-[350ms] duration-300 ease-in-out md:hidden fixed top-0 left-0 w-full h-screen bg-black z-20`}></div>
       <div onClick={() => setState({ ...state, view: false })} className={`${state.view ? "visible opacity-30 translate-x-0":"invisible -translate-x-full opacity-0"} delay-[250ms] duration-300 ease-in-out md:hidden fixed top-0 left-0 w-full h-screen bg-black z-20`}></div>
       <div onClick={() => setState({ ...state, view: false })} className={`${state.view ? "visible opacity-30 translate-x-0":"invisible -translate-x-full opacity-0"} delay-200 duration-300 ease-in-out md:hidden fixed top-0 left-0 w-full h-screen bg-black z-20`}></div>
-      <div className={`${!state.view ? '-translate-x-full md:translate-x-0':'translate-x-0 md:translate-x-0'} delay-100 duration-300 ease-in-out fixed top-0 left-0 w-3/4 md:w-full z-30 md:static md:z-0 bg-white h-screen flex-1 md:h-full flex flex-col dark:bg-darkPrimary`}>
+      <div className={`${!state.view ? '-translate-x-full md:translate-x-0':'translate-x-0 md:translate-x-0'} delay-100 duration-300 ease-in-out fixed top-0 left-0 w-3/4 md:w-full z-30 md:static md:z-0 bg-white h-screen flex-1 md:h-full flex flex-col dark:bg-dark`}>
         <div className="w-full xl:w-auto flex flex-1">
-          <div className='w-full xl:max-w-40 xl:min-w-40 2xl:max-w-56 2xl:min-w-56 border-r dark:border-darkSecondary flex flex-col'>
+          <div className='w-full xl:max-w-44 xl:min-w-44 2xl:max-w-56 2xl:min-w-56 border-r dark:border-darkSecondary flex flex-col'>
             <div className='flex-1 space-y-2 overflow-y-auto'>
               {LoopingMenus()}
             </div>

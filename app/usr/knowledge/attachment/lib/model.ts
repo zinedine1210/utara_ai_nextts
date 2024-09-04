@@ -18,14 +18,14 @@ export class AttachmentDataModel {
         this.description = props.description
         this.id = props.id
         this.location = props.location
-        this.modby = props.modby
-        this.moddate = props.moddate
-        this.originalfilename = props.originalfilename
-        this.originalfilesize = props.originalfilesize
-        this.recby = props.recby
-        this.recdate = props.recdate
+        this.modby = props.mod_by
+        this.moddate = props.mod_date
+        this.originalfilename = props.original_file_name
+        this.originalfilesize = props.original_file_size
+        this.recby = props.rec_by
+        this.recdate = props.rec_date
         this.status = props.status
-        this.createAt = formatDateData(props.recdate)
+        this.createAt = formatDateData(props.rec_date)
         this.typeFile = 'application/' + props.description.split(".")[1]
     }
 
