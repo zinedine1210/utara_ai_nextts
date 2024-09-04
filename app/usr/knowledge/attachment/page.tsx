@@ -1,6 +1,6 @@
 'use client'
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { tableAttachment } from "@@/src/constant/table";
 import { StateType } from "@@/src/types/types";
 import Datatable from "../../../components/Datatable/Datatable";
@@ -10,11 +10,14 @@ import { AttachmentDataModel } from "./lib/model";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import { AttachmentType } from "@@/src/types/datatabletypes";
+import { Notify } from "@@/src/utils/script";
+import InputText from "@@/app/components/Input/InputText";
 
 export default function AttachmentPage() {
   const { state, setState } = useGlobalContext();
   const statename = 'attachment'
   const router = useRouter()
+  const [keyword, setKeyword] = useState('')
 
   const initialMount = useCallback(async () => {
     const result = await getAttachment()
@@ -59,26 +62,19 @@ export default function AttachmentPage() {
       },
       bulk: [
         {
-          name: 'Trained',
-          icon: 'material-symbols:model-training',
+          name: 'Delete',
+          icon: 'octicon:trash-24',
           action: (id, index) => {
-            router.push(`/usr/knowledge/training/information/${id}`)
+            Notify('Action not found to delete record ' + id, 'info', 3000)
           }
         },
         {
-          name: 'Inbox',
-          icon: 'solar:inbox-broken',
+          name: 'Update',
+          icon: 'weui:pencil-filled',
           action: (id, index) => {
-            router.push(`usr/inbox/${id}`)
+            Notify('Action not found to update record ' + id, 'info', 3000)
           }
-        },
-        {
-          name: 'Simulation AI',
-          icon: 'hugeicons:ai-chat-02',
-          action: (id, index) => {
-            alert('simulation'+id)
-          }
-        },
+        }
       ]
     }
     setState({ ...state, [statename]: { ...defaultValue, data: value, totalCount: total }})
@@ -96,7 +92,17 @@ export default function AttachmentPage() {
       <p className="text-zinc-600">Input your file business here to create knowledge</p>
 
       <div className="sm:flex sm:items-center sm:justify-between mt-5">
-        <input type="search" placeholder="Filter by Name / Description" className="input-style w-full xl:w-auto" />
+        <div className="w-1/4">
+          <InputText 
+            id="searchattachment"
+            name="keywrd"
+            value={keyword}
+            onChange={value => setKeyword(value)}
+            placeholder="Filter by description.."
+            prefixIcon="cil:search"
+            type="search"
+          />
+        </div>
 
         <div className="xl:flex space-y-2 xl:space-y-0 items-center justify-between gap-2 mt-2 xl:mt-0">
           <div className="group relative">
@@ -109,9 +115,12 @@ export default function AttachmentPage() {
             </span>
           </div>
           <button className="btn-secondary" onClick={() => state[statename].onGet()}>Refresh <Icon icon={'solar:refresh-bold-duotone'} /></button>
-          <Link href={`/usr/knowledge/attachment/create`}><button className="btn-secondary">
+          <Link href={`/usr/knowledge/attachment/create`}>
+          <button className="btn-primary">
+            <Icon icon={'material-symbols:upload'} className="text-xl"/>
             Upload File
-          </button></Link>
+          </button>
+          </Link>
         </div>
       </div>
 

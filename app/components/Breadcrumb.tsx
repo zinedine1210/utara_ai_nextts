@@ -36,7 +36,7 @@ export default function Breadcrumb() {
     const breadcrumblist: MenusList[] | null = generateCombinations(pathname)
 
   return (
-        <nav className="flex" aria-label="Breadcrumb">
+        <nav className="flex z-40" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 {
                     breadcrumblist && breadcrumblist.reverse().map((bread: MenusList, index: number) => {
@@ -49,7 +49,7 @@ export default function Breadcrumb() {
                                         <Icon icon={'material-symbols-light:chevron-right'} className="text-lg"/>
                                     }
                                     <Link href={bread.route}>
-                                        <button type={"button"} className="ms-1 text-sm font-medium hover:text-blue-300 md:ms-2 dark:text-gray-400 dark:hover:text-white">{bread.name}</button>
+                                        <button type={"button"} className="ms-1 text-sm font-medium hover:text-white text-zinc-300 md:ms-2">{bread.name}</button>
                                     </Link>
                                 </div>
                             </li>

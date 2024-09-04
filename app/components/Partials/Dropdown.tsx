@@ -31,7 +31,7 @@ export default function Dropdown({ button, options, id = 'id' }: {
         <div ref={dropdownRef} className="relative w-fit">
             <button onClick={() => setIsOpen(!isOpen)}>
                 {button ?? (
-                    <div className="w-8 h-8 rounded-md bg-zinc-100 hover:bg-zinc-200 duration-300 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-md dark:bg-black dark:hover:bg-black/50 bg-zinc-100 hover:bg-zinc-200 duration-300 flex items-center justify-center">
                         <Icon icon={`fe:elipsis-v`} className="text-xl"/>
                     </div>
                 )}
