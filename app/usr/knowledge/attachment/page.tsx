@@ -2,7 +2,7 @@
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import { useCallback, useEffect, useState } from "react"
 import { tableAttachment } from "@@/src/constant/table";
-import { StateType } from "@@/src/types/types";
+import { FilterOptions, StateType } from "@@/src/types/types";
 import Datatable from "../../../components/Datatable/Datatable";
 import { getAttachment } from "@@/src/hooks/CollectionAPI";
 import { useRouter } from "next/navigation";
@@ -12,51 +12,54 @@ import Link from "next/link";
 import { AttachmentType } from "@@/src/types/datatabletypes";
 import { Notify } from "@@/src/utils/script";
 import InputText from "@@/app/components/Input/InputText";
+import { ResponseData } from "@@/src/types/apitypes";
 
 export default function AttachmentPage() {
   const { state, setState } = useGlobalContext();
   const statename = 'attachment'
-  const router = useRouter()
   const [keyword, setKeyword] = useState('')
 
   const initialMount = useCallback(async () => {
-    const result = await getAttachment()
-    const value: AttachmentDataModel[] = AttachmentDataModel.toDatatableResponse(result.data)
-    const total = value.length
     let defaultValue: StateType<AttachmentType> = {
       isLoading: false,
       headers: tableAttachment,
-      filter: [],
+      filter: [
+        {
+          key: 'size',
+          value: 100
+        },
+        {
+          key: 'page',
+          value: 1
+        }
+      ],
       page: 1,
       display: 10,
       range: {},
       columns: [{ data:"created_at", dir:"desc" }],
-      data: [],
+      data: null,
       allData: [],
       totalCount: 0,
       payload: null,
       groupBy: "t_ie_ca",
-      onGet: async () => {
+      onGet: async (filter: FilterOptions[]) => {
         setState((prev: any) => ({
           ...prev,
-          [statename]: {
-            ...prev[statename],
+          ['attachment']: {
+            ...prev['attachment'],
             isLoading: true
           }
         }))
-
-        const result = await getAttachment()
+        const result: ResponseData = await getAttachment(filter)
         const value: AttachmentDataModel[] = AttachmentDataModel.toDatatableResponse(result.data)
         const total = value.length
-
         setState((prev: any) => ({
           ...prev,
-          [statename]: {
-            ...prev[statename],
+          attachment: {
+            ...prev.attachment,
             isLoading: false,
             data: value,
-            totalCount: total,
-            page: 1
+            totalCount: total
           }
         }))
       },
@@ -77,8 +80,15 @@ export default function AttachmentPage() {
         }
       ]
     }
-    setState({ ...state, [statename]: { ...defaultValue, data: value, totalCount: total }})
-  }, [state, setState, router])
+    setState((prev: any) => ({
+      ...prev,
+      [statename]: defaultValue
+    }))
+    setState((prev: any) => {
+      prev[statename].onGet(prev[statename].filter)
+      return prev
+    })
+  }, [setState])
 
   useEffect(() => {
     if(!state?.[statename]){
@@ -114,7 +124,7 @@ export default function AttachmentPage() {
               <Icon icon={"bi:info"} className="w-6 h-6" />
             </span>
           </div>
-          <button className="btn-secondary" onClick={() => state[statename].onGet()}>Refresh <Icon icon={'solar:refresh-bold-duotone'} /></button>
+          <button className="btn-secondary" onClick={() => state[statename].onGet(state[statename].filter)}>Refresh <Icon icon={'solar:refresh-bold-duotone'} /></button>
           <Link href={`/usr/knowledge/attachment/create`}>
           <button className="btn-primary">
             <Icon icon={'material-symbols:upload'} className="text-xl"/>

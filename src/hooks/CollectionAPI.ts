@@ -2,6 +2,7 @@ import { setCookies } from "@@/app/actions";
 import axios from "axios"
 import { Notify } from "../utils/script";
 import { AttachmentType } from "../types/datatabletypes";
+import { FilterOptions } from "../types/types";
 let protocol = '';
 let host = '';
 let port = '';
@@ -78,10 +79,9 @@ export const getServices = async () => {
     return responseData
 }
 
-export const getAttachment = async () => {
-    const result = await axios.get(`${baseURL}/data/knowledge/attachment`)
+export const getAttachment = async (filter: FilterOptions[]) => {
+    const result = await axios.post(`${baseURL}/data/knowledge/attachment`, filter ?? [])
     const responseData = result.data
-    console.log(responseData)
     if(!responseData.success) {
         Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
         responseData.data = responseData.data ?? []

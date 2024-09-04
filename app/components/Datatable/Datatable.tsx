@@ -1,7 +1,7 @@
 import { useGlobalContext } from "@@/src/providers/GlobalContext"
 import Pagination from "./Pagination"
 import { useEffect, useState } from "react"
-import { DropdownOptions, StateType } from "@@/src/types/types"
+import { StateType } from "@@/src/types/types"
 import { displayListNumber } from "../../../src/constant/table"
 import { Icon } from "@iconify/react/dist/iconify.js"
 import { Notify } from "@@/src/utils/script"
@@ -20,7 +20,7 @@ export default function Datatable({
     // property 
     const display = property?.display
     const headers = property?.headers
-    const data = property?.data
+    const data = property?.data ?? []
     const columns = property?.columns
     const page = property?.page
     const totalCount = property?.totalCount
@@ -29,6 +29,19 @@ export default function Datatable({
     const isLoading = property?.isLoading ?? true
 
     useEffect(() => {},[isLoading])
+
+    const onGet = () => {
+        let filterPayload = []
+        filterPayload.push({
+            key: 'page',
+            value: property.page
+        })
+        filterPayload.push({
+            key: 'size',
+            value: property.display
+        })
+        property.onGet(filterPayload)
+    }
 
     const handleNext = async () => {
         const totalCount = property?.totalCount
@@ -43,7 +56,8 @@ export default function Datatable({
         if(page < maxPage){
             const addpage = page + 1
             property.page = addpage
-            property.onGet()
+            // property.onGet()
+            // onGet()
         }
         setState({ ...state, [statename]: property })
     }
@@ -53,7 +67,8 @@ export default function Datatable({
         if(page > 1){
             const minPage = page - 1
             property.page = minPage
-            property.onGet()
+            // property.onGet()
+            // onGet()
         }
         setState({ ...state, [statename]: property })
     }
@@ -62,7 +77,8 @@ export default function Datatable({
         const page = property?.page
         if(page !== 1){
             property.page = 1
-            property.onGet()
+            // property.onGet()
+            // onGet()
         }
         setState({ ...state, [statename]: property })
     }
@@ -74,14 +90,16 @@ export default function Datatable({
         const page = property?.page
         if(page < forwardPage){
             property.page = forwardPage
-            property.onGet()
+            // property.onGet()
+            // onGet()
         }
         setState({ ...state, [statename]: property })
     }
 
     const handleClickPage = async (value: number) => {
         property.page = value
-        property.onGet()
+        // property.onGet()
+        // onGet()
         setState({ ...state, [statename]: property })
     }
 
@@ -92,9 +110,11 @@ export default function Datatable({
         const maxpage = Math.ceil(totalCount/value)
         if(page > maxpage){
             property.page = maxpage
-            property.onGet()
+            // property.onGet()
+            // onGet()
         }else{
-            property.onGet()
+            // property.onGet()
+            // onGet()
         }
         setState({ ...state, [statename]: property })
     }

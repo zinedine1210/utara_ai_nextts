@@ -662,7 +662,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 ### fing by originalFileName, status
-GET {{host}}/v1/client/file/by?status=ACTIVE HTTP/1.1
+GET {{host}}/v1/client/file/by?size=100 HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
@@ -695,9 +695,9 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "description": "Polres Jakut",
+  "description": "asasasasasa",
   "version": "240814",
-  "files": ["01J582HWVWKDR3RVP1BXTFZ0Z3", "01J582JF3Q1VYXEM3SJHAWAEZJ", "01J582JF3SW5H0B52YV9PZEC2X", "01J582JF3XDZPEVW5XYJG2BBRX", "01J582JF3YC1PG7W0NMBY5D8YA", "01J582JF3ZETHQ0V4YPHRY66FW", "01J582JF3ZB3K5DA3FKKRHBSG0", "01J582JF40S49NFDP450ANRZDM"]
+  "files": ["01J6XNQ3KFWXQ9NT79ZK0D7K8V", "01J6XP0DNSKVMH88ZFJM8HT587"]
 }
 
 ### find by id
@@ -759,7 +759,7 @@ authorization: {{token}}
   "channel": "WHATAPPS",
   "prompt": "prompt",
   "properties": {
-    "data": "01J58DA5GD66ACCFWNM7TCCGXS"
+    "data": "01J6XNQ3KFWXQ9NT79ZK0D7K8V"
   },
   "status": "ACTIVE"
 }
@@ -770,7 +770,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "id": "01HVGG9HZWX63TW4RP4T0J57Q1",
+  "id": "01J6XNQ3KFWXQ9NT79ZK0D7K8V",
   "description": "Test QnA dua",
   "channel_id": "628133445502",
   "channel": "WHATAPPS",
@@ -786,7 +786,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 ### fing by type, description, serviceId, channel_id, channel, status
-GET {{host}}/v1/client/service/by?channel=WHATSAPP HTTP/1.1
+GET {{host}}/v1/client/service/by HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
@@ -809,7 +809,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "channel_id": "628152233201",
+  "channel_id": "081290151589",
   "channel": "WHATAPPS",
   //"question": "what is cognitive search?"
   //"question": "siapa presiden Indonesia ke 10?"
@@ -842,7 +842,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "id": "01HWCNAXWQHDZ5ZW92P0PV159J",
+  "id": "01J6XNQ3KFWXQ9NT79ZK0D7K8V",
   "answer": "LangGraph is a library that provides a high-level abstraction for creating applications that involve multiple actors (such as users, agents, or characters) interacting with each other and with Large Language Models (LLMs). It extends the LangChain library, allowing you to coordinate multiple chains (or actors) across multiple steps of computation in a cyclic manner. Think of it as a tool that helps you build stateful, multi-actor workflows with LLMs."
 }
 

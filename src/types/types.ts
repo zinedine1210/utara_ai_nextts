@@ -15,17 +15,17 @@ export interface MenusList {
 export interface StateType<T> {
     isLoading: boolean,
     headers: TableHeader[],
-    filter: any[],
+    filter: FilterOptions[],
     page: number,
     display: number,
     range: {[key: string]: any},
     columns: {[key: string]: any},
-    data: T[],
+    data: T[] | null,
     allData: T[],
     totalCount: number,
     payload: null,
     groupBy: string
-    onGet: (refresh?: boolean) => void,
+    onGet: (filter: FilterOptions[]) => void,
     bulk?: DropdownOptions[]
     bulkButton?: DropdownOptions[]
 }
@@ -56,5 +56,10 @@ export interface DropdownOptions {
 
 export interface Options {
     label: string,
+    value: any
+}
+
+export interface FilterOptions {
+    key: string,
     value: any
 }

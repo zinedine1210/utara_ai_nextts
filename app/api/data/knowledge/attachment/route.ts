@@ -1,14 +1,22 @@
 // app/api/data/route.ts
 import client from '@@/src/client/apiClient';
 import { ResponseData } from '@@/src/types/apitypes';
+import { FilterOptions } from '@@/src/types/types';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
+  const payload = await request.json() ?? []
+  let parameter = `?`
+  payload.map((fil: FilterOptions, index: number) => {
+      const isEnd = index + 1 == payload.length ? '':'&'
+      parameter = parameter + `${fil.key}=${fil.value}${isEnd}`
+  })
+  console.log(payload)
   let timeoutId;
   const timoutInterval = 60000;
   let abortSignal = AbortSignal.timeout(timoutInterval)
   const token = request.cookies.get('auth_token')
-  const requestPromise = await client('/client/file/by', {
+  const requestPromise = await client('/client/file/by' + parameter, {
     headers: {
       Authorization: 'Bearer '+ token?.value
     }

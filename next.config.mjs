@@ -17,7 +17,7 @@ const nextConfig = {
         WHATSAPP_API_URL: 'https://wa.gnscenter.com',
         SERVER: 'development'
     },
-    reactStrictMode: true,
+    reactStrictMode: false,
     compress: true,
     // eslint: {
     //     ignoreDuringBuilds: true
@@ -28,6 +28,7 @@ const nextConfig = {
     // },
     // experimental: {
     //     missingSuspenseWithCSRBailout: false,
+    //     reactCompiler: true
     // },
     images: {
         // loader: 'custom',
