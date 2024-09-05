@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     nocache: true,
   },
   icons: {
-    icon: "/favicon.ico",
+    // icon: "/favicon.ico",
     apple: "/icongen/apple-touch-icon.png",
     other: {
       rel: "icon",

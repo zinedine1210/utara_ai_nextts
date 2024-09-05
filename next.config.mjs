@@ -11,11 +11,11 @@ const withPWA = withPWAInit({
 
 const nextConfig = {
     env: {
-        BASE_DOMAIN: 'https://konekgpt.gnusa.id',
+        BASE_DOMAIN: 'https://utara-ai.vercel.app',
         PUBLIC_API_URL: 'https://gai.co.id/gai-ai-service/v1',
-        BASE_API_URL: 'http://localhost:3000/api',
+        BASE_API_URL: 'https://utara-ai.vercel.app/api',
         WHATSAPP_API_URL: 'https://wa.gnscenter.com',
-        SERVER: 'development'
+        SERVER: 'production'
     },
     reactStrictMode: false,
     compress: true,
