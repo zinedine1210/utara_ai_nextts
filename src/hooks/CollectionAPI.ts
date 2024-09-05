@@ -1,7 +1,6 @@
 import { setCookies } from "@@/app/actions";
 import axios from "axios"
 import { Notify } from "../utils/script";
-import { AttachmentType } from "../types/datatabletypes";
 import { FilterOptions } from "../types/types";
 let protocol = '';
 let host = '';
@@ -23,7 +22,9 @@ if (typeof window === 'object') {
     finalHostname = `${protocol}://${host}:${port}`
     finalBaseDomainAPI = `${finalHostname}/api`
 }
-const baseURL = process.env.BASE_API_URL ?? finalBaseDomainAPI;
+
+export const baseDomain: string = finalHostname
+const baseURL: string = (process.env.BASE_DOMAIN ?? baseDomain) + '/api';
 
 export const tryLogin = async (payload: any) => {
     const result = await axios.post(`${baseURL}/auth/login`, payload)
@@ -33,7 +34,7 @@ export const tryLogin = async (payload: any) => {
             setCookies('auth_token', responseData.data.access_token)
             localStorage.setItem("auth_info", payload.username)
         }
-        const clientMenus = await axios.get(`https://utara-ai.vercel.app/client_menus.json`)
+        const clientMenus = await axios.get(`${baseDomain}/client_menus.json`)
         localStorage.setItem('client_menus', JSON.stringify(clientMenus.data))
     }
     return responseData

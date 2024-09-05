@@ -8,6 +8,7 @@ import Datatable from "../../../components/Datatable/Datatable";
 import { useRouter } from "next/navigation";
 import { DialModel } from "./lib/model";
 import Select from "@@/app/components/Input/Select";
+import { baseDomain } from "@@/src/hooks/CollectionAPI";
 
 export default function ServicesPage() {
   const { state, setState } = useGlobalContext();
@@ -17,7 +18,7 @@ export default function ServicesPage() {
   const router = useRouter()
 
   const getData = useCallback(async () => {
-    const result = await axios.get('http://localhost:3000/dial_international.json')
+    const result = await axios.get(baseDomain +'/dial_international.json')
     const value: DialModel[] = DialModel.toDatatableResponse(result.data)
     setDial(DialModel.toOptions(result.data))
     const total = value.length

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { OptionsClient } from "../types/apitypes";
-
 const client = async (urlSuffix: string, options: OptionsClient, abortSignal: AbortSignal) => {
   try {
     const baseUrl = process.env.PUBLIC_API_URL

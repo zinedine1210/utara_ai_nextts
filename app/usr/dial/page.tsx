@@ -5,6 +5,7 @@ import { tableDial } from "@@/src/constant/table"
 import axios from "axios";
 import { DialList, StateType } from "@@/src/types/types";
 import Datatable from "../../components/Datatable/Datatable";
+import { baseDomain } from "@@/src/hooks/CollectionAPI";
 
 export default function AttachmentPage() {
   const { state, setState } = useGlobalContext();
@@ -12,7 +13,7 @@ export default function AttachmentPage() {
   
 
   const getData = useCallback(async () => {
-    const result = await axios.get('http://localhost:3000/dial_international.json')
+    const result = await axios.get(baseDomain + '/dial_international.json')
     const value: DialList[] = result.data
     const total = value.length
     let defaultValue: StateType<DialList> = {
