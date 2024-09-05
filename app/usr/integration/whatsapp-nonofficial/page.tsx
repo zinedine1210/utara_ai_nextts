@@ -5,10 +5,10 @@ import myImageLoader from "@@/src/utils/loader";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 import { useCallback, useEffect } from "react";
-import { ProfileModel } from "./lib/model";
+import { ProfileModel } from "../whatsapp/lib/model";
 import Loading from "@@/app/loading";
-import ModalCreateWhatsapp from "./components/ModalCreateWhatsapp";
-import CardWhatsapp from "./components/CardWhatsapp";
+import ModalCreateWhatsapp from "../whatsapp/components/ModalCreateWhatsapp";
+import CardWhatsapp from "../whatsapp/components/CardWhatsapp";
 
 export default function WhatsappOfficial() {
   const { state, setState } = useGlobalContext()
@@ -33,9 +33,9 @@ export default function WhatsappOfficial() {
   return (
     <>
       <div className="w-full h-full flex flex-col bg-white">
-        <div className='bg-green-100 dark:bg-green-700 w-full px-7 py-10 flex items-center justify-between'>
+        <div className='bg-zinc-100 dark:bg-zinc-700 w-full px-7 py-10 flex items-center justify-between'>
             <div className='flex items-center gap-2'>
-                <Icon icon={'ic:baseline-whatsapp'} className='text-green-500 dark:text-white text-6xl'/>
+                <Icon icon={'ic:baseline-whatsapp'} className='text-zinc-500 dark:text-white text-6xl'/>
                 <h1 className='text-2xl font-bold'>Whatsapp Official</h1>
             </div>
             <button className='btn-primary' onClick={addWhatsappTrigger}>
@@ -75,19 +75,19 @@ export default function WhatsappOfficial() {
                 <p className="text-sm text-zinc-500">You can only connect with your personal whatsapp number to react with AI</p>
                 <ul className="my-2 space-y-2">
                     <li className="flex gap-2">
-                    <span className="bg-green-500 rounded-full w-5 h-5 flex items-center justify-center text-white text-sm font-bold">1</span>
+                    <span className="bg-zinc-500 rounded-full w-5 h-5 flex items-center justify-center text-white text-sm font-bold">1</span>
                     <p className="text-sm text-zinc-500 w-full ">Create session with your valid whatsapp number</p>
                     </li>
                     <li className="flex gap-2">
-                    <span className="bg-green-500 rounded-full w-5 h-5 flex items-center justify-center text-white text-sm font-bold">2</span>
+                    <span className="bg-zinc-500 rounded-full w-5 h-5 flex items-center justify-center text-white text-sm font-bold">2</span>
                     <p className="text-sm text-zinc-500 w-full ">QR code will generate, you can scan with your phone whatsapp integration</p>
                     </li>
                     <li className="flex gap-2">
-                    <span className="bg-green-500 rounded-full w-5 h-5 flex items-center justify-center text-white text-sm font-bold">3</span>
+                    <span className="bg-zinc-500 rounded-full w-5 h-5 flex items-center justify-center text-white text-sm font-bold">3</span>
                     <p className="text-sm text-zinc-500 w-full ">Wait for the process to complete</p>
                     </li>
                     <li className="flex gap-2">
-                    <span className="bg-green-500 rounded-full w-5 h-5 flex items-center justify-center text-white text-sm font-bold">4</span>
+                    <span className="bg-zinc-500 rounded-full w-5 h-5 flex items-center justify-center text-white text-sm font-bold">4</span>
                     <p className="text-sm text-zinc-500 w-full ">When the number status is authenticated, your whatsapp ready to service</p>
                     </li>
                 </ul>

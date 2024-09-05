@@ -2,10 +2,9 @@
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import { useCallback, useEffect, useState } from "react"
 import { tableAttachment } from "@@/src/constant/table";
-import { FilterOptions, StateType } from "@@/src/types/types";
+import { FilterKey, FilterOptions, StateType } from "@@/src/types/types";
 import Datatable from "../../../components/Datatable/Datatable";
 import { getAttachment } from "@@/src/hooks/CollectionAPI";
-import { useRouter } from "next/navigation";
 import { AttachmentDataModel } from "./lib/model";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
@@ -13,6 +12,8 @@ import { AttachmentType } from "@@/src/types/datatabletypes";
 import { Notify } from "@@/src/utils/script";
 import InputText from "@@/app/components/Input/InputText";
 import { ResponseData } from "@@/src/types/apitypes";
+import { statusOptions } from "@@/src/constant/status";
+import Select from "@@/app/components/Input/Select";
 
 export default function AttachmentPage() {
   const { state, setState } = useGlobalContext();
@@ -31,6 +32,19 @@ export default function AttachmentPage() {
         {
           key: 'page',
           value: 1
+        }
+      ],
+      filterKey: [
+        {
+          value: 'original_file_name',
+          label: 'Original File Name',
+          type: 'input_text'
+        },
+        {
+          value: 'status',
+          label: 'Status',
+          options: statusOptions,
+          type: 'select'
         }
       ],
       page: 1,
@@ -95,6 +109,39 @@ export default function AttachmentPage() {
       initialMount()
     }
   }, [initialMount, state])
+  
+  const filterMount = () => {
+
+    if(state[statename])
+    return state[statename].filterKey.map((fil: FilterKey, index: number) => {
+      if(fil.type == 'input_text') {
+        return (
+          <InputText 
+            key={index}
+            id={fil.value}
+            name={fil.value}
+            value={keyword}
+            onChange={value => setKeyword(value)}
+            placeholder={`Filter by ${fil.label}`}
+            // prefixIcon="cil:search"
+            type="search"
+          />
+        )
+      }
+      if(fil.type == 'select'){
+        return (
+          <Select 
+            key={index}
+            id={fil.value}
+            name={fil.value}
+            onChange={(value) => setKeyword(value)}
+            value={keyword}
+            options={fil.options ?? []}
+          />
+        )
+      }
+    })
+  }
 
   return (
     <div className="w-full h-full p-5">
@@ -102,16 +149,8 @@ export default function AttachmentPage() {
       <p className="text-zinc-600">Input your file business here to create knowledge</p>
 
       <div className="sm:flex sm:items-center sm:justify-between mt-5">
-        <div className="w-1/4">
-          <InputText 
-            id="searchattachment"
-            name="keywrd"
-            value={keyword}
-            onChange={value => setKeyword(value)}
-            placeholder="Filter by description.."
-            prefixIcon="cil:search"
-            type="search"
-          />
+        <div className="w-1/2 grid grid-cols-3 gap-2">
+          {filterMount()}
         </div>
 
         <div className="xl:flex space-y-2 xl:space-y-0 items-center justify-between gap-2 mt-2 xl:mt-0">

@@ -12,7 +12,7 @@ export default function NotFound() {
     <div className='w-full h-screen flex items-center justify-center'>
       <div>
         <Image 
-          src={`/images/notfound.svg`}
+          src={`/images/notfound.png`}
           width={800}
           height={400}
           alt='not found'

@@ -12,10 +12,19 @@ export interface MenusList {
     sortnumber: number
 }
 
+
+export interface FilterKey {
+    value: string
+    label: string
+    type: 'input_text' | 'select'
+    options?: Options[]
+}
+
 export interface StateType<T> {
     isLoading: boolean,
     headers: TableHeader[],
     filter: FilterOptions[],
+    filterKey?: FilterKey[]
     page: number,
     display: number,
     range: {[key: string]: any},
