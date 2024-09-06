@@ -1,18 +1,19 @@
 import { AttachmentType } from "@@/src/types/datatabletypes";
 import { formatDateData } from "@@/src/utils/script";
 export class AttachmentDataModel {
-    private description: string
-    private id: string
-    private location: string
-    private modby: null | any
-    private moddate: null | any
-    private originalfilename: string
-    private originalfilesize: number
-    private recby: string
-    private recdate: string
-    private status: string
-    private createAt: string
-    private typeFile: string
+    public description: string
+    public id: string
+    public location: string
+    public modby: null | any
+    public moddate: null | any
+    public originalfilename: string
+    public originalfilesize: number
+    public recby: string
+    public recdate: string
+    public status: string
+    public createAt: string
+    public typeFile: string
+    public originalfilenamesubstring: string
 
     constructor(props: AttachmentType){
         this.description = props.description
@@ -27,6 +28,8 @@ export class AttachmentDataModel {
         this.status = props.status
         this.createAt = formatDateData(props.rec_date)
         this.typeFile = 'application/' + props.description.split(".")[1]
+        this.originalfilenamesubstring = props.original_file_name.substring(0, 30) + "..."
+
     }
 
     static toDatatableResponse = (array: AttachmentType[]) => {

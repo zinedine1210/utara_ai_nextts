@@ -18,7 +18,7 @@ export default function UserLayout({
           <div id="modal-usr"></div>
           <Navbar />
           <div className='flex-1 overflow-y-auto text-sm xl:text-xs 2xl:text-base relative'>
-            <div className='fixed bottom-0 left-0 bg-primary text-white py-1 inline-block rounded-r-full pl-3 pr-5'>
+            <div className='hidden fixed bottom-0 left-0 bg-primary text-white py-1 md:inline-block rounded-r-full pl-3 pr-5'>
               <Breadcrumb />
             </div>
             {children}

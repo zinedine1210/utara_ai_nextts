@@ -15,7 +15,8 @@ export default function Select({
     customCss='text-sm py-2.5 px-5',
     required=true,
     prefixIcon,
-    errorMessage
+    errorMessage,
+    defaultAll
 }: {
     options: Options[],
     id: string,
@@ -26,7 +27,8 @@ export default function Select({
     value: any,
     required?: boolean,
     prefixIcon?: string,
-    errorMessage?: string
+    errorMessage?: string,
+    defaultAll?: boolean
 }) {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -46,7 +48,7 @@ export default function Select({
         document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
-    const valueNow: string = options.find(res => res.value == value)?.label ?? 'Select'
+    const valueNow: string = defaultAll ? value == '' ? "All" : options.find(res => res.value == value)?.label ?? 'Select' : 'Select'
 
     return (
         <div ref={dropdownRef} className="relative w-full">
@@ -64,7 +66,7 @@ export default function Select({
                 {errorMessage && <p className="text-red-500 text-xs mt-1">{errorMessage}</p>}
             </div>
             {isOpen && (
-                <div className="absolute w-full shadow-md top-full right-0 bg-white dark:bg-dark dark:border-white/30 border shadow-lg rounded z-50 min-w-44 flex flex-col">
+                <div className="absolute w-full top-full right-0 bg-white dark:bg-dark dark:border-white/30 border shadow-lg rounded z-50 min-w-44 flex flex-col">
                     <div className="p-2">
                         <InputText 
                             placeholder="Search by label"
@@ -75,6 +77,14 @@ export default function Select({
                         />
                     </div>
                     <div className="max-h-80 h-full overflow-y-auto">
+                        {
+                            defaultAll && (
+                                <button onClick={() => onChange('')} className={`${value == '' ?"bg-primary text-white font-bold":"dark:text-zinc-500 hover:bg-primary/30"} duration-300 p-2 cursor-pointer flex items-center gap-2 w-full text-start`}>
+                                    All
+                                </button>
+                            )
+                        }
+                        
                         {
                             options.filter(item => {
                                 const value = item.label.toLowerCase();
@@ -90,7 +100,7 @@ export default function Select({
                                 return false;
                             }).map((opt, index) => {
                                 return (
-                                    <button key={index} onClick={() => onChange(opt.value)} className={`${opt.value == value ?"bg-primary text-white font-bold":"dark:text-black hover:bg-primary/30 dark:text-zinc-400"} duration-300 p-2 cursor-pointer flex items-center gap-2 w-full text-start`}>
+                                    <button key={index} onClick={() => onChange(opt.value)} className={`${opt.value == value ?"bg-primary text-white font-bold":"dark:text-zinc-500 hover:bg-primary/30"} duration-300 p-2 cursor-pointer flex items-center gap-2 w-full text-start`}>
                                         {opt.label}
                                     </button>
                                 )

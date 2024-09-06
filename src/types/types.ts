@@ -1,3 +1,5 @@
+import React from "react"
+
 export interface MenusList {
     description: string
     feature: string
@@ -33,10 +35,11 @@ export interface StateType<T> {
     allData: T[],
     totalCount: number,
     payload: null,
-    groupBy: string
+    groupBy?: string
     onGet: (filter: FilterOptions[]) => void,
     bulk?: DropdownOptions[]
     bulkButton?: DropdownOptions[]
+    componentMobile: (item: any, index: number) => React.ReactNode
 }
 
 export interface TableHeader {

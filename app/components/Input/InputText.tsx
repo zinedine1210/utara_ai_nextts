@@ -46,9 +46,7 @@ export default function InputText({
           onChange={(e: any) => onChange(e.target.value)}
           id={id}
           value={value}
-          type={type} 
-          max={max} 
-          min={min} 
+          type={type}
           name={name}
           disabled={disabled} 
           placeholder={placeholder} 

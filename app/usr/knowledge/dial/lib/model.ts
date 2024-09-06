@@ -1,8 +1,8 @@
 import { DialList } from "@@/src/types/types";
 export class DialModel {
-    private code: string;
-    private dial_code: string;
-    private name: string;
+    public code: string;
+    public dial_code: string;
+    public name: string;
 
 
     constructor(props: DialList){

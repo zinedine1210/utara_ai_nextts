@@ -98,6 +98,7 @@ export default function LoginPage() {
                     onChange={value => setEmail(value)}
                     placeholder='Enter your email'
                     label='Username'
+                    required={false}
                   />
                 </div>
                 <div
