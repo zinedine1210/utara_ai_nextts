@@ -12,7 +12,8 @@ const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
 export const GlobalProvider = ({ children, lang }: { children: ReactNode, lang: string }) => {
   const [state, setState] = useState<{[key: string]: any}>({
-    view: false
+    view: false,
+    options: {}
   });
   // const searchParams = useSearchParams();
   // const router = useRouter()

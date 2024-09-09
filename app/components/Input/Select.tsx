@@ -16,7 +16,9 @@ export default function Select({
     required=true,
     prefixIcon,
     errorMessage,
-    defaultAll
+    defaultAll=false,
+    position='right-0',
+    onTrigger
 }: {
     options: Options[],
     id: string,
@@ -28,7 +30,9 @@ export default function Select({
     required?: boolean,
     prefixIcon?: string,
     errorMessage?: string,
-    defaultAll?: boolean
+    defaultAll?: boolean,
+    position?: string,
+    onTrigger?: () => void
 }) {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -37,9 +41,16 @@ export default function Select({
     // Fungsi untuk menutup dropdown jika klik di luar
     const handleClickOutside = (event: MouseEvent) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+            setIsOpen(false);
         }
     };
+
+    const handleOpen = async () => {
+        if(onTrigger && !isOpen && options.length == 0){
+            onTrigger()
+        }
+        setIsOpen(!isOpen)
+    }
 
     // Menggunakan useEffect untuk mendeteksi klik di luar
     useEffect(() => {
@@ -48,17 +59,36 @@ export default function Select({
         document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
-    const valueNow: string = defaultAll ? value == '' ? "All" : options.find(res => res.value == value)?.label ?? 'Select' : 'Select'
-
+    
+    // const valueNow: string = defaultAll ? value == '' ? "All" : options.find(res => res.value == value)?.label ?? 'Select' : 'Select'
+    const valueNow = () => {
+        if(defaultAll){
+            if(value == ''){
+                return "All"
+            }else{
+                if(options.length > 0){
+                    return options.find(res => res.value == value)?.label
+                }else return value
+            }
+        }else{
+            if(value == ''){
+                return 'Select'
+            }else{
+                if(options.length > 0){
+                    return options.find(res => res.value == value)?.label
+                }else return value
+            }
+        }
+    }
     return (
         <div ref={dropdownRef} className="relative w-full">
             <div className="w-full">
                 {label && <label className="mb-1 inline-block font-semibold text-sm xl:text-xs 2xl:text-sm capitalize" htmlFor={id}>{label} {required && <span className="text-red-500">*</span>}</label>}
                 <div className="relative w-full">
                     {prefixIcon && <Icon icon={prefixIcon} className="text-2xl -translate-y-1/2 top-1/2 left-3 dark:text-white/80 text-black/50 absolute"/>}
-                    <button onClick={() => setIsOpen(!isOpen)} className={`${customCss} ${prefixIcon && 'pl-12'} ${errorMessage && 'border-red-500 dark:border-red-500 dark:focus:border-red-500 focus:border-red-500'} bg-zinc-50 transition-colors duration-300 disabled:bg-zinc-300 disabled:placeholder:text-black disabled:text-black dark:disabled:bg-black dark:disabled:placeholder:text-zinc-400 dark:disabled:text-zinc-400 outline-none border hover:bg-zinc-100 focus:bg-white focus:border-primary dark:bg-dark dark:border-white/50 dark:focus:border-primary rounded-md w-full flex items-center justify-between`}>
+                    <button onClick={() => handleOpen()} className={`${customCss} ${prefixIcon && 'pl-12'} ${errorMessage && 'border-red-500 dark:border-red-500 dark:focus:border-red-500 focus:border-red-500'} bg-zinc-50 transition-colors duration-300 disabled:bg-zinc-300 disabled:placeholder:text-black disabled:text-black dark:disabled:bg-black dark:disabled:placeholder:text-zinc-400 dark:disabled:text-zinc-400 outline-none border hover:bg-zinc-100 focus:bg-white focus:border-primary dark:bg-dark dark:border-white/50 dark:focus:border-primary rounded-md w-full flex items-center justify-between`}>
                         <div className="flex items-center gap-2">
-                            <span>{valueNow}</span>
+                            <span>{valueNow()}</span>
                         </div>
                         <Icon icon={'tabler:chevron-down'} className={`${isOpen && 'rotate-180'} duration-300 text-xl`}/>
                     </button>
@@ -66,7 +96,7 @@ export default function Select({
                 {errorMessage && <p className="text-red-500 text-xs mt-1">{errorMessage}</p>}
             </div>
             {isOpen && (
-                <div className="absolute w-full top-full right-0 bg-white dark:bg-dark dark:border-white/30 border shadow-lg rounded z-50 min-w-44 flex flex-col">
+                <div className={`${position} absolute w-full top-full bg-white dark:bg-dark dark:border-white/30 border shadow-lg rounded z-50 min-w-44 flex flex-col`}>
                     <div className="p-2">
                         <InputText 
                             placeholder="Search by label"

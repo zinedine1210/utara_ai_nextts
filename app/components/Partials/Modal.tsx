@@ -45,7 +45,7 @@ export default function Modal({
         }
         {
           !disableClose && (
-            <button className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center" onClick={onDismiss}>
+            <button className="absolute top-0 md:-top-3 right-0 md:-right-3 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center" onClick={onDismiss}>
               <Icon icon={'iconamoon:close-light'} className="text-2xl"/>
             </button>
           )

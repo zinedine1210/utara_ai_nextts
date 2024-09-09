@@ -92,7 +92,6 @@ export default function StackedADP({ judul, value }: {
 
         setThemeNow(theme)
         setData(obj)
-        // console.log("kesni");
     }, [theme, select])
 
     if(data && data?.series !== null){

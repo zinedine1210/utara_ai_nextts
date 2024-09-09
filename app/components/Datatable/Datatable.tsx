@@ -131,7 +131,6 @@ export default function Datatable({
     }
 
     const handleCopy = (text: string, name: string, copy: string) => {
-        console.log(text, copy, name)
         if(!copy){
             return false
         }

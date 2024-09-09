@@ -3,8 +3,8 @@ import withPWAInit from "@ducanh2912/next-pwa";
 
 const nextConfig = {
     env: {
-        // BASE_DOMAIN: 'https://utara-ai.vercel.app',
-        BASE_DOMAIN: 'http://localhost:3000',
+        BASE_DOMAIN: 'https://utara-ai.vercel.app',
+        // BASE_DOMAIN: 'http://localhost:3000',
         PUBLIC_API_URL: 'https://gai.co.id/gai-ai-service/v1',
         WHATSAPP_API_URL: 'https://wa.gnscenter.com',
         SERVER: 'production'

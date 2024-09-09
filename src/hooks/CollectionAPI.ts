@@ -141,3 +141,13 @@ export const postFile = async (formData: FormData) => {
     })
     return responseData
 }
+
+export const getDialOptions = async () => {
+    const result = await axios.get(`${baseDomain}/dial_international.json`)
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}

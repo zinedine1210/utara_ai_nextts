@@ -25,4 +25,13 @@ export class DialModel {
             }
         })
     }
+
+    static toOptions2 = (array: DialList[]) => {
+        return array.map((item: DialList) => {
+            return {
+                label: `${item.dial_code}`,
+                value: item.dial_code
+            }
+        })
+    }
 }

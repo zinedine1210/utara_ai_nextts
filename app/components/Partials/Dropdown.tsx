@@ -4,9 +4,10 @@ import { DropdownOptions } from "@@/src/types/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useEffect, useRef, useState } from "react";
 
-export default function Dropdown({ button, options, id = 'id' }: {
+export default function Dropdown({ button, options, id = 'id', position='right-0' }: {
     button?: React.ReactNode,
     options: DropdownOptions[],
+    position?: string,
     id?: string | number
 }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +37,7 @@ export default function Dropdown({ button, options, id = 'id' }: {
                     </div>
                 )}
             </button>
-            <div className={`${isOpen ? 'visible translate-y-0 opacity-100':'invisible -translate-y-5 opacity-0'} duration-300 ease-in-out absolute top-full right-0 bg-white shadow-lg rounded z-50 min-w-44 max-w-96 w-full dark:bg-dark`}>
+            <div className={`${isOpen ? 'visible translate-y-0 opacity-100':'invisible -translate-y-5 opacity-0'} ${position} duration-300 ease-in-out absolute top-full bg-white shadow-lg rounded z-50 min-w-44 max-w-96 w-full dark:bg-dark`}>
                 {
                     options.map((opt, index) => {
                         return (

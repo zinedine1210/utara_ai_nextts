@@ -6,7 +6,7 @@ export default function HalamanUtama() {
   const router = useRouter()
   useEffect(() => {
     router.push('/auth')
-  }, [])
+  }, [router])
   return (
     <div></div>
   )

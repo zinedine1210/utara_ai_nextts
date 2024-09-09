@@ -17,7 +17,6 @@ export default function AttachmentCreatePage() {
         setLoading(true)
         e.preventDefault()
         if(files.length === 0) return Notify("Files null can't upload", 'info')
-        console.log(files)
         const formData = new FormData();
         Array.from(files).forEach(file => {
           formData.append('files', file);
@@ -41,7 +40,6 @@ export default function AttachmentCreatePage() {
 
     const handlerUploadPDF = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const filestarget = e.target.files ?? []
-        console.log(filestarget)
         for (let index = 0; index < filestarget.length; index++) {
             const file = filestarget[index];
             const allowedExtensions = /(\.pdf)$/i;

@@ -1,12 +1,16 @@
 'use client'
 import Modal from "@@/app/components/Partials/Modal";
-import { postChannel } from "@@/src/hooks/CollectionAPI";
+import { getDialOptions, postChannel } from "@@/src/hooks/CollectionAPI";
 import { checkSessionWhatsapp, createSessionWhatsapp } from "@@/src/hooks/WhatsappCollection";
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import { Notify } from "@@/src/utils/script";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import { ProfileModel } from "../lib/model";
+import Select from "@@/app/components/Input/Select";
+import { DialModel } from "@@/app/usr/knowledge/dial/lib/model";
+import { Options } from "@@/src/types/types";
+import InputText from "@@/app/components/Input/InputText";
 
 export default function ModalCreateWhatsapp({
     name
@@ -16,19 +20,20 @@ export default function ModalCreateWhatsapp({
     const { state, setState } = useGlobalContext()
     const [qr, setQR] = useState<string>('')
     const [value, setValue] = useState<string>('')
+    const [dialvalue, setDialValue] = useState<string>('+62')
     const modaldata = state?.modal
+    const optionsCollection: {[key: string]: Options[]} = state.options
 
-    // const handleChange = (target: string, input: boolean | string | number) => {
-    //     setValue({ ...value, [target]: input })
-    // }
-
-    const handleSubmit = useCallback(async () => {
+    const handleSubmit = useCallback(async (e?: FormEvent) => {
+        e?.preventDefault()
         if(!value) return Notify("Please fill whatsapp number", 'error')
-        const result = await createSessionWhatsapp(value)
+        const valueFinal: string = dialvalue + value
+        setValue(valueFinal)
+        const result = await createSessionWhatsapp(valueFinal)
         if(result.success){
             setQR(result.data.qr)
         }
-    }, [value])
+    }, [value, dialvalue])
 
     const handleAuthenticated = useCallback(async () => {
         // action to add to database
@@ -74,6 +79,17 @@ export default function ModalCreateWhatsapp({
         };
       }, [qr, value, handleCheckSession]);
 
+      const getDial = async () => {
+        const result = await getDialOptions()
+        const toOptions: Options[] = DialModel.toOptions2(result)
+        setState((prev: any) => ({
+            ...prev,
+            options: {
+                dialInternational: toOptions
+            }
+        }))
+      }
+
   return (
     <>
         <Modal name={name} disableClose={qr ? true : false}>
@@ -92,12 +108,34 @@ export default function ModalCreateWhatsapp({
                         </ul>
                     </div>
                     :
-                    <>
+                    <form onSubmit={(e) => handleSubmit(e)}>
                         <label htmlFor="inputwhatsappnumber" className="mb-2 inline-block text-sm">Whatsapp Number</label>
-                        <input type="number" id="inputwhatsappnumber" onChange={(e) => setValue(e.target.value)} value={value} maxLength={12} className='bg-zinc-50 dark:bg-black text-sm py-2 px-5 outline-none border-2 hover:bg-zinc-100 focus:bg-white focus:border-lightPrimary w-full' placeholder='Type in 089508...' />
-        
-                        <button className="btn-primary mt-5" onClick={() => handleSubmit()} disabled={!value}>Create Session</button>
-                    </>
+                        <div className="flex items-center">
+                            <div className="w-fit">
+                                <Select 
+                                    id="dialinternational"
+                                    name="dialinternational"
+                                    onChange={value => setDialValue(value)}
+                                    value={dialvalue}
+                                    onTrigger={() => getDial()}
+                                    // label=""
+                                    position="left-0"
+                                    options={optionsCollection?.dialInternational ?? []}
+                                />
+                            </div>
+                            <div className="w-full">
+                                <InputText 
+                                    id="numberwhatsapp"
+                                    name="numberwhatsapp"
+                                    type="number"
+                                    placeholder="Example 89508..."
+                                    onChange={value => setValue(value)}
+                                    value={value}
+                                />
+                            </div>
+                        </div>
+                        <button className="btn-primary mt-5" type="submit" disabled={!value}>Create Session</button>
+                    </form>
                 }
             </div>
         </Modal>

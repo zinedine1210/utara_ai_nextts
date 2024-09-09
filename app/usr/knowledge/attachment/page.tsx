@@ -16,10 +16,12 @@ import FilterDatatable from "@@/app/components/Datatable/FilterDatatable";
 import DatatableMobile from "@@/app/components/Datatable/DatatableMobile";
 import ToolTips from "@@/app/components/Partials/ToolTips";
 import CardMobileAttachment from "./components/CardMobileAttachment";
+import { useWindowSize } from "@@/src/hooks/usewindowsize";
 
 export default function AttachmentPage() {
   const { state, setState } = useGlobalContext();
   const statename: string = 'attachment'
+  const windowWidth = useWindowSize();
 
   const initialMount = useCallback(async () => {
     let defaultValue: StateType<AttachmentType> = {
@@ -66,7 +68,7 @@ export default function AttachmentPage() {
           }
         }))
         const result: ResponseData = await getAttachment(filter)
-        const value: AttachmentDataModel[] = AttachmentDataModel.toDatatableResponse(result.data)
+        const value: AttachmentDataModel[] = AttachmentDataModel.toDatatableResponse(result.data).reverse()
         const total = value.length
         setState((prev: any) => ({
           ...prev,
@@ -113,6 +115,22 @@ export default function AttachmentPage() {
       initialMount()
     }
   }, [initialMount, state])
+
+  const DatatableView = () => {
+    if(windowWidth < 820){
+      return (
+        <div className="w-full md:hidden h-full overflow-y-hidden">
+          <DatatableMobile statename={statename} />
+        </div>
+      )
+    }else{
+      return (
+        <div className="hidden md:block py-10 px-5">
+          <Datatable statename={statename} />
+        </div>
+      )
+    }
+  }
   
 
   return (
@@ -127,7 +145,7 @@ export default function AttachmentPage() {
           </div>
 
           <div className="w-full md:w-1/2 flex items-center justify-end gap-2">
-            <ToolTips title="Usage Information">
+            <ToolTips title="Usage Information" position="-right-1/2 translate-x-1/2">
               <p className="text-xs font-light mt-2">Select files you want to create and train, then enter to button <span className="font-bold">Training Bot</span>. <br /> Your training files will be added to the training page.</p>
             </ToolTips>
             <button className="btn-secondary" onClick={() => state[statename].onGet(state[statename].filter)}> <h1 className="hidden md:block">Refresh</h1> <Icon icon={'solar:refresh-bold-duotone'} className="text-xl" /></button>
@@ -141,10 +159,7 @@ export default function AttachmentPage() {
         </div>
       </div>
 
-      <div className="hidden md:block py-10 px-5">
-        <Datatable statename={statename} />
-      </div>
-      <DatatableMobile statename={statename} />
+      {DatatableView()}
     </div>
   )
 }

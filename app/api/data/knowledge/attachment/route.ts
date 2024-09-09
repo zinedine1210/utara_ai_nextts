@@ -11,7 +11,6 @@ export async function POST(request: NextRequest) {
       const isEnd = index + 1 == payload.length ? '':'&'
       parameter = parameter + `${fil.key}=${fil.value}${isEnd}`
   })
-  console.log(payload)
   let timeoutId;
   const timoutInterval = 60000;
   let abortSignal = AbortSignal.timeout(timoutInterval)
