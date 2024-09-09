@@ -151,7 +151,7 @@ export default function DatatableMobile({
   return (
     <ul
       ref={ulRef}
-      className='w-full overflow-y-auto h-full md:hidden pb-10 relative'
+      className='w-full overflow-y-auto h-full md:hidden pb-10 relative no-scrollbar'
     >
       {
         ComponentMount()

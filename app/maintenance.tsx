@@ -11,9 +11,9 @@ export default function MaintenancePage() {
     const handleback = () => router.back()
   return (
     <div className='w-full h-full min-h-full max-h-full flex items-center justify-center'>
-        <div className='flex items-center justify-center gap-10'>
-            <div className='w-[500px]'>
-                <h1 className='text-6xl font-bold leading-tight text-primary'>This Page Is Under Construction</h1>
+        <div className='md:flex items-center justify-center gap-10'>
+            <div className='w-full md:w-[500px] p-2'>
+                <h1 className='text-3xl md:text-6xl font-bold leading-tight text-primary'>This Page Is Under Construction</h1>
                 <p className='text-zinc-500 dark:text-zinc-300 mt-5'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita mollitia libero veniam reprehenderit necessitatibus blanditiis, qui beatae quas reiciendis neque in laborum provident vitae alias?</p>
                 <button className='btn-primary mt-5' onClick={handleback}>Return Back</button>
             </div>

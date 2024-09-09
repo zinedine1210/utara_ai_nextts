@@ -108,7 +108,7 @@ export default function FilterDatatable({
         <h1 className="hidden md:block">Filter</h1>
       </button>
 
-      <div className={`${isOpen ? 'visible opacity-100 scale-100':'invisible opacity-0 scale-0'} p-3 md:p-5 origin-top-left duration-300 ease-in-out absolute top-full mt-2 left-0 bg-white shadow-lg rounded-xl z-50 w-full min-w-96 dark:bg-dark`}>
+      <div className={`${isOpen ? 'visible opacity-100 scale-100':'invisible opacity-0 scale-0'} p-3 md:p-5 origin-top-left duration-300 ease-in-out absolute top-full mt-2 left-0 bg-white shadow-lg rounded-xl z-50 w-full min-w-80 md:min-w-96 dark:bg-dark`}>
         <h1 className="font-bold mb-2 text-sm">Filter</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
           {filterMount()}

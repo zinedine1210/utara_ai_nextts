@@ -342,3 +342,14 @@ a {
   align-items: center;
   z-index: 1000;
 }
+
+/* Hanya sembunyikan scrollbar, tetapi masih bisa di-scroll */
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+  }
+  
+  .no-scrollbar {
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+	scrollbar-width: none; /* Firefox */
+  }
+  

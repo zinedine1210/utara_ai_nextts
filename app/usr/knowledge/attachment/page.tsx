@@ -119,7 +119,7 @@ export default function AttachmentPage() {
     <div className="w-full h-full flex flex-col md:block ">
       <div className="p-5">
         <h1 className="font-bold text-xl">Attachment</h1>
-        <p className="text-zinc-600">Input your file business here to create knowledge</p>
+        <p className="text-zinc-600 dark:text-zinc-400">Input your file business here to create knowledge</p>
 
         <div className="flex md:items-center md:justify-between mt-5">
           <div className="w-auto md:w-1/2">

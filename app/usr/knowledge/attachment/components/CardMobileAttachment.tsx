@@ -8,7 +8,7 @@ export default function CardMobileAttachment({
     index: number
 }) {
   return (
-    <div className="w-full bg-white shadow-md p-3 rounded-md">
+    <div className="w-full bg-white dark:bg-darkSecondary shadow-md p-3 rounded-md">
       <h1 className="font-semibold">{data.originalfilenamesubstring}</h1>
       <p className="text-xs">{data.description}</p>
       <p className="font-bold">Size: {data.originalfilesize}KB</p>

@@ -44,12 +44,12 @@ export default function Breadcrumb() {
                             <li key={index}>
                                 <div className="flex items-center">
                                     {index == 0 ? 
-                                        <Icon icon={bread.icon} className="text-lg"/>
+                                        <Icon icon={bread.icon} className="text-sm md:text-lg"/>
                                         :
-                                        <Icon icon={'material-symbols-light:chevron-right'} className="text-lg"/>
+                                        <Icon icon={'material-symbols-light:chevron-right'} className="text-sm md:text-lg"/>
                                     }
                                     <Link href={bread.route}>
-                                        <button type={"button"} className="ms-1 text-sm font-medium hover:text-white text-zinc-300 md:ms-2">{bread.name}</button>
+                                        <button type={"button"} className="ms-1 text-xs md:text-sm font-medium hover:text-white text-zinc-300 md:ms-2">{bread.name}</button>
                                     </Link>
                                 </div>
                             </li>

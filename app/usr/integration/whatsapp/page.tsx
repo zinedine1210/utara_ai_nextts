@@ -33,16 +33,16 @@ export default function WhatsappOfficial() {
   return (
     <>
       <div className="w-full h-full flex flex-col bg-white">
-        <div className='bg-green-100 dark:bg-green-700 w-full px-7 py-10 flex items-center justify-between'>
-            <div className='flex items-center gap-2'>
+        <div className='bg-green-100 dark:bg-green-700 w-full px-3 md:px-7 py-8 md:py-10 flex items-center justify-between'>
+            <div className='md:flex items-center gap-2'>
                 <Icon icon={'ic:baseline-whatsapp'} className='text-green-500 dark:text-white text-6xl'/>
-                <h1 className='text-2xl font-bold'>Whatsapp Official</h1>
+                <h1 className='text-lg md:text-2xl font-bold'>Whatsapp Official</h1>
             </div>
             <button className='btn-primary' onClick={addWhatsappTrigger}>
                 Add Whatsapp
             </button>
         </div>
-        <div className="flex justify-evenly">
+        <div className="md:flex justify-evenly">
           <div className="w-full md:w-1/2">
             {
               data ?

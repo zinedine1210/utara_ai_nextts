@@ -25,6 +25,7 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true)
     const payload = {
       username: email,
       password: pass
@@ -60,10 +61,12 @@ export default function LoginPage() {
     if(result.success){
       Notify(result.message, 'success')
       Notify(`Welcome ${email}`, 'info', 5000)
+      setLoading(false)
       setTimeout(() => {
         router.push('/usr')
       }, 2000);
     }else{
+      setLoading(false)
       Notify(result.message, 'error')
     }
   };
@@ -129,6 +132,7 @@ export default function LoginPage() {
                     value={pass}
                     onChange={value => setPass(value)}
                     placeholder='Enter your password'
+                    required={false}
                   />
                   {/* <div>
                       <label className="block mb-2 text-sm text-zinc-600 dark:text-zinc-200">Password</label>
@@ -139,7 +143,7 @@ export default function LoginPage() {
                   </a> */}
                 </div>
 
-                {loading ? (
+                { loading ? (
                   <div role="status" className="w-full text-center py-5">
                     <svg
                       aria-hidden="true"
