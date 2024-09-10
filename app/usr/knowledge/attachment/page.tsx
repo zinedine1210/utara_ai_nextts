@@ -27,6 +27,7 @@ export default function AttachmentPage() {
     let defaultValue: StateType<AttachmentType> = {
       isLoading: false,
       headers: tableAttachment,
+      select: [],
       filter: [
         {
           key: 'size',
@@ -62,8 +63,8 @@ export default function AttachmentPage() {
       onGet: async (filter: FilterOptions[]) => {
         setState((prev: any) => ({
           ...prev,
-          ['attachment']: {
-            ...prev['attachment'],
+          [statename]: {
+            ...prev[statename],
             isLoading: true
           }
         }))
@@ -72,8 +73,8 @@ export default function AttachmentPage() {
         const total = value.length
         setState((prev: any) => ({
           ...prev,
-          attachment: {
-            ...prev.attachment,
+          [statename]: {
+            ...prev[statename],
             isLoading: false,
             data: value,
             totalCount: total

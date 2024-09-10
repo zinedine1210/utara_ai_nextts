@@ -25,6 +25,7 @@ export interface FilterKey {
 export interface StateType<T> {
     isLoading: boolean,
     headers: TableHeader[],
+    select?: number[],
     filter: FilterOptions[],
     filterKey?: FilterKey[]
     page: number,

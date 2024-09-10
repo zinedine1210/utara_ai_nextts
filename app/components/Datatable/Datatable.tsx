@@ -27,6 +27,7 @@ export default function Datatable({
     const bulk = property?.bulk
     const bulkButton = property?.bulkButton
     const isLoading = property?.isLoading ?? true
+    const select = property?.select
 
     useEffect(() => {},[isLoading])
 
@@ -130,6 +131,26 @@ export default function Datatable({
         setState({ ...state, [statename]: property })
     }
 
+    const handleCheck = (index: number) => {
+        if(select && property.select !== undefined){
+            if(index == -1){
+                property.select = []
+                if(select.length != data.length){
+                    data.forEach((item: any, index: number) => {
+                        property.select = [ ...select, index ]
+                    })
+                }
+            }else{
+                if (select.includes(index)) {
+                    property.select = select.filter(num => num !== index);
+                } else {
+                    select.push(index);
+                }
+            }
+            setState({ ...state, [statename]: property })
+        }
+    }
+
     const handleCopy = (text: string, name: string, copy: string) => {
         if(!copy){
             return false
@@ -143,6 +164,7 @@ export default function Datatable({
     const showingTo = display * page > totalCount ? totalCount: display * page
 
     const skeletonLoading = Array.from({ length: Number(display) }, (_, i) => i + 1);
+    const dataLoop = data.slice(showing - 1, showingTo)
     
   return (
     <div>
@@ -167,6 +189,16 @@ export default function Datatable({
 
                     {/* HEADERS LOOPING */}
                     <tr className="bg-white dark:bg-dark border-b-2 border-black">
+                        {
+                            select && (
+                                <th scope="col" className="p-4">
+                                    <div className="flex items-center">
+                                        <input id={`selectall-${statename}`} type="checkbox" onChange={() => handleCheck(-1)} checked={select.length == data.length} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                        <label htmlFor={`selectall-${statename}`} className="sr-only">checkbox</label>
+                                    </div>
+                                </th>
+                            )
+                        }
                         {
                             headers && headers.map((head, key) => {
                                 if(head.sort)
@@ -211,9 +243,20 @@ export default function Datatable({
                             })
                         :
                         data.length > 0 ?
-                            data.slice(showing - 1, showingTo).map((item, key) => {
+                            dataLoop.map((item, key) => {
+                                const keyData: number = key + showing - 1
                                 return (
                                     <tr key={key} className="even:bg-gray-50 border-b dark:border-gray-700 odd:dark:bg-darkPrimary odd:bg-darkPrimary odd:bg-opacity-20 even:dark:bg-darkSecondary">
+                                        {
+                                            select && (
+                                                <td className="w-4 p-4">
+                                                    <div className="flex items-center">
+                                                        <input id={`select-${statename}-${keyData}`} checked={select.includes(keyData)} onChange={() => handleCheck(keyData)} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                                        <label htmlFor={`select-${statename}-${key}`} className="sr-only">checkbox</label>
+                                                    </div>
+                                                </td>
+                                            )
+                                        }
                                         {
                                             headers.map((head: any, headIndex) => {
                                                 return (
@@ -295,7 +338,7 @@ function SkeletonTable ({ headers }: {
             {
                 headers.map((head, index) => {
                     return (
-                        <th key={index} className="px-5 py-1 blur-sm rounded-xl dark:bg-darkPrimary bg-zinc-200 select-none whitespace-nowrap">
+                        <th key={index} className="px-5 py-5 blur-sm rounded-xl dark:bg-darkPrimary bg-zinc-200 select-none whitespace-nowrap">
                             Lorem, ipsum dolor.
                         </th>
                     )

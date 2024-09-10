@@ -165,6 +165,7 @@ export default function TrainingPage() {
             <div className="w-80">
               <Select 
                 id="simulation"
+                prefixIcon={IconsCollection.chat}
                 name="simulation"
                 onChange={value => state[statename].bulkButton[2].action(value, 1)}
                 value={state.simulation ?? ''}

@@ -28,8 +28,7 @@ export class AttachmentDataModel {
         this.status = props.status
         this.createAt = formatDateData(props.rec_date)
         this.typeFile = 'application/' + props.description.split(".")[1]
-        this.originalfilenamesubstring = props.original_file_name.substring(0, 30) + "..."
-
+        this.originalfilenamesubstring = props.original_file_name.length > 30 ? props.original_file_name.substring(0, 30) + "..." : props.original_file_name
     }
 
     static toDatatableResponse = (array: AttachmentType[]) => {

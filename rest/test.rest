@@ -755,11 +755,11 @@ authorization: {{token}}
   "type": "QNA",
   "description": "Data Polres Jakut",
   "serviceId": "qna",
-  "channel_id": "628152233201",
+  "channel_id": "089508781380",
   "channel": "WHATAPPS",
   "prompt": "prompt",
   "properties": {
-    "data": "01J6XNQ3KFWXQ9NT79ZK0D7K8V"
+    "data": "01J7AS9WF5NRVX1Z6YVNQS4R9N"
   },
   "status": "ACTIVE"
 }
