@@ -220,7 +220,7 @@ export default function Datatable({
                                                     <td key={headIndex} onClick={() => handleCopy(item[head.copy], head.label, head.copy)} className={`px-3 xl:px-3 2xl:px-5 py-2.5 xl:py-3 2xl:py-4 text-sm xl:text-xs 2xl:text-sm ${head.cssRow} ${head.copy && "select-all"}`}>
                                                         { 
                                                             head.status ?
-                                                            <div style={{backgroundColor:`${head.status[item[head.property]]}`}} className={`text-center rounded-xl my-1 text-sm xl:text-xs 2xl:text-base py-1.5 px-4 w-fit text-white font-bold`}>
+                                                            <div style={{backgroundColor:`${head.status[item[head.property]]}`}} className={`text-center rounded-xl my-1 text-sm xl:text-xs 2xl:text-sm py-1.5 px-4 w-fit text-white font-bold`}>
                                                                 { item?.[head.property] }
                                                             </div>
                                                             :

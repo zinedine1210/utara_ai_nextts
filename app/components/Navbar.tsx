@@ -22,7 +22,7 @@ export default function Navbar() {
             width={35}
             height={35}
             className="w-auto h-10 2xl:h-12"
-            placeholder={`data:image/${myImageLoader(50, 50)}`}
+            placeholder={`data:image/${myImageLoader(35, 35)}`}
           />
           <div>
             <h1 className="text-sm xl:text-xs 2xl:text-base text-white font-bold uppercase">Polres Jakarta Utara</h1>

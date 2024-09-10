@@ -1,5 +1,5 @@
 import { TableHeader } from "@@/src/types/types"
-import { trainingColorStatus } from "./status"
+import { trainingColorStatus, trainingStatus } from "./status"
 
 export const tableDial: TableHeader[] = [
     { label: "CODE", property: "code", sort: "code", copy:"code", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
@@ -9,11 +9,11 @@ export const tableDial: TableHeader[] = [
 
 
 export const tableTraining: TableHeader[] = [
-    { label: "Knowledge Name", property: "name", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Description", property: "description", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
-    { label: "Type", property: "type_training_name", status: trainingColorStatus, cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
-    { label: "Prompt", property: "prompt", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
-    { label: "User ID", property: "user_id", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Version", property: "version", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Training Size", property: "trained_data_size", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Status Train", property: "status", status: trainingStatus, cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Date", property: "createdAt", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" }
 ]
 
 export const tableAttachment: TableHeader[] = [

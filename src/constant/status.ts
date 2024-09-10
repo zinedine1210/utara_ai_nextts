@@ -12,7 +12,28 @@ export const trainingColorStatus = {
     'Scratch': '#ff00bf'
 }
 
+export const trainingStatus = {
+    'IN_QUEUE': '#fcba03',
+    'ACTIVE': '#ff1900',
+    'INACTIVE': '#ff00bf'
+}
+
 export const statusOptions: Options[] = [
+    {
+        value: 'ACTIVE',
+        label: 'Active'
+    },
+    {
+        value: 'INACTIVE',
+        label: 'Inactive'
+    }
+]
+
+export const trainingStatusOptions: Options[] = [
+    {
+        value: 'IN_QUEUE',
+        label: 'Queue'
+    },
     {
         value: 'ACTIVE',
         label: 'Active'

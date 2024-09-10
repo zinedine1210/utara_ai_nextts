@@ -7,7 +7,9 @@ export const IconsCollection: {[key: string]: string} = {
     'chevron-down': 'gravity-ui:chevron-down',
     'close': 'mdi:window-close',
     'pencil': 'ph:note-pencil-duotone',
-    'upload': '',
-    'refresh': '',
-    'save': 'fluent:save-multiple-16-regular'
+    'upload': 'tabler:upload',
+    'refresh': 'solar:refresh-line-duotone',
+    'save': 'fluent:save-multiple-16-regular',
+    'training': 'material-symbols-light:model-training',
+    'chat': 'lets-icons:chat'
 }

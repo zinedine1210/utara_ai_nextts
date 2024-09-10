@@ -18,6 +18,7 @@ export default function Select({
     errorMessage,
     defaultAll=false,
     position='right-0',
+    placeholder,
     onTrigger
 }: {
     options: Options[],
@@ -32,6 +33,7 @@ export default function Select({
     errorMessage?: string,
     defaultAll?: boolean,
     position?: string,
+    placeholder?: string,
     onTrigger?: () => void
 }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -59,12 +61,11 @@ export default function Select({
         document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
-    
-    // const valueNow: string = defaultAll ? value == '' ? "All" : options.find(res => res.value == value)?.label ?? 'Select' : 'Select'
+
     const valueNow = () => {
         if(defaultAll){
             if(value == ''){
-                return "All"
+                return placeholder ?? 'Select'
             }else{
                 if(options.length > 0){
                     return options.find(res => res.value == value)?.label
@@ -72,7 +73,7 @@ export default function Select({
             }
         }else{
             if(value == ''){
-                return 'Select'
+                return placeholder ?? 'Select'
             }else{
                 if(options.length > 0){
                     return options.find(res => res.value == value)?.label

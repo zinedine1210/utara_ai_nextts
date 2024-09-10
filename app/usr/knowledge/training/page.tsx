@@ -1,8 +1,198 @@
-import MaintenancePage from '@@/app/maintenance'
-import React from 'react'
+'use client'
+import { useGlobalContext } from "@@/src/providers/GlobalContext";
+import { useCallback, useEffect, useState } from "react"
+import { tableTraining } from "@@/src/constant/table";
+import { FilterOptions, Options, StateType } from "@@/src/types/types";
+import Datatable from "../../../components/Datatable/Datatable";
+import { getTraining } from "@@/src/hooks/CollectionAPI";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import Link from "next/link";
+import { TrainingType } from "@@/src/types/datatabletypes";
+import { Notify } from "@@/src/utils/script";
+import { ResponseData } from "@@/src/types/apitypes";
+import { trainingStatusOptions } from "@@/src/constant/status";
+import FilterDatatable from "@@/app/components/Datatable/FilterDatatable";
+import DatatableMobile from "@@/app/components/Datatable/DatatableMobile";
+import CardMobileAttachment from "./components/CardMobileTraining";
+import { useWindowSize } from "@@/src/hooks/usewindowsize";
+import { TrainingModel } from "./lib/model";
+import { IconsCollection } from "@@/src/constant/icons";
+import Simulation from "./components/Simulation";
+import Select from "@@/app/components/Input/Select";
 
-export default function HalamanTraining() {
+export default function TrainingPage() {
+  const { state, setState } = useGlobalContext();
+  const statename: string = 'trainingdata'
+  const windowWidth = useWindowSize();
+  const [optionsSimulation, setOptionsSimulation] = useState<Options[]>([])
+
+  const initialMount = useCallback(async () => {
+    let defaultValue: StateType<TrainingType> = {
+      isLoading: false,
+      headers: tableTraining,
+      filter: [
+        {
+          key: 'size',
+          value: 100
+        },
+        {
+          key: 'page',
+          value: 1
+        }
+      ],
+      filterKey: [
+        {
+          value: 'description',
+          label: 'Description',
+          type: 'input_text'
+        },
+        {
+          value: 'status',
+          label: 'Status',
+          options: trainingStatusOptions,
+          type: 'select'
+        }
+      ],
+      page: 1,
+      display: 10,
+      range: {},
+      columns: [{ data:"created_at", dir:"desc" }],
+      data: null,
+      allData: [],
+      totalCount: 0,
+      payload: null,
+      groupBy: "createdAt",
+      onGet: async (filter: FilterOptions[]) => {
+        setState((prev: any) => ({
+          ...prev,
+          [statename]: {
+            ...prev[statename],
+            isLoading: true
+          }
+        }))
+        const result: ResponseData = await getTraining(filter)
+        const value: TrainingModel[] = TrainingModel.toDatatableResponse(result.data).reverse()
+        const options: Options[] = TrainingModel.toOptions(result.data)
+        setOptionsSimulation(options)
+        const total = value.length
+        setState((prev: any) => ({
+          ...prev,
+          [statename]: {
+            ...prev[statename],
+            isLoading: false,
+            data: value,
+            totalCount: total
+          }
+        }))
+      },
+      bulkButton: [
+        {
+          name: 'Trained',
+          icon: 'material-symbols:model-training',
+          customCss: 'bg-gradient-to-r from-indigo-600 to-indigo-400 text-white rounded-md',
+          action: (id, index) => {
+            // router.push(`/usr/knowledge/training/information/${id}`)
+          }
+        },
+        {
+          name: 'Inbox',
+          icon: 'solar:inbox-broken',
+          customCss: 'bg-gradient-to-r from-emerald-600 to-emerald-400 text-white rounded-md',
+          action: (id, index) => {
+            // router.push(`usr/inbox/${id}`)
+          }
+        },
+        {
+          name: 'Simulation AI',
+          icon: 'hugeicons:ai-chat-02',
+          customCss: 'bg-gradient-to-r from-teal-600 to-teal-400 text-white rounded-md',
+          action: (id, index) => {
+            setState((prev: any) => ({
+              ...prev, 
+              simulation: id
+            }))
+          }
+        },
+      ],
+      componentMobile: (item, index) => {
+        return <CardMobileAttachment data={item} index={index} />
+      }
+    }
+    setState((prev: any) => ({
+      ...prev,
+      [statename]: defaultValue
+    }))
+    setState((prev: any) => {
+      prev[statename].onGet(prev[statename].filter)
+      return prev
+    })
+  }, [setState])
+
+  useEffect(() => {
+    if(!state?.[statename]){
+      initialMount()
+    }
+  }, [initialMount, state])
+
+  const DatatableView = () => {
+    if(windowWidth < 820){
+      return (
+        <div className="w-full md:hidden h-full overflow-y-hidden">
+          <DatatableMobile statename={statename} />
+        </div>
+      )
+    }else{
+      return (
+        <div className="hidden md:block">
+          <Datatable statename={statename} />
+        </div>
+      )
+    }
+  }
+  
+
   return (
-    <div><MaintenancePage /></div>
+    <div className="w-full h-full flex flex-col md:block ">
+      <div className="p-5">
+        <h1 className="font-bold text-xl">Knowledge Base</h1>
+        <p className="text-zinc-600 dark:text-zinc-400">Your AI understands many topics, but you can add specific knowledge about your company or products to supplement it.</p>
+
+        <div className="flex md:items-center md:justify-between mt-5">
+          <div className="w-auto md:w-1/2">
+            <FilterDatatable statename={statename} />
+          </div>
+          <div className="w-full md:w-1/2 flex items-center justify-end gap-2">
+            <div className="w-80">
+              <Select 
+                id="simulation"
+                name="simulation"
+                onChange={value => state[statename].bulkButton[2].action(value, 1)}
+                value={state.simulation ?? ''}
+                defaultAll={true}
+                options={optionsSimulation}
+                placeholder="Select to simulation"
+              />  
+            </div>
+            <button className="btn-secondary" onClick={() => state[statename].onGet(state[statename].filter)}> <h1 className="hidden md:block">Refresh</h1> <Icon icon={'solar:refresh-bold-duotone'} className="text-xl" /></button>
+            <Link href={`/usr/knowledge/training/create`} className="inline-block">
+              <button className="btn-primary">
+                <Icon icon={IconsCollection.training} className="text-xl"/>
+                Train AI
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className={`flex gap-5 px-5`}>
+        {
+          state.simulation && (
+            <Simulation />
+          )
+        }
+        <div className="w-full">
+          {DatatableView()}
+        </div>
+      </div>
+    </div>
   )
 }

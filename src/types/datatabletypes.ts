@@ -12,18 +12,20 @@ export interface AttachmentType {
 }
 
 export interface TrainingType {
-    code: string
-    description: string
     id: string
-    name: string
-    org_id: string
-    prompt: string
-    status_training: number
-    status_training_name: string
-    type_training: number
-    type_training_name: string
-    user_id: string
-    _files: string[]
+    description: string
+    version: string
+    collection_name: string | null
+    files: AttachmentType[]
+    trained_data_size: number
+    trained_date: string | null
+    tokens: string | null
+    cost: string | null
+    status: string
+    rec_by: string
+    rec_date: string
+    mod_by: string | null
+    mod_date: string | null
 }
 
 export type WhatsappList = {
