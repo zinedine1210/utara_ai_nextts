@@ -39,6 +39,18 @@
     "description": "",
     "feature": "",
     "icon": "mingcute:attachment-line",
+    "parent": "clm_knowledge_training",
+    "sortnumber": 302,
+    "id": "clm_knowledge_training_create",
+    "route": "/usr/knowledge/training/create",
+    "name": "Create Training Data",
+    "flag": "Knowledge Builder",
+    "show": true
+  },
+  {
+    "description": "",
+    "feature": "",
+    "icon": "mingcute:attachment-line",
     "parent": "clm_knowledge",
     "sortnumber": 302,
     "id": "clm_knowledge_attachment",
