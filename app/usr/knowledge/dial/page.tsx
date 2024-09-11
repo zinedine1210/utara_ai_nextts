@@ -28,7 +28,7 @@ export default function ServicesPage() {
       data: null,
       allData: [],
       totalCount: 0,
-      payload: null,
+      payload: [],
       onGet: async (filter: FilterOptions[]) => {
         setState((prev: any) => ({
           ...prev,
@@ -92,7 +92,7 @@ export default function ServicesPage() {
   }, [initialMount, state])
 
   return (
-    <div className="w-full h-full flex flex-col md:block ">
+    <div className="w-full h-full overflow-hidden flex flex-col pt-10">
       <div className="p-5">
         <h1 className="font-bold text-xl">Dial</h1>
         <p className="text-zinc-600">Dial International for phone number</p>

@@ -3,22 +3,23 @@ import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import { useCallback, useEffect } from "react"
 import { tableAttachment } from "@@/src/constant/table";
 import { FilterOptions, StateType } from "@@/src/types/types";
-import Datatable from "../../../components/Datatable/Datatable";
-import { getAttachment } from "@@/src/hooks/CollectionAPI";
-import { AttachmentDataModel } from "./lib/model";
+import { getAttachment, postTraining } from "@@/src/hooks/CollectionAPI";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import Link from "next/link";
 import { AttachmentType } from "@@/src/types/datatabletypes";
-import { Notify } from "@@/src/utils/script";
 import { ResponseData } from "@@/src/types/apitypes";
 import { statusOptions } from "@@/src/constant/status";
 import FilterDatatable from "@@/app/components/Datatable/FilterDatatable";
 import DatatableMobile from "@@/app/components/Datatable/DatatableMobile";
 import ToolTips from "@@/app/components/Partials/ToolTips";
-import CardMobileAttachment from "./components/CardMobileAttachment";
 import { useWindowSize } from "@@/src/hooks/usewindowsize";
+import { AttachmentDataModel } from "../../attachment/lib/model";
+import CardMobileAttachment from "../../attachment/components/CardMobileAttachment";
+import Datatable from "@@/app/components/Datatable/Datatable";
+import { IconsCollection } from "@@/src/constant/icons";
+import ModalCreateTraining from "../components/ModalCreateTraining";
+import { Notify } from "@@/src/utils/script";
 
-export default function AttachmentPage() {
+export default function CreateTrainPage() {
   const { state, setState } = useGlobalContext();
   const statename: string = 'attachment'
   const windowWidth = useWindowSize();
@@ -81,22 +82,6 @@ export default function AttachmentPage() {
           }
         }))
       },
-      bulk: [
-        {
-          name: 'Delete',
-          icon: 'octicon:trash-24',
-          action: (id, index) => {
-            Notify('Action not found to delete record ' + id, 'info', 3000)
-          }
-        },
-        {
-          name: 'Update',
-          icon: 'weui:pencil-filled',
-          action: (id, index) => {
-            Notify('Action not found to update record ' + id, 'info', 3000)
-          }
-        }
-      ],
       componentMobile: (item, index) => {
         return <CardMobileAttachment data={item} index={index} />
       }
@@ -120,47 +105,54 @@ export default function AttachmentPage() {
   const DatatableView = () => {
     if(windowWidth < 820){
       return (
-        <div className="w-full md:hidden h-full overflow-y-hidden">
+        <div className="w-full md:hidden h-full flex-1 pb-44">
           <DatatableMobile statename={statename} />
         </div>
       )
     }else{
       return (
-        <div className="hidden md:block pb-10 px-5">
+        <div className="hidden md:block px-5 flex-1 overflow-y-auto pb-20">
           <Datatable statename={statename} />
         </div>
       )
     }
   }
-  
 
+  const handleSubmit = async () => {
+    const objPayload: FilterOptions[] = state[statename].payload
+    const result = await postTraining(objPayload)
+    console.log(result)
+  }
+  
+  const modalName: string = "modalcreatetraining"
+  const modalCreate = () => state[statename].select.length > 0 ? setState((prev: any) => ({ ...prev, modal: { name: modalName, data: state[statename].select }})) : Notify('Please select one file', 'info', 3000)
   return (
     <div className="w-full h-full overflow-hidden flex flex-col pt-10">
+      <ModalCreateTraining name={modalName}/>
       <div className="p-5">
-        <h1 className="font-bold text-xl">Attachment</h1>
-        <p className="text-zinc-600 dark:text-zinc-400">Input your file business here to create knowledge</p>
+          <h1 className="font-bold text-xl">Create Training</h1>
+          <p className="text-zinc-600 dark:text-zinc-400">Select your file to start training data</p>
 
-        <div className="flex md:items-center md:justify-between mt-5">
-          <div className="w-auto md:w-1/2">
-            <FilterDatatable statename={statename} />
+          <div className="flex md:items-center md:justify-between mt-5">
+              <div className="w-auto md:w-1/2">
+                  <FilterDatatable statename={statename} />
+              </div>
+              <div className="w-full md:w-1/2 flex items-center justify-end gap-2">
+                  <ToolTips title="Usage Information" position="right-0 translate-x-0">
+                  <p className="text-xs font-light mt-2">Select files you want to create and train, then enter to button <span className="font-bold">Training Bot</span>. <br /> Your training files will be added to the training page.</p>
+                  </ToolTips>
+              </div>
           </div>
-
-          <div className="w-full md:w-1/2 flex items-center justify-end gap-2">
-            <ToolTips title="Usage Information" position="-right-1/2 translate-x-1/2">
-              <p className="text-xs font-light mt-2">Select files you want to create and train, then enter to button <span className="font-bold">Training Bot</span>. <br /> Your training files will be added to the training page.</p>
-            </ToolTips>
-            <button className="btn-secondary" onClick={() => state[statename].onGet(state[statename].filter)}> <h1 className="hidden md:block">Refresh</h1> <Icon icon={'solar:refresh-bold-duotone'} className="text-xl" /></button>
-            <Link href={`/usr/knowledge/attachment/create`} className="inline-block">
-              <button className="btn-primary">
-                <Icon icon={'material-symbols:upload'} className="text-xl"/>
-                Upload File
-              </button>
-            </Link>
-          </div>
-        </div>
       </div>
-
       {DatatableView()}
+      <div className="backdrop-blur-md w-full absolute bottom-0 left-0 px-5 py-2 flex items-center justify-between">
+          <h1 className="text-zinc-600 text-sm"><span className="font-bold text-3xl">{state[statename]?.select.length}</span> {state[statename]?.select.length == 1 ? "File":"Files"} Selected</h1>
+          <button className="btn-primary" disabled={state[statename]?.select.length == 0 ? true:false} onClick={() => modalCreate()}>
+              {/* <IoCreate className='text-white font-bold text-lg'/> */}
+              <Icon icon={IconsCollection.train} className="text-white font-bold text-lg"/>
+              <span>Training AI ChatBot</span>
+          </button>
+      </div>
     </div>
   )
 }

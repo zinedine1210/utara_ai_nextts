@@ -3,3 +3,9 @@ export interface PayloadAttachmentType {
     status?: string
     id?: string
 }
+
+export interface PayloadTrainingType {
+    description: string
+    version: string
+    files: string[]
+}

@@ -2,6 +2,7 @@ import { setCookies } from "@@/app/actions";
 import axios from "axios"
 import { Notify } from "../utils/script";
 import { FilterOptions } from "../types/types";
+import { PayloadAttachmentType } from "../types/payloadtypes";
 let protocol = '';
 let host = '';
 let port = '';
@@ -29,14 +30,20 @@ const baseURL: string = (process.env.BASE_DOMAIN ?? baseDomain) + '/api';
 export const tryLogin = async (payload: any) => {
     const result = await axios.post(`${baseURL}/auth/login`, payload)
     const responseData = result.data
+    console.log(responseData)
     if(responseData.success){
         if(responseData.data.access_token){
-            setCookies('auth_token', responseData.data.access_token)
+            setCookies('auth_token', responseData.data.access_token, responseData.data.expired_at)
             localStorage.setItem("auth_info", payload.username)
         }
         const clientMenus = await axios.get(`${baseDomain}/client_menus.json`)
         localStorage.setItem('client_menus', JSON.stringify(clientMenus.data))
+    }else{
+        if(responseData.status == 404 && responseData.message == 'Request failed with status code 503'){
+            Notify('Website in maintenance, please try again later', 'info', 5000)
+        }
     }
+    
     return responseData
 }
 
@@ -52,6 +59,16 @@ export const tryLogout = async () => {
 
 export const getOrg = async () => {
     const result = await axios.get(`${baseURL}/root/org`)
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+export const postTraining = async (payload: FilterOptions[]) => {
+    const result = await axios.post(`${baseURL}/data/knowledge/training/create`, payload)
     const responseData = result.data
     if(!responseData.success) {
         Notify(responseData.message ?? 'Something went wrong', 'error', 3000)

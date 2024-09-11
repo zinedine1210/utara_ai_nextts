@@ -75,7 +75,7 @@ export default function AttachmentCreatePage() {
     }
 
   return (
-      <div className="w-full xl:w-3/4 relative h-screen overflow-y-auto">
+      <div className="w-full xl:w-3/4 relative h-screen overflow-y-auto pt-10">
         <div className='p-3 xl:p-5'>
             <label className="text-base xl:text-xl dark:text-white font-semibold flex items-center gap-2">
                 <Icon icon={"iconamoon:attachment-light"} className='text-2xl'/>

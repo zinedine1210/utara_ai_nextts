@@ -35,7 +35,7 @@ export interface StateType<T> {
     data: T[] | null,
     allData: T[],
     totalCount: number,
-    payload: null,
+    payload: FilterOptions[],
     groupBy?: string
     onGet: (filter: FilterOptions[]) => void,
     bulk?: DropdownOptions[]

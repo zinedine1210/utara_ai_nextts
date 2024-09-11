@@ -10,15 +10,14 @@ export default function UserLayout({
   children: ReactNode
 }) {
   return (
-    <div className='flex flex-col w-full min-h-screen h-screen overflow-hidden relative'>
-      <main className='flex-1 w-full lg:flex overflow-hidden h-full'>
-        {/* <div className='bg-red-500 sm:bg-violet-500 md:bg-yellow-500 lg:bg-gray-500 xl:bg-green-500 2xl:bg-blue-500 w-14 h-full'></div> */}
+    <div className='w-full h-screen relative'>
+      <main className='flex h-full overflow-hidden'>
         <Sidebar />
         <div className='w-full h-full bg-zinc-100 dark:bg-dark/60 relative flex flex-col'>
-          <div id="modal-usr"></div>
+          {/* <div id="modal-usr"></div> */}
           <Navbar />
           <div className='flex-1 overflow-y-auto text-sm xl:text-xs 2xl:text-base relative'>
-            <div className='z-30 fixed bottom-0 left-0 bg-primary text-white py-1.5 md:py-1 md:inline-block rounded-r-full pl-3 pr-5'>
+            <div className='z-10 absolute top-1 left-0 bg-primary text-white py-1.5 md:py-1 inline-block rounded-r-full pl-3 pr-5'>
               <Breadcrumb />
             </div>
             {children}

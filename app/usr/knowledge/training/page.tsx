@@ -8,7 +8,6 @@ import { getTraining } from "@@/src/hooks/CollectionAPI";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import { TrainingType } from "@@/src/types/datatabletypes";
-import { Notify } from "@@/src/utils/script";
 import { ResponseData } from "@@/src/types/apitypes";
 import { trainingStatusOptions } from "@@/src/constant/status";
 import FilterDatatable from "@@/app/components/Datatable/FilterDatatable";
@@ -60,7 +59,7 @@ export default function TrainingPage() {
       data: null,
       allData: [],
       totalCount: 0,
-      payload: null,
+      payload: [],
       groupBy: "createdAt",
       onGet: async (filter: FilterOptions[]) => {
         setState((prev: any) => ({
@@ -143,7 +142,7 @@ export default function TrainingPage() {
       )
     }else{
       return (
-        <div className="hidden md:block">
+        <div className="hidden md:block pb-20">
           <Datatable statename={statename} />
         </div>
       )
@@ -152,7 +151,7 @@ export default function TrainingPage() {
   
 
   return (
-    <div className="w-full h-full flex flex-col md:block ">
+    <div className="w-full h-full overflow-hidden flex flex-col pt-10">
       <div className="p-5">
         <h1 className="font-bold text-xl">Knowledge Base</h1>
         <p className="text-zinc-600 dark:text-zinc-400">Your AI understands many topics, but you can add specific knowledge about your company or products to supplement it.</p>
@@ -184,7 +183,7 @@ export default function TrainingPage() {
           </div>
         </div>
       </div>
-      <div className={`flex gap-5 px-5`}>
+      <div className={`flex gap-5 px-0 md:px-5 flex-1 overflow-y-auto`}>
         {
           state.simulation && (
             <Simulation />

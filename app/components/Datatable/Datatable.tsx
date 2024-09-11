@@ -131,22 +131,24 @@ export default function Datatable({
         setState({ ...state, [statename]: property })
     }
 
-    const handleCheck = (index: number) => {
-        if(select && property.select !== undefined){
-            if(index == -1){
-                property.select = []
-                if(select.length != data.length){
-                    data.forEach((item: any, index: number) => {
-                        property.select = [ ...select, index ]
+    const handleCheck = (id: any) => {
+        let copySelect = select ?? []
+        if(copySelect){
+            if(id == -1){
+                copySelect = []
+                if(select?.length != data.length){
+                    data.forEach((item: any) => {
+                        copySelect = [ ...copySelect, item.id ]
                     })
                 }
             }else{
-                if (select.includes(index)) {
-                    property.select = select.filter(num => num !== index);
+                if (copySelect.includes(id)) {
+                    copySelect = copySelect.filter(num => num !== id);
                 } else {
-                    select.push(index);
+                    copySelect.push(id);
                 }
             }
+            property.select = copySelect
             setState({ ...state, [statename]: property })
         }
     }
@@ -244,14 +246,13 @@ export default function Datatable({
                         :
                         data.length > 0 ?
                             dataLoop.map((item, key) => {
-                                const keyData: number = key + showing - 1
                                 return (
                                     <tr key={key} className="even:bg-gray-50 border-b dark:border-gray-700 odd:dark:bg-darkPrimary odd:bg-darkPrimary odd:bg-opacity-20 even:dark:bg-darkSecondary">
                                         {
                                             select && (
                                                 <td className="w-4 p-4">
                                                     <div className="flex items-center">
-                                                        <input id={`select-${statename}-${keyData}`} checked={select.includes(keyData)} onChange={() => handleCheck(keyData)} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                                        <input id={`select-${statename}-${key}`} checked={select.includes(item.id)} onChange={() => handleCheck(item.id)} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                                                         <label htmlFor={`select-${statename}-${key}`} className="sr-only">checkbox</label>
                                                     </div>
                                                 </td>
