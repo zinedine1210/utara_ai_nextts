@@ -91,7 +91,7 @@ export default function Select({
                         <div className="flex items-center gap-2">
                             <span>{valueNow()}</span>
                         </div>
-                        <Icon icon={'tabler:chevron-down'} className={`${isOpen && 'rotate-180'} duration-300 text-xl`}/>
+                        <Icon icon={'tabler:chevron-down'} className={`${isOpen && 'rotate-180'} duration-300 text-xl text-primary`}/>
                     </button>
                 </div>
                 {errorMessage && <p className="text-red-500 text-xs mt-1">{errorMessage}</p>}

@@ -9,7 +9,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import { TrainingType } from "@@/src/types/datatabletypes";
 import { ResponseData } from "@@/src/types/apitypes";
-import { trainingStatusOptions } from "@@/src/constant/status";
+import { statusOptions } from "@@/src/constant/status";
 import FilterDatatable from "@@/app/components/Datatable/FilterDatatable";
 import DatatableMobile from "@@/app/components/Datatable/DatatableMobile";
 import CardMobileAttachment from "./components/CardMobileTraining";
@@ -48,7 +48,7 @@ export default function TrainingPage() {
         {
           value: 'status',
           label: 'Status',
-          options: trainingStatusOptions,
+          options: statusOptions,
           type: 'select'
         }
       ],

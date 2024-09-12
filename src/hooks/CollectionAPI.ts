@@ -87,8 +87,8 @@ export const getTraining = async (filter: FilterOptions[]) => {
     return responseData
 }
 
-export const getServices = async () => {
-    const result = await axios.get(`${baseURL}/data/knowledge/services`)
+export const getServices = async (filter: FilterOptions[]) => {
+    const result = await axios.post(`${baseURL}/data/knowledge/services`, filter ?? [])
     const responseData = result.data
     if(!responseData.success) {
         Notify(responseData.message ?? 'Something went wrong', 'error', 3000)

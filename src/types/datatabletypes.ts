@@ -10,7 +10,6 @@ export interface AttachmentType {
     rec_date: string
     status: string
 }
-
 export interface TrainingType {
     id: string
     description: string
@@ -56,19 +55,19 @@ export interface ProfileType {
 }
 
 export interface ServicesType {
+    id: string
     type: string
-    loc: string[]
-    msg: string
-    input: {
-        type: string
-        description: string
-        serviceId: string
-        channel_id: string
-        channel: string
-        prompt: string
-        properties: {
-            data: string
-        }
-        status: string
+    description: string
+    service_id: string
+    channel_id: string
+    channel: string
+    prompt: string
+    properties: {
+        data: string
     }
+    status: string
+    rec_by: string
+    rec_date: string
+    mod_by: null | string,
+    mod_date: null | string
 }

@@ -191,6 +191,9 @@ export default function Datatable({
 
                     {/* HEADERS LOOPING */}
                     <tr className="bg-white dark:bg-dark border-b-2 border-black">
+                        <th scope="col" className="p-4">
+                            No
+                        </th>
                         {
                             select && (
                                 <th scope="col" className="p-4">
@@ -248,6 +251,9 @@ export default function Datatable({
                             dataLoop.map((item, key) => {
                                 return (
                                     <tr key={key} className="even:bg-gray-50 border-b dark:border-gray-700 odd:dark:bg-darkPrimary odd:bg-darkPrimary odd:bg-opacity-20 even:dark:bg-darkSecondary">
+                                        <td className="w-4 p-4 text-black text-center">
+                                            {key + showing}
+                                        </td>
                                         {
                                             select && (
                                                 <td className="w-4 p-4">
@@ -264,7 +270,7 @@ export default function Datatable({
                                                     <td key={headIndex} onClick={() => handleCopy(item[head.copy], head.label, head.copy)} className={`px-3 xl:px-3 2xl:px-5 py-2.5 xl:py-3 2xl:py-4 text-sm xl:text-xs 2xl:text-sm ${head.cssRow} ${head.copy && "select-all"}`}>
                                                         { 
                                                             head.status ?
-                                                            <div style={{backgroundColor:`${head.status[item[head.property]]}`}} className={`text-center rounded-xl my-1 text-sm xl:text-xs 2xl:text-sm py-1.5 px-4 w-fit text-white font-bold`}>
+                                                            <div style={{backgroundColor:`${head.status[item[head.property]]}`}} className={`text-center rounded-full my-1 text-xs py-1.5 px-4 w-fit text-white`}>
                                                                 { item?.[head.property] }
                                                             </div>
                                                             :

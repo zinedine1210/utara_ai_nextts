@@ -1,4 +1,4 @@
-import { Options } from "../types/types"
+import { FilterOptions, Options } from "../types/types"
 
 export const trainingTypeStatus = {
     '1': 'Upload',
@@ -18,28 +18,26 @@ export const trainingStatus = {
     'INACTIVE': '#ff00bf'
 }
 
-export const statusOptions: Options[] = [
-    {
-        value: 'ACTIVE',
-        label: 'Active'
-    },
-    {
-        value: 'INACTIVE',
-        label: 'Inactive'
-    }
-]
+export const channelType = {
+    'WHATSAPP': '#22c55e',
+    'WHATAPPS': '#22c55e'
+}
 
-export const trainingStatusOptions: Options[] = [
-    {
-        value: 'IN_QUEUE',
-        label: 'Queue'
-    },
-    {
-        value: 'ACTIVE',
-        label: 'Active'
-    },
-    {
-        value: 'INACTIVE',
-        label: 'Inactive'
-    }
-]
+export const serviceTemplateType = {
+    'QNA': '#ff00bf',
+    'EVENT': '#fcba03',
+}
+const getFromOptions = (type: {[key: string]: string}): Options[]  => {
+    let arrayOptions: Options[] = []
+    Object.entries(type).map((item, index) => {
+        arrayOptions.push({
+            value: item[0],
+            label: item[0]
+        })
+    })
+    return arrayOptions
+}
+export const channelTypeOptions = getFromOptions(channelType)
+export const statusOptions = getFromOptions(trainingStatus)
+export const serviceOptions = getFromOptions(serviceTemplateType)
+export const trainingstatusOptions = statusOptions

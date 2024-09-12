@@ -7,7 +7,7 @@
 @apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
 @ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNkoxUURNNktUN00yRjlXOEU1QjBDVDQiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI1MTIxNTc1fQ.6Bk91aFnXlIILuQbmkIzIpYoe5ytlF_6cnAzkHEe5D8
 @partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUo2SjFWODIzUUZGRVdFMEJQV1ZUMUU3NiIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzI1MTIxNjk5fQ.kS-bq1DKi_1kgkhwsMULxEFBs35F6UQnu6RiNVwIJUI
-@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNktHNDFUQkNGNkNKN1o1U0M5S1lDUVIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI1OTQ2NDM0fQ.uVXS239JovKpM91aAl3pV0MqJP0VqOxCn27-4I6MWGI
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNktHNDFUQkNGNkNKN1o1U0M5S1lDUVIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI2MTk5NjE1fQ.LRrEG-8onVTm4i-l4o0dsiq8ZJAh9aHtc5ore0V8xCg
 @token = {{clientToken}}
 
 
@@ -701,12 +701,12 @@ authorization: {{token}}
 }
 
 ### find by id
-GET {{host}}/v1/client/data/id/01J6V9YA7DKZ7QFWRHR31K2S82 HTTP/1.1
+GET {{host}}/v1/client/data/id/01J7GF7RYCSTGRRT9N6F1V1E3N HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
 ### fing by description, status
-GET {{host}}/v1/client/data/by HTTP/1.1
+GET {{host}}/v1/client/data/by?id=01J7GFZKQBY23MY3H7C7FM879F HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
@@ -754,8 +754,8 @@ authorization: {{token}}
 {
   "type": "QNA",
   "description": "Data Polres Jakut",
-  "serviceId": "qna",
-  "channel_id": "089508781380",
+  "service_id": "qna",
+  "channel_id": "1290192102",
   "channel": "WHATAPPS",
   "prompt": "prompt",
   "properties": {

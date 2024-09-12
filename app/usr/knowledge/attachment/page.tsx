@@ -126,7 +126,7 @@ export default function AttachmentPage() {
       )
     }else{
       return (
-        <div className="hidden md:block pb-10 px-5">
+        <div className="hidden md:block pb-10 px-5 overflow-y-auto">
           <Datatable statename={statename} />
         </div>
       )

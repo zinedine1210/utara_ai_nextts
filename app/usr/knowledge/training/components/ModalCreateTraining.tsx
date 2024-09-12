@@ -66,7 +66,7 @@ export default function ModalCreateTraining({
     <>
         <Modal name={name} disableClose={false}>
             <div className="w-full">
-                <form className="p-5 block w-[500px]" onSubmit={(e) => handleSubmit(e)}>
+                <form className="p-5 block w-full md:w-[500px]" onSubmit={(e) => handleSubmit(e)}>
                     <h1 className="font-bold text-xl">Create Training</h1>
                     <div className="space-y-2 mt-5">
                         <div>
