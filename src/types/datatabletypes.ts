@@ -47,9 +47,9 @@ export interface ProfileType {
     email: string
     npwp: string
     channel: {
-        whatsapp: string[] | null,
-        telegram: string[] | null,
-        email: string[] | null
+        whatsapp: string[],
+        telegram: string[],
+        email: string[]
     },
     status: string
 }

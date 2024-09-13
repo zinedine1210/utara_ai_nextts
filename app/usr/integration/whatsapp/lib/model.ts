@@ -1,15 +1,15 @@
 import { EmailList, ProfileType, TelegramList, WhatsappList } from "@@/src/types/datatabletypes";
 export class ProfileModel {
-    private name: string;
-    private legal_name: string
-    private address: string
-    private phone: string
-    private email: string
-    private npwp: string
-    private whatsapp: any[] | null
-    private telegram: any[] | null
-    private channelEmail: any[] | null
-    private status: string
+    public name: string;
+    public legal_name: string
+    public address: string
+    public phone: string
+    public email: string
+    public npwp: string
+    public whatsapp: any[]
+    public telegram: any[]
+    public channelEmail: any[]
+    public status: string
 
     constructor(props: ProfileType){
         this.name = props.name

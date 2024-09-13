@@ -14,6 +14,9 @@ import { useWindowSize } from "@@/src/hooks/usewindowsize";
 import Datatable from "@@/app/components/Datatable/Datatable";
 import { ServicesModel } from "./lib/model";
 import CardMobileServices from "./components/CardMobileServices";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import { IconsCollection } from "@@/src/constant/icons";
+import Link from "next/link";
 
 export default function ServicesPage() {
   const { state, setState } = useGlobalContext();
@@ -150,6 +153,12 @@ export default function ServicesPage() {
                   <ToolTips title="Usage Information" position="right-0 translate-x-0">
                   <p className="text-xs font-light mt-2">Select files you want to create and train, then enter to button <span className="font-bold">Training Bot</span>. <br /> Your training files will be added to the training page.</p>
                   </ToolTips>
+                  <Link href={`/usr/knowledge/services/create`}>
+                    <button className="btn-primary">
+                      <Icon icon={IconsCollection.service} className="text-lg"/>
+                      Create Service
+                    </button>
+                  </Link>
               </div>
           </div>
       </div>

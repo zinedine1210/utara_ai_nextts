@@ -11,5 +11,6 @@ export const IconsCollection: {[key: string]: string} = {
     'refresh': 'solar:refresh-line-duotone',
     'save': 'fluent:save-multiple-16-regular',
     'training': 'material-symbols-light:model-training',
-    'chat': 'lets-icons:chat'
+    'chat': 'lets-icons:chat',
+    'service': 'eos-icons:service-outlined'
 }

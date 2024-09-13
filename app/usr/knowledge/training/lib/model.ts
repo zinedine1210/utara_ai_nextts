@@ -51,4 +51,13 @@ export class TrainingModel {
             }
         })
     }
+
+    static toOptionsFromModel = (array: TrainingModel[]) => {
+        return array.map((item: TrainingModel) => {
+            return {
+                label: item.description,
+                value: item.id
+            }
+        })
+    }
 }

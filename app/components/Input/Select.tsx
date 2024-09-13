@@ -16,6 +16,7 @@ export default function Select({
     required=true,
     prefixIcon,
     errorMessage,
+    disabled=false,
     defaultAll=false,
     position='right-0',
     placeholder,
@@ -34,6 +35,7 @@ export default function Select({
     defaultAll?: boolean,
     position?: string,
     placeholder?: string,
+    disabled?: boolean,
     onTrigger?: () => void
 }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -87,7 +89,7 @@ export default function Select({
                 {label && <label className="mb-1 inline-block font-semibold text-sm xl:text-xs 2xl:text-sm capitalize" htmlFor={id}>{label} {required && <span className="text-red-500">*</span>}</label>}
                 <div className="relative w-full">
                     {prefixIcon && <Icon icon={prefixIcon} className="text-2xl -translate-y-1/2 top-1/2 left-3 dark:text-white/80 text-black/50 absolute"/>}
-                    <button onClick={() => handleOpen()} className={`${customCss} ${prefixIcon && 'pl-12'} ${errorMessage && 'border-red-500 dark:border-red-500 dark:focus:border-red-500 focus:border-red-500'} bg-zinc-50 transition-colors duration-300 disabled:bg-zinc-300 disabled:placeholder:text-black disabled:text-black dark:disabled:bg-black dark:disabled:placeholder:text-zinc-400 dark:disabled:text-zinc-400 outline-none border hover:bg-zinc-100 focus:bg-white focus:border-primary dark:bg-dark dark:border-white/50 dark:focus:border-primary rounded-md w-full flex items-center justify-between`}>
+                    <button type="button" disabled={disabled} onClick={() => handleOpen()} className={`${customCss} ${prefixIcon && 'pl-12'} ${errorMessage && 'border-red-500 dark:border-red-500 dark:focus:border-red-500 focus:border-red-500'} bg-zinc-50 transition-colors duration-300 disabled:bg-zinc-300 disabled:placeholder:text-black disabled:text-black dark:disabled:bg-black dark:disabled:placeholder:text-zinc-400 dark:disabled:text-zinc-400 outline-none border hover:bg-zinc-100 focus:bg-white focus:border-primary dark:bg-dark dark:border-white/50 dark:focus:border-primary rounded-md w-full flex items-center justify-between`}>
                         <div className="flex items-center gap-2">
                             <span>{valueNow()}</span>
                         </div>
@@ -102,6 +104,7 @@ export default function Select({
                         <InputText 
                             placeholder="Search by label"
                             value={keyword}
+                            required={false}
                             onChange={value => setKeyword(value)}
                             name={name}
                             id={id}
@@ -110,7 +113,7 @@ export default function Select({
                     <div className="max-h-80 h-full overflow-y-auto">
                         {
                             defaultAll && (
-                                <button onClick={() => onChange('')} className={`${value == '' ?"bg-primary text-white font-bold":"dark:text-zinc-500 hover:bg-primary/30"} duration-300 p-2 cursor-pointer flex items-center gap-2 w-full text-start`}>
+                                <button type="button" onClick={() => onChange('')} className={`${value == '' ?"bg-primary text-white font-bold":"dark:text-zinc-500 hover:bg-primary/30"} duration-300 p-2 cursor-pointer flex items-center gap-2 w-full text-start`}>
                                     All
                                 </button>
                             )
@@ -131,7 +134,7 @@ export default function Select({
                                 return false;
                             }).map((opt, index) => {
                                 return (
-                                    <button key={index} onClick={() => onChange(opt.value)} className={`${opt.value == value ?"bg-primary text-white font-bold":"dark:text-zinc-500 hover:bg-primary/30"} duration-300 p-2 cursor-pointer flex items-center gap-2 w-full text-start`}>
+                                    <button type="button" key={index} onClick={() => onChange(opt.value)} className={`${opt.value == value ?"bg-primary text-white font-bold":"dark:text-zinc-500 hover:bg-primary/30"} duration-300 p-2 cursor-pointer flex items-center gap-2 w-full text-start`}>
                                         {opt.label}
                                     </button>
                                 )
