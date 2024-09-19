@@ -32,8 +32,8 @@ export default function WhatsappOfficial() {
   const addWhatsappTrigger = () => setState({ ...state, modal: { name: modalName, data: data?.[channelName] }})
   return (
     <>
-      <div className="w-full h-full flex flex-col bg-white">
-        <div className='bg-green-100 dark:bg-green-700 w-full px-3 md:px-7 py-8 md:py-10 flex items-center justify-between'>
+      <div className="w-full h-full flex flex-col">
+        <div className='bg-green-100 dark:bg-green-700 w-full px-3 md:px-7 py-8 md:py-16 flex items-center justify-between'>
             <div className='md:flex items-center gap-2'>
                 <Icon icon={'ic:baseline-whatsapp'} className='text-green-500 dark:text-white text-6xl'/>
                 <h1 className='text-lg md:text-2xl font-bold'>Whatsapp Official</h1>
@@ -42,8 +42,8 @@ export default function WhatsappOfficial() {
                 Add Whatsapp
             </button>
         </div>
-        <div className="md:flex justify-evenly">
-          <div className="w-full md:w-1/2">
+        <div className="md:flex justify-evenly flex-1">
+          <div className="w-full md:w-1/2 ">
             {
               data ?
                   data?.[channelName] ?
@@ -70,7 +70,7 @@ export default function WhatsappOfficial() {
                 </div>
             }
           </div>
-          <div className="w-full xl:w-1/3 bg-white dark:bg-darkPrimary xl:-mt-10 rounded-md p-5 shadow-md">
+          <div className="hidden md:block w-full h-full xl:w-1/3 bg-white dark:bg-darkPrimary xl:-mt-10 rounded-md p-5 shadow-md">
                 <h1 className="text-xl mb-5">Whatsapp Channel Integration</h1>
                 <p className="text-sm text-zinc-500">You can only connect with your personal whatsapp number to react with AI</p>
                 <ul className="my-2 space-y-2">

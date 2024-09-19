@@ -14,8 +14,8 @@ export const trainingColorStatus = {
 
 export const trainingStatus = {
     'IN_QUEUE': '#fcba03',
-    'ACTIVE': '#ff1900',
-    'INACTIVE': '#ff00bf'
+    'ACTIVE': '#32a852',
+    'INACTIVE': '#ff1900'
 }
 
 export const channelType = {

@@ -69,7 +69,7 @@
     "route": "/usr/knowledge/dial",
     "name": "Dial",
     "flag": "Knowledge Builder",
-    "show": true
+    "show": false
   },
   {
     "description": "",

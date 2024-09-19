@@ -146,7 +146,7 @@ export default function CreateTrainPage() {
       </div>
       {DatatableView()}
       <div className="backdrop-blur-md w-full absolute bottom-0 left-0 px-5 py-2 flex items-center justify-between">
-          <h1 className="text-zinc-600 text-sm"><span className="font-bold text-3xl">{state[statename]?.select.length}</span> {state[statename]?.select.length == 1 ? "File":"Files"} Selected</h1>
+          <h1 className="dark:text-white text-zinc-600 text-sm"><span className="font-bold text-3xl">{state[statename]?.select.length}</span> {state[statename]?.select.length == 1 ? "File":"Files"} Selected</h1>
           <button className="btn-primary" disabled={state[statename]?.select.length == 0 ? true:false} onClick={() => modalCreate()}>
               {/* <IoCreate className='text-white font-bold text-lg'/> */}
               <Icon icon={IconsCollection.train} className="text-white font-bold text-lg"/>

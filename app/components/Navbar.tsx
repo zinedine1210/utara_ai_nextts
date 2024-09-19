@@ -16,7 +16,7 @@ export default function Navbar() {
           <button onClick={() => setState({ ...state, view: true })} className="md:hidden">
             <Icon icon={'ic:round-chevron-right'} className="text-3xl"/>
           </button>
-          {/* <Image 
+          <Image 
             src={'/images/logometro.png'}
             alt="Logo Polres Metro Jakarta Utara"
             width={35}
@@ -27,7 +27,7 @@ export default function Navbar() {
           <div>
             <h1 className="text-sm xl:text-xs 2xl:text-base text-white font-bold uppercase">Polres Jakarta Utara</h1>
             <p className="text-xs 2xl:text-sm">AI</p>
-          </div> */}
+          </div>
         </div>
         <div className='flex items-center gap-5'>
           <DarkMode />

@@ -103,7 +103,7 @@ export default function ServiceCreatePage() {
     }
   return (
     <div className='w-full flex flex-col pt-12 px-2'>
-        <div className='w-full md:w-1/2 bg-white rounded-md p-5 shadow-md'>
+        <div className='w-full md:w-1/2 bg-white dark:bg-dark shadow-white/50 rounded-md p-5 shadow-md'>
             <h1 className="font-bold text-xl">Services</h1>
             <p className="text-zinc-600 dark:text-zinc-400">Select your file to start training data</p>
 

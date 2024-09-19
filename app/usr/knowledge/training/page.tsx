@@ -161,9 +161,10 @@ export default function TrainingPage() {
             <FilterDatatable statename={statename} />
           </div>
           <div className="w-full md:w-1/2 flex items-center justify-end gap-2">
-            <div className="w-80">
+            <div className="w-fit md:w-80">
               <Select 
                 id="simulation"
+                justIconOnMobile={true}
                 prefixIcon={IconsCollection.chat}
                 name="simulation"
                 onChange={value => state[statename].bulkButton[2].action(value, 1)}

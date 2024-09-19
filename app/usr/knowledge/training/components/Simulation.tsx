@@ -36,9 +36,9 @@ export default function Simulation({ close=false }) {
     <div className="border fixed top-0 left-0 z-50 xl:block w-full xl:min-w-[300px] xl:max-w-[410px] h-screen xl:h-[760px] xl:border-8 border-black xl:z-0 xl:rounded-[20px] bg-white dark:bg-dark dark:border-black mx-auto outline outline-blue-300 shadow-2xl pb-16 xl:relative overflow-hidden">
         <div className="w-full pt-4 pb-8 rounded-b-full flex items-center justify-between bg-blue-100 dark:bg-blue-500 px-2 text-center">
             {
-                close && <button className="absolute top-2 right-2" onClick={() => setState({...state, view: 2, modal: null })}><Icon icon={IconsCollection.close} className="text-xl" /></button>
+                close && <button className="absolute top-2 right-2" onClick={() => setState({...state, simulation: null })}><Icon icon={IconsCollection.close} className="text-xl" /></button>
             }
-            <button className="absolute top-2 right-2 xl:hidden" onClick={() => setState({...state, view: 2, modal: null })}><Icon icon={IconsCollection.close} className="text-xl" /></button>
+            <button className="absolute top-2 right-2 xl:hidden" onClick={() => setState({...state, simulation: null })}><Icon icon={IconsCollection.close} className="text-xl" /></button>
             <div className="w-full">
                 <h1 className="text-xl font-bold font-mono">Chat Simulation AI</h1>
                 <p className="text-sm font-medium text-zinc-600 dark:text-zinc-200">Ask any question our AI will answer!</p>

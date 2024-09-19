@@ -161,7 +161,7 @@ export default function Datatable({
             <h1 className="dark:text-white text-sm xl:text-xs 2xl:text-base">Showing { showing } to { showingTo } of {totalCount} Entries</h1>
             <div className="flex items-center">
                 <h1 className=" dark:text-white text-sm xl:text-xs 2xl:text-base">Display </h1>
-                <select onChange={(e) => handleDisplay(Number(e.target.value))} name="display" id="displaySelect" className="bg-transparent px-2 outline-none">
+                <select value={display} onChange={(e) => handleDisplay(Number(e.target.value))} name="display" id="displaySelect" className="bg-transparent px-2 outline-none">
                     {
                         displayListNumber.map((item, index) => {
                             return (
@@ -238,7 +238,7 @@ export default function Datatable({
                             dataLoop.map((item, key) => {
                                 return (
                                     <tr key={key} className="even:bg-gray-50 border-b dark:border-gray-700 odd:dark:bg-darkPrimary odd:bg-darkPrimary odd:bg-opacity-20 even:dark:bg-darkSecondary">
-                                        <td className="w-4 p-4 text-black text-center">
+                                        <td className="w-4 p-4 text-black dark:text-white text-center">
                                             {key + showing}
                                         </td>
                                         {
@@ -270,7 +270,7 @@ export default function Datatable({
                                         {
                                             bulk && (
                                                 <td className="relative">
-                                                    <Dropdown id={item.id} options={bulk}/>
+                                                    <Dropdown position={(key + 1 == display) ? 'relative':'absolute'} id={item.id} options={bulk}/>
                                                 </td>
                                             )
                                         }

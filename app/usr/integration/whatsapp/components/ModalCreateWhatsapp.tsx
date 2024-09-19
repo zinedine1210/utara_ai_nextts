@@ -97,7 +97,7 @@ export default function ModalCreateWhatsapp({
                 {
                     qr ?
                     <div className="mx-auto text-center">
-                        <h1 className='text-xl font-bold text-zinc-600'>{value}</h1>
+                        <h1 className='text-xl font-bold text-zinc-600 dark:text-white mb-2'>{value}</h1>
                         {/* <button className='text-center text-blue-500 text-sm font-light'>Change Number</button> */}
                         <Image src={qr} alt="WhatsappINtegration" className="mx-auto" width={400} height={400}/>
                         <p className='text-start text-xl font-bold mt-5'>Integration to Whatsapp by QR Code</p>

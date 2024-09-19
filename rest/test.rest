@@ -7,7 +7,7 @@
 @apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
 @ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNkoxUURNNktUN00yRjlXOEU1QjBDVDQiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI1MTIxNTc1fQ.6Bk91aFnXlIILuQbmkIzIpYoe5ytlF_6cnAzkHEe5D8
 @partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUo2SjFWODIzUUZGRVdFMEJQV1ZUMUU3NiIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzI1MTIxNjk5fQ.kS-bq1DKi_1kgkhwsMULxEFBs35F6UQnu6RiNVwIJUI
-@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNktHNDFUQkNGNkNKN1o1U0M5S1lDUVIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI2MTk5NjE1fQ.LRrEG-8onVTm4i-l4o0dsiq8ZJAh9aHtc5ore0V8xCg
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNktHNDFUQkNGNkNKN1o1U0M5S1lDUVIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI2Nzk5MjQ4fQ.c64YfmJYhR0U770mytw1UYzns6eawD4p6VFAJVIwpEw
 @token = {{clientToken}}
 
 
@@ -68,9 +68,9 @@ Accept: {{json}}
 content-type: {{json}}
 
 {
-  "username": "test10",
+  "username": "ziddan",
   "password": "123456",
-  "email": "test10@gmail.com",
+  "email": "ziddan@gmail.com",
   "phone": "62816112233"
 }
 
@@ -657,7 +657,7 @@ curl {{host}}/v1/client/file/ \
   -F "description=Description of the files"
 
 ### find by id
-GET {{host}}/v1/client/file/id/01J6V9YA7DKZ7QFWRHR31K2S82 HTTP/1.1
+GET {{host}}/v1/client/file/id/01J6XKYH133MDDNFNN9493TD91 HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
@@ -726,7 +726,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "id": "01HTK7Z07EE45F8DRMXC2V2JE2",
+  "id": "01J7GF7RYCSTGRRT9N6F1V1E3N",
   "description": "Coba-coba"
 }
 
@@ -736,10 +736,10 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "id": "01HTKF8FTDJ80M47JGFYNDS615",
+  "id": "01J7GF7RYCSTGRRT9N6F1V1E3N",
   "version": "20240506",
   "unanswered": {
-    "channel_id": "628133445501"
+    "channel_id": "089508781380"
   }
 }
 
@@ -796,7 +796,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "id": "01HVG0WEP3ATMFRVCQFGYKCF1M",
+  "id": "01J7J6NR1JZBBZSZEV6X7M07QY",
   "status": "ACTIVE"
 }
 
@@ -809,7 +809,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "channel_id": "081290151589",
+  "channel_id": "089508781380",
   "channel": "WHATAPPS",
   //"question": "what is cognitive search?"
   //"question": "siapa presiden Indonesia ke 10?"
@@ -829,7 +829,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 ### fing by channel_id, channel, subChannel, channelRef
-GET {{host}}/v1/client/chat/by?channel=WHATAPPS HTTP/1.1
+GET {{host}}/v1/client/chat/by HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
@@ -842,7 +842,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "id": "01J6XNQ3KFWXQ9NT79ZK0D7K8V",
+  "id": "01J7GF7RYCSTGRRT9N6F1V1E3N",
   "answer": "LangGraph is a library that provides a high-level abstraction for creating applications that involve multiple actors (such as users, agents, or characters) interacting with each other and with Large Language Models (LLMs). It extends the LangChain library, allowing you to coordinate multiple chains (or actors) across multiple steps of computation in a cyclic manner. Think of it as a tool that helps you build stateful, multi-actor workflows with LLMs."
 }
 
@@ -852,7 +852,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 ### fing by channel_id, channel, subChannel, channelRef
-GET {{host}}/v1/client/unanswered/by?channel_id=628133445501 HTTP/1.1
+GET {{host}}/v1/client/unanswered/by HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
