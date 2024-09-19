@@ -9,7 +9,6 @@ export const tableDial: TableHeader[] = [
 
 
 export const tableTraining: TableHeader[] = [
-    { label: "ID", property: "id", copy:"id", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Description", property: "description", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Version", property: "version", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Training Size", property: "trained_data_size", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
@@ -18,7 +17,6 @@ export const tableTraining: TableHeader[] = [
 ]
 
 export const tableAttachment: TableHeader[] = [
-    { label: "ID", property: "id", copy:"id", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "File Name", copy: "originalfilename", property: "originalfilenamesubstring", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Description", property: "description", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Type", property: "typeFile", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
@@ -27,7 +25,6 @@ export const tableAttachment: TableHeader[] = [
 ]
 
 export const tableServices: TableHeader[] = [
-    { label: "ID", property: "id", copy:"id", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Type", property: "type", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Description", property: "description", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Channel ID", property: "channel_id", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },

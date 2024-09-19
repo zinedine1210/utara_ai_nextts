@@ -134,7 +134,7 @@ export default function TrainingPage() {
   }, [initialMount, state])
 
   const DatatableView = () => {
-    if(windowWidth < 820){
+    if(windowWidth < 820 && windowWidth !== 0){
       return (
         <div className="w-full md:hidden h-full overflow-y-hidden">
           <DatatableMobile statename={statename} />

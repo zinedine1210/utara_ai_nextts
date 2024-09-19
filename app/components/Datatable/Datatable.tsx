@@ -31,19 +31,6 @@ export default function Datatable({
 
     useEffect(() => {},[isLoading])
 
-    const onGet = () => {
-        let filterPayload = []
-        filterPayload.push({
-            key: 'page',
-            value: property.page
-        })
-        filterPayload.push({
-            key: 'size',
-            value: property.display
-        })
-        property.onGet(filterPayload)
-    }
-
     const handleNext = async () => {
         const totalCount = property?.totalCount
         const display = property?.display

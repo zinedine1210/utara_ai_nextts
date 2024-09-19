@@ -103,7 +103,7 @@ export default function CreateTrainPage() {
   }, [initialMount, state])
 
   const DatatableView = () => {
-    if(windowWidth < 820){
+    if(windowWidth < 820 && windowWidth !== 0){
       return (
         <div className="w-full md:hidden h-full flex-1 pb-44">
           <DatatableMobile statename={statename} />
