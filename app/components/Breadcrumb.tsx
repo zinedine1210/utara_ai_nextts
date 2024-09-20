@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function Breadcrumb() {
     const pathname = usePathname()
     const [clientMenus, setClientMenus] = useState<MenusList[]>([])
-    function generateCombinations(input: string): MenusList[] {
+    function generateCombinations(input: string): MenusList[] | null {
         const result: MenusList[] = [];
         if(clientMenus.length > 0){
             const parts = input.split('/');
@@ -18,7 +18,11 @@ export default function Breadcrumb() {
                 if(findIndex == -1){
                     findIndex = clientMenus.findIndex(res => res.id == `clm_${parts.slice(2, 3)}`)
                 }
-                result.push(clientMenus[findIndex])
+                if(clientMenus[findIndex]){
+                    result.push(clientMenus[findIndex])
+                }else{
+                    return null
+                }
             }
         }
         return result;
@@ -35,8 +39,9 @@ export default function Breadcrumb() {
 
     const breadcrumblist: MenusList[] | null = generateCombinations(pathname)
 
-  return (
-        <nav className="flex z-40" aria-label="Breadcrumb">
+    if(breadcrumblist)
+    return (
+        <nav className="flex z-40 py-1.5 md:py-1" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 {
                     breadcrumblist && breadcrumblist.reverse().map((bread: MenusList, index: number) => {
@@ -44,7 +49,7 @@ export default function Breadcrumb() {
                             <li key={index}>
                                 <div className="flex items-center">
                                     {index == 0 ? 
-                                        <Icon icon={bread.icon} className="text-sm md:text-lg"/>
+                                        <Icon icon={bread?.icon} className="text-sm md:text-lg"/>
                                         :
                                         <Icon icon={'material-symbols-light:chevron-right'} className="text-sm md:text-lg"/>
                                     }
@@ -59,5 +64,5 @@ export default function Breadcrumb() {
                 }
             </ol>
         </nav>
-  )
+    )
 }

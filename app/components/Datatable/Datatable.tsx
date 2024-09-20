@@ -149,7 +149,7 @@ export default function Datatable({
         })
     }
 
-    const showing = totalCount > 0 ? (display * page) - display + 1 : 0
+    const showing = totalCount > 0 ? (display * page) - display + 1 : 0 
     const showingTo = display * page > totalCount ? totalCount: display * page
 
     const skeletonLoading = Array.from({ length: Number(display) }, (_, i) => i + 1);

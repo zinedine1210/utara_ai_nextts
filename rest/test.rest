@@ -706,7 +706,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 ### fing by description, status
-GET {{host}}/v1/client/data/by?id=01J7GFZKQBY23MY3H7C7FM879F HTTP/1.1
+GET {{host}}/v1/client/data/by HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
@@ -736,7 +736,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "id": "01J7GF7RYCSTGRRT9N6F1V1E3N",
+  "id": "01J84JBJRC3S8MGE568ZEX86G0",
   "version": "20240506",
   "unanswered": {
     "channel_id": "089508781380"
@@ -809,8 +809,8 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "channel_id": "089508781380",
-  "channel": "WHATAPPS",
+  "channel_id": "+62089508781380",
+  "channel": "WHATSAPP",
   //"question": "what is cognitive search?"
   //"question": "siapa presiden Indonesia ke 10?"
   //"question": "Apakah Anda tahu LangChain?"
@@ -820,16 +820,16 @@ authorization: {{token}}
   //"question": "seperti apa SOP TPTKP?"
   //"question": "apa hotline SATRESNARKOBA?"
   //"question": "apa saja jenis-jenis narkoba?"
-  "question": "apa gejala sakau?"
+  "question": "Etihad Stadium, how much a capacity over of spectators?"
 }
 
 ### find by id
-GET {{host}}/v1/client/chat/id/01HVXKATWG0D178HP5Z68EZPJ7 HTTP/1.1
+GET {{host}}/v1/client/chat/id/01J84JBJRC3S8MGE568ZEX86G0 HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
 ### fing by channel_id, channel, subChannel, channelRef
-GET {{host}}/v1/client/chat/by HTTP/1.1
+GET {{host}}/v1/client/chat/by?channel_id=+62089508781380 HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
@@ -842,12 +842,12 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "id": "01J7GF7RYCSTGRRT9N6F1V1E3N",
+  "id": "01J84JBJRC3S8MGE568ZEX86G0",
   "answer": "LangGraph is a library that provides a high-level abstraction for creating applications that involve multiple actors (such as users, agents, or characters) interacting with each other and with Large Language Models (LLMs). It extends the LangChain library, allowing you to coordinate multiple chains (or actors) across multiple steps of computation in a cyclic manner. Think of it as a tool that helps you build stateful, multi-actor workflows with LLMs."
 }
 
 ### find by id
-GET {{host}}/v1/client/unanswered/id/01HWCNAXWQHDZ5ZW92P0PV159J HTTP/1.1
+GET {{host}}/v1/client/unanswered/id/01J84JBJRC3S8MGE568ZEX86G0 HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 

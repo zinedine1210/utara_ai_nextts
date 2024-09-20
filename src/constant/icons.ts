@@ -12,5 +12,8 @@ export const IconsCollection: {[key: string]: string} = {
     'save': 'fluent:save-multiple-16-regular',
     'training': 'material-symbols-light:model-training',
     'chat': 'lets-icons:chat',
-    'service': 'eos-icons:service-outlined'
+    'service': 'eos-icons:service-outlined',
+    'addressbook': 'ph:address-book',
+    'elipsis-v': 'fe:elipsis-v',
+    'send': 'teenyicons:send-outline'
 }
