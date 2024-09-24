@@ -47,10 +47,6 @@ export default function MainChat({
             {
                 key: "channel",
                 value: "WHATSAPP"
-            },
-            {
-                key: 'question',
-                value: ''
             }
         ]
         setPayload(initPayload)
@@ -61,9 +57,20 @@ export default function MainChat({
     }, [roomId, setState])
 
     useEffect(() => {
+        const intervalId = setInterval(() => {
+            // getAllChat()
+            console.log("jaksjaksjaks")
+        }, 10000);
+        
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [getAllChat])
+
+    useEffect(() => {
         getAllChat()
         ScrollOnTop("auto")
-      }, [getAllChat])
+    }, [getAllChat])
     
     const ScrollOnTop = (viewType: ScrollBehavior) => {
         containerRef.current?.scrollIntoView({ behavior: viewType });
@@ -102,8 +109,10 @@ export default function MainChat({
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         const payloadObj: FilterOptions[] = payload
-        const result = await postChat(payloadObj)
-        console.log(result)
+        payloadObj.push({ key: 'question', value: text })
+        await postChat(payloadObj)
+        getAllChat()
+        setText("")
     }
 
   return (
