@@ -1,6 +1,6 @@
 'use client'
 import { postChannel } from "@@/src/hooks/CollectionAPI"
-import { checkSessionWhatsapp } from "@@/src/hooks/WhatsappCollection"
+import { checkSessionWhatsapp, deleteWhatsapp } from "@@/src/hooks/WhatsappCollection"
 import { useGlobalContext } from "@@/src/providers/GlobalContext"
 import { Icon } from "@iconify/react/dist/iconify.js"
 import { useCallback, useEffect, useState } from "react"
@@ -29,6 +29,7 @@ export default function CardWhatsapp({ id }: { id: string }) {
   const handleDelete = async () => {
     let array = state['profile']['whatsapp']
     array = array.filter((res: string) => res !== id)
+    await deleteWhatsapp(id)
     const result = await postChannel(array, 'whatsapp')
     const valueModel = new ProfileModel(result.data)
     setState({ ...state, profile: valueModel })

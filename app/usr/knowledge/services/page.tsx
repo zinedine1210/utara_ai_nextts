@@ -140,7 +140,7 @@ export default function ServicesPage() {
   }
 
   return (
-    <div className="w-full h-full overflow-hidden flex flex-col pt-10">
+    <div className="w-full h-full overflow-hidden flex flex-col">
       <div className="p-5">
           <h1 className="font-bold text-xl">Services</h1>
           <p className="text-zinc-600 dark:text-zinc-400">Select your file to start training data</p>

@@ -7,7 +7,7 @@
 @apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
 @ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNkoxUURNNktUN00yRjlXOEU1QjBDVDQiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI1MTIxNTc1fQ.6Bk91aFnXlIILuQbmkIzIpYoe5ytlF_6cnAzkHEe5D8
 @partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUo2SjFWODIzUUZGRVdFMEJQV1ZUMUU3NiIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzI1MTIxNjk5fQ.kS-bq1DKi_1kgkhwsMULxEFBs35F6UQnu6RiNVwIJUI
-@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNktHNDFUQkNGNkNKN1o1U0M5S1lDUVIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI2Nzk5MjQ4fQ.c64YfmJYhR0U770mytw1UYzns6eawD4p6VFAJVIwpEw
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNktHNDFUQkNGNkNKN1o1U0M5S1lDUVIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI3MjQ3NTYwfQ.yxuQa7RlgqGuVjKvozyS24z3sVi3d5OG2szn2cmBXa0
 @token = {{clientToken}}
 
 
@@ -809,7 +809,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "channel_id": "+62089508781380",
+  "channel_id": "6289508781380",
   "channel": "WHATSAPP",
   //"question": "what is cognitive search?"
   //"question": "siapa presiden Indonesia ke 10?"
@@ -818,9 +818,9 @@ authorization: {{token}}
   //"question": "Bagaimana penanganan perkara di harda?"
   //"question": "Apa persyaratan buat SIM?"
   //"question": "seperti apa SOP TPTKP?"
-  //"question": "apa hotline SATRESNARKOBA?"
+  "question": "apa hotline SATRESNARKOBA?"
   //"question": "apa saja jenis-jenis narkoba?"
-  "question": "Etihad Stadium, how much a capacity over of spectators?"
+  //"question": "Etihad Stadium, how much a capacity over of spectators?"
 }
 
 ### find by id
@@ -829,7 +829,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 ### fing by channel_id, channel, subChannel, channelRef
-GET {{host}}/v1/client/chat/by?channel_id=+62089508781380 HTTP/1.1
+GET {{host}}/v1/client/chat/by?channel_id=6289508781380 HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
@@ -842,7 +842,7 @@ content-type: {{json}}
 authorization: {{token}}
 
 {
-  "id": "01J84JBJRC3S8MGE568ZEX86G0",
+  "id": "01J8HE2EKN86SDC1BJSDH3FM0B",
   "answer": "LangGraph is a library that provides a high-level abstraction for creating applications that involve multiple actors (such as users, agents, or characters) interacting with each other and with Large Language Models (LLMs). It extends the LangChain library, allowing you to coordinate multiple chains (or actors) across multiple steps of computation in a cyclic manner. Think of it as a tool that helps you build stateful, multi-actor workflows with LLMs."
 }
 

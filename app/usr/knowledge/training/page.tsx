@@ -151,7 +151,7 @@ export default function TrainingPage() {
   
 
   return (
-    <div className="w-full h-full overflow-hidden flex flex-col pt-10">
+    <div className="w-full h-full overflow-hidden flex flex-col">
       <div className="p-5">
         <h1 className="font-bold text-xl">Knowledge Base</h1>
         <p className="text-zinc-600 dark:text-zinc-400">Your AI understands many topics, but you can add specific knowledge about your company or products to supplement it.</p>

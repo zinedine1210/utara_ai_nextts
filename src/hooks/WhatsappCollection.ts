@@ -13,3 +13,8 @@ export const checkSessionWhatsapp = async (nameId: string) => {
     const result = await axios.get(`${baseWhatsappURL}/sessions/status/${nameId}`)
     return result.data
 }
+
+export const deleteWhatsapp = async (nameId: string) => {
+    const result = await axios.delete(`${baseWhatsappURL}/sessions/delete/${nameId}`)
+    return result.data
+}

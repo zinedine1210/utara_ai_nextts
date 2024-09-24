@@ -27,7 +27,7 @@ export default function ModalCreateWhatsapp({
     const handleSubmit = useCallback(async (e?: FormEvent) => {
         e?.preventDefault()
         if(!value) return Notify("Please fill whatsapp number", 'error')
-        const valueFinal: string = dialvalue + value
+        const valueFinal: string = dialvalue.split("+")[1] + value
         setValue(valueFinal)
         const result = await createSessionWhatsapp(valueFinal)
         if(result.success){

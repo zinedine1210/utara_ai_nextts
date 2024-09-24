@@ -1,5 +1,7 @@
 import React from 'react'
 import MainChat from '../components/MainChat'
+import { Icon } from '@iconify/react/dist/iconify.js'
+import { IconsCollection } from '@@/src/constant/icons'
 
 export default function ChatLayout({
     children,
@@ -15,7 +17,9 @@ export default function ChatLayout({
           {
             params.roomId == 'all' ? (
               <div className='flex items-center justify-center w-full h-full'>
-                Chat Not Found
+                <div className='mx-auto text-center'>
+                  <Icon icon={IconsCollection.chat} className='text-[500px] text-zinc-400/30'/>
+                </div>
               </div>
             ):
             <MainChat roomId={params.roomId} />

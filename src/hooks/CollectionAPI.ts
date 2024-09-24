@@ -178,3 +178,23 @@ export const getDialOptions = async () => {
     }
     return responseData
 }
+
+// CHAT
+export const getChat = async (filter: FilterOptions[]) => {
+    const result = await axios.post(`${baseURL}/data/chat`, filter ?? [])
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+export const postChat = async (payload: FilterOptions[]) => {
+    const result = await axios.post(`${baseURL}/data/chat/create`, payload ?? [])
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}

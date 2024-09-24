@@ -135,7 +135,7 @@ export default function AttachmentPage() {
   
 
   return (
-    <div className="w-full h-full overflow-hidden flex flex-col pt-10">
+    <div className="w-full h-full overflow-hidden flex flex-col">
       <div className="p-5">
         <h1 className="font-bold text-xl">Attachment</h1>
         <p className="text-zinc-600 dark:text-zinc-400">Input your file business here to create knowledge</p>

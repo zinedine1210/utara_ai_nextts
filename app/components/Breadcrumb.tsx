@@ -39,7 +39,7 @@ export default function Breadcrumb() {
 
     const breadcrumblist: MenusList[] | null = generateCombinations(pathname)
 
-    if(breadcrumblist)
+    if(breadcrumblist && breadcrumblist.length > 2)
     return (
         <nav className="flex z-40 py-1.5 md:py-1" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">

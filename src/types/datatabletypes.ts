@@ -26,7 +26,19 @@ export interface TrainingType {
     mod_by: string | null
     mod_date: string | null
 }
-
+export type ChatType = {
+    answered: string
+    answered_date: string
+    channel: string
+    channel_id: string
+    channelref: null | string
+    id: string
+    question: string
+    question_date: string
+    service_id: string
+    subchannel: null | string
+    token: number
+}
 export type WhatsappList = {
     name: string,
     number: number

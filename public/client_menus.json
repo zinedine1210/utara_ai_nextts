@@ -175,18 +175,16 @@
   {
     "description": "",
     "feature": "",
-    "icon": "",
-    "iconColor": "#22c55e",
-    "parent": "clm_integration",
+    "icon": "lets-icons:chat",
+    "parent": "",
     "sortnumber": 206,
-    "id": "clm_integration_gnusachat",
-    "route": "/usr/integration/gnusachat",
-    "name": "Gnusa Chat",
-    "flag": "channel integration",
-    "show": false
+    "id": "clm_chat",
+    "route": "/usr/chat/all",
+    "name": "Chat",
+    "flag": "Chat",
+    "show": true
   },
   {
-    "description": "",
     "feature": "",
     "icon": "",
     "parent": "",
