@@ -16,7 +16,7 @@ export default function ChatLayout({
           {children}
           {
             params.roomId == 'all' ? (
-              <div className='flex items-center justify-center w-full h-full'>
+              <div className={`md:flex hidden items-center justify-center w-full h-full`}>
                 <div className='mx-auto text-center'>
                   <Icon icon={IconsCollection.chat} className='text-[500px] text-zinc-400/30'/>
                 </div>

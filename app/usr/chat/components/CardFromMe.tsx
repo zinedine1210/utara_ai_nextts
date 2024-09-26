@@ -35,8 +35,8 @@ export default function CardFromMe({ data }: { data: ChatModel }) {
   return (
     <div className="w-full flex">
         <div className="flex items-start gap-2.5 ml-auto">
-            <Dropdown options={optionsChat} id={'dropdown'+data.getId()}/>
-            <div className={`pt-3 pb-7 px-3 rounded-s-lg rounded-ee-lg bg-teal-500 text-white relative shadow-xl max-w-[500px] w-full min-w-72`}>
+            <Dropdown options={optionsChat} position="md:right-0 left-0" id={'dropdown'+data.getId()}/>
+            <div className={`pt-3 pb-7 px-3 rounded-s-lg rounded-ee-lg bg-teal-500 text-white relative shadow-xl max-w-[500px] w-full min-w-56`}>
                 <p className="text-sm font-normal py-1.5 dark:text-white">{data.getQuestion()}</p>
                 <div className="absolute bottom-1 right-2 flex items-center gap-2">
                     <div className={`flex items-center`}>

@@ -10,6 +10,7 @@ import { ChatModel } from "../lib/model";
 import Loading from "@@/app/loading";
 import InputText from "@@/app/components/Input/InputText";
 import { FilterOptions } from "@@/src/types/types";
+import Link from "next/link";
 
 export default function MainChat({
     roomId
@@ -19,6 +20,7 @@ export default function MainChat({
     const { state, setState } = useGlobalContext()
     const [text, setText] = useState<string>("")
     const [payload, setPayload] = useState<FilterOptions[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
 
     const containerRef = useRef<null | HTMLDivElement>(null)
     const groupByDay = (data: ChatModel[]) => {
@@ -108,26 +110,32 @@ export default function MainChat({
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
+        setLoading(true)
         const payloadObj: FilterOptions[] = payload
         payloadObj.push({ key: 'question', value: text })
         await postChat(payloadObj)
         getAllChat()
         setText("")
+        ScrollOnTop("smooth")
+        setLoading(false)
     }
 
   return (
-    <div className="w-full flex flex-col">
-        <header className="w-full bg-white py-5 px-5 border-b shadow-md border-zinc-200">
-            <h1 className="font-bold text-primary">{roomId}</h1>
+    <div className={`${roomId == 'all' ? "hidden":""} w-full flex flex-col`}>
+        <header className="w-full bg-white dark:bg-dark py-3 md:py-4 px-5 border-b shadow-md dark:border-zinc-200/30 border-zinc-200 flex items-center gap-5">
+            <Link href={`/usr/chat/all`}>
+                <button type="button"><Icon icon={IconsCollection['addressbook']} className="dark:text-white text-primary text-xl md:hidden"/></button>
+            </Link>
+            <h1 className="font-bold dark:text-white text-primary text-base md:text-lg">{roomId}</h1>
         </header>
-        <div className="mx-auto flex-1 h-full overflow-y-auto space-y-4 w-3/4 py-5 no-scrollbar">
-            <div className="px-10">
+        <div className="mx-auto flex-1 h-full overflow-y-auto space-y-4 w-full md:w-3/4 py-5 no-scrollbar">
+            <div className="px-5 md:px-10">
                 {mountAllChat()}
             </div>
             <div ref={containerRef}></div>
         </div>
-        <form onSubmit={(e) => handleSubmit(e)} className="pb-5 px-10">
-            <div className="bg-white shadow-xl rounded-2xl w-3/4 mx-auto px-5 pb-2 pt-3">
+        <form onSubmit={(e) => handleSubmit(e)} className="pb-5 px-5 md:px-10">
+            <div className="bg-white dark:bg-darkSecondary shadow-xl rounded-2xl w-full md:w-3/4 mx-auto px-5 pb-2 pt-3">
                 <div className="flex items-center gap-2">
                     <button type="button" className="w-10 h-10 rounded-full hover:bg-blue-200 hover:rotate-180 transition-all ease-in-out duration-300 flex items-center justify-center">
                         <Icon icon={IconsCollection.plus} className="text-3xl "/>
@@ -135,14 +143,12 @@ export default function MainChat({
                     <div className="w-full relative">
                         <InputText 
                             value={text}
+                            disabled={loading}
                             onChange={(value: string) => setText(value)}
                             id="inputtextchat"
                             name="inputtextchat"
                             placeholder="Type something and enter to send"
                         />
-                        {/* <button className="absolute top-1/2 -translate-y-1/2 right-0 w-16 flex items-center justify-center duration-300 ease-out peer-focus:visible peer-focus:opacity-100 opacity-0 peer-focus:rotate-45 invisible transition-all" type="submit">
-                            <Icon icon={IconsCollection.send} className="text-blue-500 text-2xl duration-300 hover:text-teal-500"/>
-                        </button> */}
                     </div>
                 </div>
             </div>

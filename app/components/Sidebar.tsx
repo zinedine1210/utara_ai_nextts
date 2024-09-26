@@ -120,6 +120,7 @@ export default function Sidebar() {
                             <div className={`${splitActive == menu.id ? "max-h-screen duration-500":"max-h-0 duration-200"} px-5 ease-in-out transition-all overflow-hidden border-l border-dotted border-primary ml-8`}>
                               {
                                 childMenu && childMenu.map((item: MenusList, key1: number) => {
+                                  if(item.show)
                                   return (
                                     <Link href={item.route} key={key1}>
                                       <button className={`${item.id == isActive ? 'text-primary font-bold':'hover:text-primary'} py-3 gap-2 text-start w-full text-sm flex items-center`}>

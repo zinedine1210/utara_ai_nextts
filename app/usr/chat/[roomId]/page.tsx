@@ -61,12 +61,12 @@ export default function PanelListChat({
   }, [])
 
   return (
-    <div className='w-1/4 h-full flex flex-col bg-white'>
+    <div className={`${params.roomId == "all" ? "w-full":"hidden md:flex"} md:w-1/4 h-full flex-col bg-white dark:bg-dark`}>
       <header className="w-full shadow-md px-2 py-2.5">
         <div className="w-full flex items-center justify-between mb-5">
             <div className="flex items-center gap-2">
-                <span className='w-11 h-11 shadow-md rounded-full flex items-center justify-center text-white font-bold text-xl uppercase bg-gradient-to-br from-blue-600 to-blue-200'>
-                    {state?.profile?.name.charAt(2)}
+                <span className='w-11 h-11 shadow-md rounded-full flex items-center justify-center text-white font-bold text-xl uppercase bg-gradient-to-br from-primary to-primary/60'>
+                    {state?.profile?.name.charAt(0)}
                 </span>
                 <div>
                   <h1 className="font-bold">Hallo, {state?.profile?.name.substring(0, 10)}</h1>
