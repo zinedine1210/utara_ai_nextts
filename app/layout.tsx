@@ -7,6 +7,7 @@ import "@@/src/utils/script"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NextThemes } from '@@/src/providers/NextThemes';
+import Script from 'next/script';
 
 const APP_NAME = "Polres Utara AI";
 const APP_DEFAULT_TITLE = "Polres Jakarta Utara AI";
@@ -88,7 +89,7 @@ export const viewport: Viewport = {
 };
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params
 }: {
@@ -97,6 +98,7 @@ export default function RootLayout({
     lang: string
   }
 }) {
+
   return (
       <html lang="en">
         <body>

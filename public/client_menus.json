@@ -14,6 +14,18 @@
   {
     "description": "",
     "feature": "",
+    "icon": "solar:wallet-money-bold-duotone",
+    "parent": "",
+    "sortnumber": 90,
+    "id": "clm_topup",
+    "route": "/usr/top-up",
+    "name": "Top Up",
+    "flag": "content",
+    "show": true
+  },
+  {
+    "description": "",
+    "feature": "",
     "icon": "carbon:ibm-watson-knowledge-studio",
     "parent": "",
     "sortnumber": 30,

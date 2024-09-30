@@ -20,5 +20,6 @@ export const IconsCollection: {[key: string]: string} = {
     'share': 'material-symbols-light:share',
     'forward': 'material-symbols:forward',
     'check': 'ph:check-bold',
-    'plus': 'oui:plus'
+    'plus': 'oui:plus',
+    'money': 'solar:wallet-money-bold-duotone'
 }
