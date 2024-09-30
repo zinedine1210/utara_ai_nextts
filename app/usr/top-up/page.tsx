@@ -113,7 +113,7 @@ const TopupPage = () => {
             <div className="p-5">
                 <h1 className="font-bold text-xl text-primary">Top Up GAI Token</h1>
                 <form onSubmit={(e: FormEvent) => checkout(e)} className="mt-5 space-y-5">
-                    <div className="bg-zinc-200 p-5 rounded-md">
+                    <div className="bg-zinc-200 dark:bg-darkSecondary p-5 rounded-md">
                         <h1 className="font-semibold mb-2 text-sm">Nominal Top Up</h1>
                         <InputText 
                             value={formattedNominalValue}
