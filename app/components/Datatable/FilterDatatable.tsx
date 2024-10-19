@@ -80,7 +80,7 @@ export default function FilterDatatable({
               onChange={value => handleFilter(value, fil.value)}
               placeholder={`Filter by ${fil.label}`}
               // prefixIcon="cil:search"
-              type="search"
+              type="text"
             />
           )
         }
@@ -96,6 +96,22 @@ export default function FilterDatatable({
               placeholder={`Select by ${fil.label}`}
               options={fil.options ?? []}
             />
+          )
+        }
+        if(fil.type == "input_date") {
+          return (
+            <div>
+              <p className="text-sm font-semibold mb-1">{fil.label}</p>
+              <InputText
+                key={index}
+                id={fil.value}
+                name={fil.value}
+                value={value}
+                onChange={value => handleFilter(value, fil.value)}
+                // prefixIcon="cil:search"
+                type="date"
+              />
+            </div>
           )
         }
       })

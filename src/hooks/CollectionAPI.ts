@@ -117,6 +117,40 @@ export const getAttachment = async (filter: FilterOptions[]) => {
     return responseData
 }
 
+export const getHistoryTopUp = async (filter: FilterOptions[]) => {
+    function restructureDateRange(filter: FilterOptions[]){
+        const startFind: undefined | FilterOptions = filter.find(res => res.key == "start_date")
+        const endFind: undefined | FilterOptions = filter.find(res => res.key == "end_date")
+        const finalPayload: FilterOptions[] = filter.filter(res => {
+            if(res.key == "start_date" || res.key == "end_date") return false
+            return true
+        })
+        if(!startFind || !endFind){
+            return finalPayload
+        }else{
+            finalPayload.push({
+                key: "trans_date",
+                value: {
+                    start_date: startFind.value,
+                    end_date: endFind.value
+                }
+            })
+            return finalPayload
+        }
+    }
+    const daterangefilter = restructureDateRange(filter)
+    console.log(daterangefilter)
+    const result = await axios.post(`${baseURL}/data/topup`, daterangefilter ?? [])
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+
+
 export const getProfile = async () => {
     const result = await axios.get(`${baseURL}/auth/profile`)
     const responseData = result.data

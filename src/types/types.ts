@@ -18,7 +18,7 @@ export interface MenusList {
 export interface FilterKey {
     value: string
     label: string
-    type: 'input_text' | 'select'
+    type: 'input_text' | 'select' | 'input_date'
     options?: Options[]
 }
 

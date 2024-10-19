@@ -83,3 +83,34 @@ export interface ServicesType {
     mod_by: null | string,
     mod_date: null | string
 }
+
+export interface TopUpType {
+    id: string
+    org_id: string
+    parent_id: string
+    rec_name: string
+    trans_date: Date
+    trans_id: string
+    currency: "IDR" | "THB"
+    amount: number
+    voucher_code: string
+    discount: null | string
+    discount_type: null | string
+    discount_value: null | string
+    total_amount: number
+    provider: null | string
+    provider_trans_id: string
+    payment_method: null | string
+    payment_provider: null | string
+    bank_id: null | string
+    bank_acc: null | string
+    bank_va_acc: null | string
+    paid_date: null | Date
+    expire_date: null | Date
+    status: string
+    rec_by: string
+    rec_date: string
+    mod_by: null | string
+    mod_date: null | Date
+    origin_response: null | string
+}

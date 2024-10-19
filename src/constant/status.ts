@@ -23,6 +23,13 @@ export const channelType = {
     'WHATAPPS': '#22c55e'
 }
 
+export const topUpStatus = {
+    'INITIALIZE': '#3b82f6',
+    'PENDING': '#f97316',
+    'SETTLE': '#10b981',
+    'CANCEL': '#ef4444'
+}
+
 export const serviceTemplateType = {
     'QNA': '#ff00bf',
     'EVENT': '#fcba03',

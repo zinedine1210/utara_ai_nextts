@@ -1,5 +1,5 @@
 import { TableHeader } from "@@/src/types/types"
-import { channelType, trainingColorStatus, trainingStatus } from "./status"
+import { channelType, topUpStatus, trainingColorStatus, trainingStatus } from "./status"
 
 export const tableDial: TableHeader[] = [
     { label: "CODE", property: "code", sort: "code", copy:"code", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
@@ -31,6 +31,17 @@ export const tableServices: TableHeader[] = [
     { label: "Channel", property: "channel", status: channelType, cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Status", property: "status", status: trainingStatus, cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Date", property: "createdAt", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" }
+]
+export const tableTopUp: TableHeader[] = [
+    { label: "Name", property: "recName", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Status", property: "status", status: topUpStatus, cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Currency", property: "currency", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Amount", property: "amountFormat", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Total Amount", property: "totalAmountFormat", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Voucher Code", property: "voucherCode", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Create At", property: "createAt", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Rec Date", property: "recDate", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "Trans Date", property: "transDate", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
 ]
 
 
