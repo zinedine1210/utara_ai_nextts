@@ -1,5 +1,6 @@
 import { useGlobalContext } from "@@/src/providers/GlobalContext"
 import { TopUpModel } from "../lib/model"
+import { topUpStatus } from "@@/src/constant/status"
 
 export default function CardTopUp({
     data,
@@ -36,10 +37,36 @@ export default function CardTopUp({
     }
 }
   return (
-    <div className="w-full bg-white dark:bg-darkSecondary shadow-md p-3 rounded-md">
-      <p>{data.recName}</p>
-      <p>{data.amountFormat}</p>
-      <p>{data.totalAmountFormat}</p>
+    <div className="w-full bg-white dark:bg-darkSecondary shadow-md py-2 px-3 rounded-md">
+      <div className="flex items-center justify-between">
+        <p className="font-bold text-sm">{data.recName}</p>
+        <div style={{backgroundColor:`${topUpStatus[data.status]}`}} className={`text-center rounded-full text-xs py-1.5 px-4 w-fit text-white`}>
+          <p className="text-xs font-bold">{ data.status }</p>
+        </div>
+      </div>
+      <div className="border-t mt-2 py-2 space-y-1">
+        <div className="flex items-center justify-between">
+          <p className="font-bold text-sm">Payment Method</p>
+          <p className="text-zinc-500">{data.paymentMethod}</p>
+        </div>
+        <div className="flex items-center justify-between">
+          <p className="font-bold text-sm">Voucher Code</p>
+          <p className="text-zinc-500">{data?.voucherCode}</p>
+        </div>
+        <div className="flex items-center justify-between">
+          <p className="font-bold text-sm">Amount</p>
+          <p className="text-zinc-500">{data.currency} {data.amountFormat}</p>
+        </div>
+        <div className="flex items-center justify-between">
+          <p className="font-bold text-sm">Total Amount</p>
+          <p className="text-zinc-500">{data.currency} {data.totalAmountFormat}</p>
+        </div>
+
+        <div className="border-t pt-2 text-sm flex items-center justify-between">
+          <p></p>
+          <p className="">{data.createAt}</p>
+        </div>
+      </div>
     </div>
   )
 }
