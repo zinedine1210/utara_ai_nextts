@@ -8,8 +8,16 @@ export async function POST(request: NextRequest) {
   const payload = await request.json() ?? []
   let parameter = `?`
   payload.map((fil: FilterOptions, index: number) => {
-      const isEnd = index + 1 == payload.length ? '':'&'
-      parameter = parameter + `${fil.key}=${fil.value}${isEnd}`
+    let value = fil.value;
+
+    // Jika fil.key adalah 'trans_date' dan fil.value adalah object
+    if (fil.key === 'trans_date' && typeof fil.value === 'object') {
+      // Encode JSON object ke dalam string dan URL encode
+      value = encodeURIComponent(JSON.stringify(fil.value));
+    }
+
+    const isEnd = index + 1 == payload.length ? '' : '&'
+    parameter = parameter + `${fil.key}=${value}${isEnd}`
   })
   let timeoutId;
   const timoutInterval = 60000;

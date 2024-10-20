@@ -195,7 +195,7 @@ export default function Datatable({
                             headers && headers.map((head, key) => {
                                 if(head.sort)
                                 return (
-                                    <th scope="col" key={key} className="px-3 xl:px-3 2xl:px-5 py-2.5 xl:py-3 2xl:py-4 group text-sm xl:text-xs 2xl:text-sm">
+                                    <th scope="col" key={key} className="whitespace-nowrap px-3 xl:px-3 2xl:px-5 py-2.5 xl:py-3 2xl:py-4 group text-sm xl:text-xs 2xl:text-sm">
                                         <div className="flex items-center gap-2 ">
                                             {head.label}
                                             <button onClick={() => handleSort(head.sort)} className={`${columns.find((res: any) => res.data == head.sort) ? "bg-blue-200 rounded-full w-6 h-6 flex items-center justify-center visible opacity-100 dark:text-black" : "dark:text-white opacity-0 invisible"} group-hover:visible duration-300 group-hover:opacity-100`}>
@@ -208,7 +208,7 @@ export default function Datatable({
                                 )
 
                                 return (
-                                    <th key={key} scope="col" className={`px-5 py-4 text-sm xl:text-xs 2xl:text-sm ${head.cssHead}`}>
+                                    <th key={key} scope="col" className={`whitespace-nowrap px-5 py-4 text-sm xl:text-xs 2xl:text-sm ${head.cssHead}`}>
                                         {head.label}
                                     </th>
                                 )
@@ -216,7 +216,7 @@ export default function Datatable({
                         }
                         {
                             (bulk || bulkButton) && (
-                                <th className={`px-5 py-4 text-sm xl:text-xs 2xl:text-sm`}>
+                                <th className={`px-5 py-4 text-sm xl:text-xs 2xl:text-sm whitespace-nowrap`}>
                                     Bulk Action
                                 </th>
                             )
@@ -270,7 +270,7 @@ export default function Datatable({
                                         {
                                             bulk && (
                                                 <td className="relative">
-                                                    <Dropdown position={(key + 1 == display) ? 'relative':'absolute'} id={item.id} options={bulk}/>
+                                                    <Dropdown position={`right-0 ${(key + 1 == display) ? 'relative':'absolute'}`} id={item.id} options={bulk}/>
                                                 </td>
                                             )
                                         }
