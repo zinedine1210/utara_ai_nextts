@@ -100,7 +100,7 @@ export default function FilterDatatable({
         }
         if(fil.type == "input_date") {
           return (
-            <div>
+            <div key={index}>
               <p className="text-sm font-semibold mb-1">{fil.label}</p>
               <InputText
                 key={index}

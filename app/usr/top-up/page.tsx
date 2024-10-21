@@ -6,11 +6,16 @@ import { Options } from "@@/src/types/types";
 import { Notify } from "@@/src/utils/script";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
 import { useEffect } from 'react';
-import HistoryTopUp from "./components/HistoryTopUp";
+import HistoryTopUp from "./components/ModalHistoryTopUp";
+import ModalHistoryTopUp from "./components/ModalHistoryTopUp";
+import { useGlobalContext } from "@@/src/providers/GlobalContext";
+import { useRouter } from "next/navigation";
 
 const TopupPage = ({ params, searchParams }) => {
+    const { setState, state } = useGlobalContext()
+    const modalName: string = "modalhistorytopup"
     const [tokenValue, setTokenValue] = useState('');
     const [nominalValue, setNominalValue] = useState('');
     const [voucher, setVoucher] = useState<string>('')
@@ -27,13 +32,13 @@ const TopupPage = ({ params, searchParams }) => {
         script.setAttribute('data-client-key', process.env.NEXT_PUBLIC_MIDTRANS_CLIENT!);
         script.async = true;
         document.body.appendChild(script);
-        
+        setState((prev: any) => ({ ...prev, modal: { name: modalName }}))
         return () => {
             if(script){
                 document.body.removeChild(script) // hapus script jika sudah digunakan
             }
         }
-    }, []);
+    }, [setState]);
 
     const formatter = new Intl.NumberFormat('id-ID', {
         style: 'currency',
@@ -127,7 +132,7 @@ const TopupPage = ({ params, searchParams }) => {
             value: 'adlJAJS8ja71'
         },
     ]
-
+    
     return (
         <div className="w-full h-full overflow-hidden">
             <div className="p-5 space-x-5 flex">
@@ -233,12 +238,10 @@ const TopupPage = ({ params, searchParams }) => {
                         </div>
                     </form>
                 </div>
-                {
-                    tab == 'history' && (
-                        <HistoryTopUp tabHistory={tabHistory}/>
-                    )
-                }
             </div>
+            {
+                tab == "history" && <ModalHistoryTopUp tabHistory={tabHistory} modalName={modalName} />
+            }
         </div>
     );
 }
