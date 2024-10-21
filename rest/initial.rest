@@ -9,7 +9,7 @@
 @apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
 @ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNTJRRTM2UlgzUUtGRzNZWjU0WEpXQjIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI0Mzk2MjE2fQ.NOqfW3Ljg80ZvQuoZwHtFY2gVsMjHYvgNXneAq-AbiA
 @partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUoyWllYTjJSWVlHSzc2TlNCUTJSV0owMiIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzIxNDMzNTAyfQ.yomnaf9KczdgQEf7qBe4z3LU38uyZr4VO7kNOZxy7rU
-@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKNTJTWVZYRVQwSjZDS0JQVk05Wlo1M0oiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI1MDczOTUyfQ.bdkvi66xZ_f1o3Fb-dezAQYtxae1VS-5IC0PPlLegeM
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKOTE2NE1GRDZTUE5CRFRXQzlKRTlWWlIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI5MTQ1Mzg3fQ.pAzvNVLOAbiAdiRsdAGbRJRzjtCmDG-dOXywr2FGn2E
 @token = {{clientToken}}
 
 
@@ -942,11 +942,13 @@ GET {{host}}/v3/api-docs/lms-doc HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
+### Partner API Topup ###
+### get all topup
+# url encoded trans_date = {"start_date": "2023-01-01", "end_date": "2023-12-31"}
+GET {{host}}/v1/client/topup/by?page=1&size=10&&trans_date=%7B%22start_date%22%3A%20%222024-01-01%22%2C%20%22end_date%22%3A%20%222024-12-31%22%7D HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
 
-
-
-
-
-
-
+### End Partner API Topup ###
 

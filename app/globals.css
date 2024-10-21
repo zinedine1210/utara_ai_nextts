@@ -41,7 +41,7 @@ a {
 		@apply w-full duration-300 text-start
 	}
 	.btn-primary {
-		@apply flex items-center justify-center px-3 xl:px-3 py-2.5 md:text-sm text-xs tracking-wide text-white transition-colors duration-200 bg-primary/80 rounded-lg gap-x-2 hover:bg-primary dark:hover:bg-primary/80 dark:bg-primary dark:disabled:bg-black disabled:bg-zinc-500 disabled:cursor-not-allowed;
+		@apply flex items-center justify-center px-3 xl:px-5 py-2.5 md:text-sm text-xs tracking-wide text-white transition-colors duration-200 bg-primary/80 rounded-lg gap-x-2 hover:bg-primary dark:hover:bg-primary/80 dark:bg-primary dark:disabled:bg-black disabled:bg-zinc-500 disabled:cursor-not-allowed;
 	}
 
 	.btn-secondary {
