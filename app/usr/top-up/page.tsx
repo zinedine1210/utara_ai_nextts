@@ -1,17 +1,23 @@
 "use client"
 import InputText from "@@/app/components/Input/InputText";
+import Select from "@@/app/components/Input/Select";
 import { IconsCollection } from "@@/src/constant/icons";
+import { Options } from "@@/src/types/types";
 import { Notify } from "@@/src/utils/script";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useEffect } from 'react';
+import HistoryTopUp from "./components/HistoryTopUp";
 
-const TopupPage = () => {
+const TopupPage = ({ params, searchParams }) => {
     const [tokenValue, setTokenValue] = useState('');
     const [nominalValue, setNominalValue] = useState('');
+    const [voucher, setVoucher] = useState<string>('')
     const [isTyping, setIsTyping] = useState(false);
     const [loading, setLoading] = useState<boolean>(false)
-
+    const tab: string | null = searchParams?.tab
+    const tabHistory: string | null = searchParams?.tabHistory
 
     useEffect(() => {
         // Load Snap.js script secara dinamis
@@ -107,84 +113,131 @@ const TopupPage = () => {
         setLoading(false)
     };
 
+    const optionsVoucher: Options[] = [
+        {
+            label: "Voucher 1",
+            value: 'hkas89nas09a'
+        },
+        {
+            label: "Voucher 2",
+            value: 'Jsoau9as9812'
+        },
+        {
+            label: "Voucher 3",
+            value: 'adlJAJS8ja71'
+        },
+    ]
 
     return (
         <div className="w-full h-full overflow-hidden">
-            <div className="p-5">
-                <h1 className="font-bold text-xl text-primary">Top Up GAI Token</h1>
-                <form onSubmit={(e: FormEvent) => checkout(e)} className="mt-5 space-y-5">
-                    <div className="bg-zinc-200 dark:bg-darkSecondary p-5 rounded-md">
-                        <h1 className="font-semibold mb-2 text-sm">Nominal Top Up</h1>
-                        <InputText 
-                            value={formattedNominalValue}
-                            onChange={handleNominalChange}
-                            id="nominaltopup"
-                            name="nominaltopup"
-                            placeholder="Input nominal top up"
-                            prefixIcon={IconsCollection.money}
-                        />
+            <div className="p-5 space-x-5 flex">
+                <div className="w-full">
+                    <div className="flex items-center justify-between">
+                        <h1 className="font-bold text-xl text-primary">Top Up GAI Token</h1>
+                        <Link href={tab ? `?`: `?tab=history`}>
+                            <button className="btn-secondary">History</button>
+                        </Link>
                     </div>
-                    <div>
-                        <h1 className="font-semibold mb-2">Recommended Top Up nominal</h1>
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-5">
-                            <button type="button" onClick={() => handleNominalChange("10000")} className="overflow-hidden block bg-primary text-start text-white rounded-xl shadow-xl p-5 relative">
-                                <Icon icon={IconsCollection.money} className="-rotate-12 text-[120px] text-white text-opacity-20 absolute top-1/2 -translate-y-1/2 right-0 "/>
-                                <div className="flex items-end gap-3">
-                                    <h1 className="text-3xl font-bold">Rp</h1>
-                                    <p className="text-lg">10.000</p>
-                                </div>
-                                <p className="text-sm">500 Token</p>
-                            </button>
-                            <button type="button" onClick={() => handleNominalChange("20000")} className="overflow-hidden block bg-primary text-start text-white rounded-xl shadow-xl p-5 relative">
-                                <Icon icon={IconsCollection.money} className="-rotate-12 text-[120px] text-white text-opacity-20 absolute top-1/2 -translate-y-1/2 right-0 "/>
-                                <div className="flex items-end gap-3">
-                                    <h1 className="text-3xl font-bold">Rp</h1>
-                                    <p className="text-lg">20.000</p>
-                                </div>
-                                <p className="text-sm">500 Token</p>
-                            </button>
-                            <button type="button" onClick={() => handleNominalChange("50000")} className="overflow-hidden block bg-primary text-start text-white rounded-xl shadow-xl p-5 relative">
-                                <Icon icon={IconsCollection.money} className="-rotate-12 text-[120px] text-white text-opacity-20 absolute top-1/2 -translate-y-1/2 right-0 "/>
-                                <div className="flex items-end gap-3">
-                                    <h1 className="text-3xl font-bold">Rp</h1>
-                                    <p className="text-lg">50.000</p>
-                                </div>
-                                <p className="text-sm">500 Token</p>
-                            </button>
-                            <button type="button" onClick={() => handleNominalChange("100000")} className="overflow-hidden block bg-primary text-start text-white rounded-xl shadow-xl p-5 relative">
-                                <Icon icon={IconsCollection.money} className="-rotate-12 text-[120px] text-white text-opacity-20 absolute top-1/2 -translate-y-1/2 right-0 "/>
-                                <div className="flex items-end gap-3">
-                                    <h1 className="text-3xl font-bold">Rp</h1>
-                                    <p className="text-lg">100.000</p>
-                                </div>
-                                <p className="text-sm">500 Token</p>
-                            </button>
-                            <button type="button" onClick={() => handleNominalChange("500000")} className="overflow-hidden block bg-primary text-start text-white rounded-xl shadow-xl p-5 relative">
-                                <Icon icon={IconsCollection.money} className="-rotate-12 text-[120px] text-white text-opacity-20 absolute top-1/2 -translate-y-1/2 right-0 "/>
-                                <div className="flex items-end gap-3">
-                                    <h1 className="text-3xl font-bold">Rp</h1>
-                                    <p className="text-lg">500.000</p>
-                                </div>
-                                <p className="text-sm">500 Token</p>
-                            </button>
-                            <button type="button" onClick={() => handleNominalChange("1000000")} className="overflow-hidden block bg-primary text-start text-white rounded-xl shadow-xl p-5 relative">
-                                <Icon icon={IconsCollection.money} className="-rotate-12 text-[120px] text-white text-opacity-20 absolute top-1/2 -translate-y-1/2 right-0 "/>
-                                <div className="flex items-end gap-3">
-                                    <h1 className="text-3xl font-bold">Rp</h1>
-                                    <p className="text-lg">1.000.000</p>
-                                </div>
-                                <p className="text-sm">500 Token</p>
-                            </button>
+                    <form onSubmit={(e: FormEvent) => checkout(e)} className="mt-5 space-y-5">
+                        <div className="bg-zinc-200 dark:bg-darkSecondary p-5 rounded-md">
+                            <h1 className="font-semibold mb-2 text-sm">Nominal Top Up</h1>
+                            <InputText 
+                                value={formattedNominalValue}
+                                onChange={handleNominalChange}
+                                id="nominaltopup"
+                                name="nominaltopup"
+                                placeholder="Input nominal top up"
+                                prefixIcon={IconsCollection.money}
+                            />
                         </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <button type="submit" className="btn-primary">
-                            <Icon icon={IconsCollection.save} className="text-xl"/>
-                            Checkout
-                        </button>
-                        <a href={`https://simulator.sandbox.midtrans.com/`} target="_blank" className="btn-secondary">Simulation Payment</a>
-                    </div>
-                </form>
+                        <div>
+                            <h1 className="font-semibold mb-2">Recommended Top Up nominal</h1>
+                            <div className="grid grid-cols-2 md:grid-cols-5 gap-5">
+                                <button type="button" onClick={() => handleNominalChange("10000")} className="overflow-hidden block bg-primary text-start text-white rounded-xl shadow-xl p-5 relative">
+                                    <Icon icon={IconsCollection.money} className="-rotate-12 text-[120px] text-white text-opacity-20 absolute top-1/2 -translate-y-1/2 right-0 "/>
+                                    <div className="flex items-end gap-3">
+                                        <h1 className="text-3xl font-bold">Rp</h1>
+                                        <p className="text-lg">10.000</p>
+                                    </div>
+                                    <p className="text-sm">500 Token</p>
+                                </button>
+                                <button type="button" onClick={() => handleNominalChange("20000")} className="overflow-hidden block bg-primary text-start text-white rounded-xl shadow-xl p-5 relative">
+                                    <Icon icon={IconsCollection.money} className="-rotate-12 text-[120px] text-white text-opacity-20 absolute top-1/2 -translate-y-1/2 right-0 "/>
+                                    <div className="flex items-end gap-3">
+                                        <h1 className="text-3xl font-bold">Rp</h1>
+                                        <p className="text-lg">20.000</p>
+                                    </div>
+                                    <p className="text-sm">500 Token</p>
+                                </button>
+                                <button type="button" onClick={() => handleNominalChange("50000")} className="overflow-hidden block bg-primary text-start text-white rounded-xl shadow-xl p-5 relative">
+                                    <Icon icon={IconsCollection.money} className="-rotate-12 text-[120px] text-white text-opacity-20 absolute top-1/2 -translate-y-1/2 right-0 "/>
+                                    <div className="flex items-end gap-3">
+                                        <h1 className="text-3xl font-bold">Rp</h1>
+                                        <p className="text-lg">50.000</p>
+                                    </div>
+                                    <p className="text-sm">500 Token</p>
+                                </button>
+                                <button type="button" onClick={() => handleNominalChange("100000")} className="overflow-hidden block bg-primary text-start text-white rounded-xl shadow-xl p-5 relative">
+                                    <Icon icon={IconsCollection.money} className="-rotate-12 text-[120px] text-white text-opacity-20 absolute top-1/2 -translate-y-1/2 right-0 "/>
+                                    <div className="flex items-end gap-3">
+                                        <h1 className="text-3xl font-bold">Rp</h1>
+                                        <p className="text-lg">100.000</p>
+                                    </div>
+                                    <p className="text-sm">500 Token</p>
+                                </button>
+                                <button type="button" onClick={() => handleNominalChange("500000")} className="overflow-hidden block bg-primary text-start text-white rounded-xl shadow-xl p-5 relative">
+                                    <Icon icon={IconsCollection.money} className="-rotate-12 text-[120px] text-white text-opacity-20 absolute top-1/2 -translate-y-1/2 right-0 "/>
+                                    <div className="flex items-end gap-3">
+                                        <h1 className="text-3xl font-bold">Rp</h1>
+                                        <p className="text-lg">500.000</p>
+                                    </div>
+                                    <p className="text-sm">500 Token</p>
+                                </button>
+                                <button type="button" onClick={() => handleNominalChange("1000000")} className="overflow-hidden block bg-primary text-start text-white rounded-xl shadow-xl p-5 relative">
+                                    <Icon icon={IconsCollection.money} className="-rotate-12 text-[120px] text-white text-opacity-20 absolute top-1/2 -translate-y-1/2 right-0 "/>
+                                    <div className="flex items-end gap-3">
+                                        <h1 className="text-3xl font-bold">Rp</h1>
+                                        <p className="text-lg">1.000.000</p>
+                                    </div>
+                                    <p className="text-sm">500 Token</p>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <h1 className="font-semibold">Voucher</h1>
+                            <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-2">Redeem your voucher here</p>
+                            <div className="flex items-center gap-5 w-1/2">
+                                <Select 
+                                    id="voucherselect"
+                                    name="voucherselect"
+                                    onChange={(value) => setVoucher(value)}
+                                    value={voucher}
+                                    options={optionsVoucher}
+                                    placeholder="Select your claim voucher"
+                                />
+                                <InputText 
+                                    id="vouchername"
+                                    name="vouchername"
+                                    onChange={(value) => setVoucher(value)}
+                                    value={voucher}
+                                    placeholder="Enter your code"
+                                />
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button type="submit" className="btn-primary">
+                                <Icon icon={IconsCollection.save} className="text-xl"/>
+                                Checkout
+                            </button>
+                            <a href={`https://simulator.sandbox.midtrans.com/`} target="_blank" className="btn-secondary">Simulation Payment</a>
+                        </div>
+                    </form>
+                </div>
+                {
+                    tab == 'history' && (
+                        <HistoryTopUp tabHistory={tabHistory}/>
+                    )
+                }
             </div>
         </div>
     );
