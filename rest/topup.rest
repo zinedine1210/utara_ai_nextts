@@ -1,0 +1,143 @@
+### var
+
+@json = application/json
+@localHost = http://localhost:1899
+@devHost = https://gai.co.id/gai-ai-service
+@host = {{devHost}}
+@apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
+@ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNkhXODI0WDlDREQ5Rkg2NTRWNFNFUFciLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI2OTAxMzc1fQ.c7mPphsgeFkZZTjEWrC2nQahqxx_93_-l_34CBL6nxw
+@partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUo2SFdISE1HWDlXUEUwSlBCUjdFQ1JCUCIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzI2OTkyMzQ1fQ.10q2yUqWDiE7y9jLTohZwfCHntg6TAPXd0jK8Qd4zm4
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKOTE2NE1GRDZTUE5CRFRXQzlKRTlWWlIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI5NjgwMzIwfQ.Ptq5ibMh13nQL0dDhSntlOa-qiLJYWZgeKuz7kEMDTg
+@token = {{clientToken}}
+
+
+### test ==================================================================================================
+
+GET {{host}}/v1/test HTTP/1.1
+
+###
+
+GET {{host}}/v1/database/test HTTP/1.1
+authorization: {{token}}
+
+###
+
+POST {{host}}/v1/database/test/init_db/bxy HTTP/1.1
+authorization: {{token}}
+
+
+### auth ==================================================================================================
+
+### login owner
+
+POST {{host}}/v1/auth/login HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+
+{
+  "username": "gnusa",
+  "password": "123456"
+}
+
+### login partner
+
+POST {{host}}/v1/auth/login HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+
+{
+  "username": "boxy",
+  "password": "123456"
+}
+
+### login client
+
+POST {{host}}/v1/auth/login HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+
+{
+  "username": "tempy",
+  "password": "123456"
+}
+
+### Client API Topup ###
+### initialize topup
+POST {{host}}/v1/root/topup HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
+
+{
+  "trans_id": "gr21safsfas21",
+  "currency": "IDR",
+  "amount": 30000,
+  "total_amount": 30000,
+  "voucher_code": "asf2"
+}
+
+### pending topup
+PUT {{host}}/v1/root/topup/status HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
+
+{
+  "id": "01J872ZR7ZGJM1A4N6X5RQ79VP",
+  "trans_id": "TRX123456789",
+  "currency": "IDR",
+  "total_amount": 30000,
+  "provider": "BCA",
+  "provider_trans_id": "BCA123456789",
+  "payment_method": "Virtual Account",
+  "payment_provider": null,
+  "origin_response": {
+      "transaction_id": "BCA123456789",
+      "virtual_account": "1234567890",
+      "expire_date": "2024-10-01T10:00:00"
+    },
+  "bank_id": "BCA",
+  "bank_acc": null,
+  "bank_va_acc": "1234567890",
+  "expire_date": "2024-10-01T10:00:00"
+}
+
+### settlement topup
+PUT {{host}}/v1/root/topup/settlement HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
+
+{
+  "id": "01J872ZR7ZGJM1A4N6X5RQ79VP",
+  "trans_id": "TRX123456789",
+  "currency": "IDR",
+  "total_amount": 30000,
+  "provider": "BCA",
+  "provider_trans_id": "BCA123456789",
+  "payment_method": "Virtual Account",
+  "payment_provider": null,
+  "origin_response": {
+      "paid_date": "2024-09-18T14:30:24.602Z",
+      "transaction_id": "BCA123456789",
+      "virtual_account": "1234567890",
+      "expire_date": "2024-10-01T10:00:00"
+    },
+  "bank_id": "BCA",
+  "bank_acc": null,
+  "bank_va_acc": "1234567890",
+  "paid_date": "2024-09-18T14:30:24.602Z",
+  "expire_date": "2024-10-01T10:00:00"
+}
+
+### End Client API Topup ###
+
+### Partner API Topup ###
+### get all topup
+# url encoded trans_date = {"start_date": "2023-01-01", "end_date": "2023-12-31"}
+GET {{host}}/v1/root/topup/by?page=1&size=10&&trans_date=%7B%22start_date%22%3A%20%222024-01-01%22%2C%20%22end_date%22%3A%20%222024-12-31%22%7D HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
+
+### End Partner API Topup ###

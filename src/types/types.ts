@@ -14,6 +14,14 @@ export interface MenusList {
     sortnumber: number
 }
 
+export interface InitTopUpType {
+    trans_id: string
+    id: string
+    total_amount: number
+    currency: "IDR" | string
+    org_id: string
+    status: 'INITIALIZE' | 'PENDING' | 'SETTLE' | 'CANCEL'
+}
 
 export interface FilterKey {
     value: string

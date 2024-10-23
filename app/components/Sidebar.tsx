@@ -152,7 +152,7 @@ export default function Sidebar() {
       <div className={`${!state.view ? '-translate-x-full md:translate-x-0':'translate-x-0 md:translate-x-0'} delay-100 duration-300 ease-in-out fixed top-0 left-0 w-3/4 md:w-full z-30 md:static md:z-0 bg-white h-screen flex-1 md:h-full flex flex-col dark:bg-dark`}>
         <header className="bg-primary dark:bg-dark w-full py-5 px-3 shadow-md">
           <div className="bg-white dark:bg-black rounded-md p-3">
-            <h1 className="font-bold text-sm text-primary">Welcome, Zinedine</h1>
+            <h1 className="font-bold text-sm text-primary">Welcome, Guest</h1>
             <p className="text-xs">Menus Panel</p>
           </div>
         </header>

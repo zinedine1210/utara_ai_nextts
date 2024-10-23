@@ -8,7 +8,7 @@ export class TopUpModel {
     public recName: string
     public transDate: string
     public transId: string
-    public currency: "IDR" | "THB"
+    public currency: "IDR" | string
     public amount: number
     public voucherCode: string
     public discount: null | string
@@ -24,7 +24,7 @@ export class TopUpModel {
     public bankVaAcc: null | string
     public paidDate: string | null
     public expireDate: string | null
-    public status: string
+    public status: 'INITIALIZE' | 'PENDING' | 'SETTLE' | 'CANCEL'
     public recBy: string
     public recDate: string
     public modBy: null | string

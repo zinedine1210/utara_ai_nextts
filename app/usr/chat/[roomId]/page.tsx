@@ -37,16 +37,16 @@ export default function PanelListChat({
   const funcAllOptions: {[key: string]: () => void} = {
     'getAllChannel': async () => {
         if(state.profile){
-            state.options.whatsapp = state.profile.whatsapp.map((item: string) => {
+            state.options.whatsapp = state.profile.whatsapp ? state.profile.whatsapp.map((item: string) => {
                 return { label: item, value: item }
-            })
+            }) : []
         }else{
             const result = await getProfile()
             const value: ProfileModel = new ProfileModel(result.data)
             state.profile = value
-            state.options.whatsapp = value.whatsapp.map((item: string) => {
+            state.options.whatsapp = value.whatsapp ? value.whatsapp.map((item: string) => {
                 return { label: item, value: item }
-            })
+            }): []
         }
         setState((prev: any) => ({
           ...prev,

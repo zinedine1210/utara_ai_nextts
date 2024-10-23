@@ -2,8 +2,8 @@
 import InputText from "@@/app/components/Input/InputText";
 import Select from "@@/app/components/Input/Select";
 import { IconsCollection } from "@@/src/constant/icons";
-import { Options } from "@@/src/types/types";
-import { Notify } from "@@/src/utils/script";
+import { FilterOptions, InitTopUpType, Options } from "@@/src/types/types";
+import { formatCurrency, Notify } from "@@/src/utils/script";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { FormEvent, useCallback, useState } from "react";
@@ -12,6 +12,9 @@ import HistoryTopUp from "./components/ModalHistoryTopUp";
 import ModalHistoryTopUp from "./components/ModalHistoryTopUp";
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import { useRouter } from "next/navigation";
+import { initializeTopUp } from "@@/src/hooks/CollectionAPI";
+import { ResponseData } from "@@/src/types/apitypes";
+
 
 const TopupPage = ({ params, searchParams }) => {
     const { setState, state } = useGlobalContext()
@@ -23,6 +26,7 @@ const TopupPage = ({ params, searchParams }) => {
     const [loading, setLoading] = useState<boolean>(false)
     const tab: string | null = searchParams?.tab
     const tabHistory: string | null = searchParams?.tabHistory
+    const initTopUpData: null | InitTopUpType = state?.initTopUp
 
     useEffect(() => {
         // Load Snap.js script secara dinamis
@@ -73,14 +77,15 @@ const TopupPage = ({ params, searchParams }) => {
 
     const formattedNominalValue = nominalValue ? formatter.format(parseInt(nominalValue, 10)) : '';
 
-    const checkout = async (e: FormEvent) => {
-        e.preventDefault()
+    const checkout = async () => {
+        setState((prev: any) => ({...prev, initTopUp: null}))
         setLoading(true)
-        const priceFinal: number = Number(nominalValue)
+        if(!initTopUpData) return Notify('Initialize not found, please try again later', 'info', 3000)
+        const finaldata: InitTopUpType = initTopUpData
         const data = {
-            id: ~~(Math.random() * 10000) + 1,
+            id: finaldata.trans_id,
             productName: "GAI Token",
-            price: priceFinal,
+            price: finaldata.total_amount,
             quantity: 1,
         };
 
@@ -118,6 +123,35 @@ const TopupPage = ({ params, searchParams }) => {
         setLoading(false)
     };
 
+    const requestInit = async (e: FormEvent) => {
+        e.preventDefault()
+        setLoading(true)
+        const priceFinal: number = Number(nominalValue)
+        const data = {
+            trans_id: (~~(Math.random() * 10000) + 1).toString(),
+            currency: "IDR",
+            amount: priceFinal,
+            total_amount: priceFinal,
+            voucher_code: voucher,
+        };
+        let payload: FilterOptions[] = []
+        Object.entries(data).forEach(el => {
+            payload.push({
+                key: el[0],
+                value: el[1]
+            })
+        });
+        const response: ResponseData = await initializeTopUp(payload)
+        console.log(response)
+        if(response.success){
+            setState((prev: any) => ({
+                ...prev,
+                initTopUp: response.data
+            }))
+        }
+        setLoading(false)
+    }
+
     const optionsVoucher: Options[] = [
         {
             label: "Voucher 1",
@@ -143,7 +177,7 @@ const TopupPage = ({ params, searchParams }) => {
                             <button className="btn-secondary">History</button>
                         </Link>
                     </div>
-                    <form onSubmit={(e: FormEvent) => checkout(e)} className="mt-5 space-y-5">
+                    <form onSubmit={(e: FormEvent) => requestInit(e)} className="mt-5 space-y-5">
                         <div className="bg-zinc-200 dark:bg-darkSecondary p-5 rounded-md">
                             <h1 className="font-semibold mb-2 text-sm">Nominal Top Up</h1>
                             <InputText 
@@ -217,12 +251,14 @@ const TopupPage = ({ params, searchParams }) => {
                                     name="voucherselect"
                                     onChange={(value) => setVoucher(value)}
                                     value={voucher}
+                                    required={false}
                                     options={optionsVoucher}
                                     placeholder="Select your claim voucher"
                                 />
                                 <InputText 
                                     id="vouchername"
                                     name="vouchername"
+                                    required={false}
                                     onChange={(value) => setVoucher(value)}
                                     value={voucher}
                                     placeholder="Enter your code"
@@ -231,8 +267,8 @@ const TopupPage = ({ params, searchParams }) => {
                         </div>
                         <div className="flex items-center gap-2">
                             <button type="submit" className="btn-primary">
-                                <Icon icon={IconsCollection.save} className="text-xl"/>
-                                Checkout
+                                <Icon icon={IconsCollection.request} className="text-xl"/>
+                                Request
                             </button>
                             <a href={`https://simulator.sandbox.midtrans.com/`} target="_blank" className="btn-secondary">Simulation Payment</a>
                         </div>
@@ -241,6 +277,41 @@ const TopupPage = ({ params, searchParams }) => {
             </div>
             {
                 tab == "history" && <ModalHistoryTopUp tabHistory={tabHistory} modalName={modalName} />
+            }
+            {
+                initTopUpData && (
+                    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/65 z-50">
+                        <div className="bg-white rounded-md shadow-md p-5 w-full max-w-xl relative">
+                            <h1 className="font-bold text-base">Checkout Detail</h1>
+                            <Icon icon={IconsCollection.money} className="absolute top-0 right-0 text-[250px] -rotate-12 text-primary/10"/>
+                            <div className="border-y border-dashed py-2 mt-2 space-y-1">
+                                <div className="flex items-center text-sm justify-between">
+                                    <p className="font-bold">Transaction ID</p>
+                                    <p className="text-zinc-600">{initTopUpData?.trans_id}</p>
+                                </div>
+                                <div className="flex items-center text-sm justify-between">
+                                    <p className="font-bold">Status</p>
+                                    <p className="text-zinc-600">{initTopUpData?.status}</p>
+                                </div>
+                                <div className="flex items-center text-sm justify-between">
+                                    <p className="font-bold">Currency</p>
+                                    <p className="text-zinc-600">{initTopUpData?.currency}</p>
+                                </div>
+                                <div className="flex items-center text-sm justify-between">
+                                    <p className="font-bold">Total Amount</p>
+                                    <p className="text-zinc-600">{formatCurrency(initTopUpData?.total_amount ?? 0, false)}</p>
+                                </div>
+                            </div>
+
+                            <footer className="flex items-center gap-2 mt-2">
+                                <button onClick={() => checkout()} type="button" className="btn-primary">
+                                    <Icon icon={IconsCollection.request} className="text-xl"/>
+                                    Checkout
+                                </button>
+                            </footer>
+                        </div>
+                    </div>
+                )
             }
         </div>
     );

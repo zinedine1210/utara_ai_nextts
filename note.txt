@@ -1,0 +1,7 @@
+- API Whatsapp
+- Simulasi AI by training (/usr/knowledge/training)
+- API AB Test
+    - Dari chat simulasi AI jika ada jawaban dari AI yang salah atau ada yang tidak terjawab oleh AI. Klik jawaban AI tersebut maka chat tersebut disimpan ke AB test
+    - Lalu di page AB Test, user bisa menjawab secara manual jawaban dari pertanyaan tersebut. lalu disimpan sebagai update dari training data tersebut
+- Services (/usr/knowledge/services) 
+    menghubungkan training data yang dipilih dengan nomer whatsapp. Jadi harusnya ketika ada orang yang chat langsung di whatsapp maka AI yang jawab berdasarkan training data yang dipilih

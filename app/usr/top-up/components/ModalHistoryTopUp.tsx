@@ -22,7 +22,6 @@ export default function ModalHistoryTopUp({ tabHistory, modalName }) {
     <Modal name={modalName} disableClose={true}>
         <div className="w-full rounded-md">
             <HistoryPage />
-
             <footer>
                 <button type="button" onClick={() => handleBack()} className="btn-secondary">Close</button>
             </footer>

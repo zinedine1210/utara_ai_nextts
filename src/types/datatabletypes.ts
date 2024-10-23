@@ -91,7 +91,7 @@ export interface TopUpType {
     rec_name: string
     trans_date: Date
     trans_id: string
-    currency: "IDR" | "THB"
+    currency: "IDR" | string
     amount: number
     voucher_code: string
     discount: null | string
@@ -107,7 +107,7 @@ export interface TopUpType {
     bank_va_acc: null | string
     paid_date: null | Date
     expire_date: null | Date
-    status: string
+    status: 'INITIALIZE' | 'PENDING' | 'SETTLE' | 'CANCEL'
     rec_by: string
     rec_date: string
     mod_by: null | string

@@ -232,3 +232,14 @@ export const postChat = async (payload: FilterOptions[]) => {
     }
     return responseData
 }
+
+// TOPUP
+export const initializeTopUp = async (payload: FilterOptions[]) => {
+    const result = await axios.post(`${baseURL}/data/topup/initialize`, payload ?? [])
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}

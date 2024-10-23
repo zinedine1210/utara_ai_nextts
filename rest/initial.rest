@@ -456,7 +456,7 @@ authorization: {{token}}
 }
 
 ### find organization by id
-GET {{host}}/v1/partner/client/id/01J116TYWGKWZ49X1R014VF649 HTTP/1.1
+GET {{host}}/v1/partner/client/id/01J116TYWGKWZ49X1R014VF649 HTTP/1.1    
 content-type: {{json}}
 authorization: {{token}}
 Api-Key: {{apiKey}}

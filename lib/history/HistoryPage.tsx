@@ -2,7 +2,7 @@
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
 import { useCallback, useEffect } from "react"
 import { tableTopUp } from "@@/src/constant/table";
-import { FilterOptions, StateType } from "@@/src/types/types";
+import { FilterOptions, InitTopUpType, StateType } from "@@/src/types/types";
 import { getHistoryTopUp } from "@@/src/hooks/CollectionAPI";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
@@ -16,6 +16,7 @@ import { useWindowSize } from "@@/src/hooks/usewindowsize";
 import { TopUpModel } from "./lib/model";
 import CardTopUp from "./components/CardTopUp";
 import Datatable from "@@/app/components/Datatable/Datatable";
+import { IconsCollection } from "@@/src/constant/icons";
 
 export default function HistoryPage() {
   const { state, setState } = useGlobalContext();
@@ -80,17 +81,25 @@ export default function HistoryPage() {
       },
       bulk: [
         {
-          name: 'Delete',
-          icon: 'octicon:trash-24',
+          name: 'Checkout',
+          icon: IconsCollection.save,
           action: (id, index) => {
-            Notify('Action not found to delete record ' + id, 'info', 3000)
-          }
-        },
-        {
-          name: 'Update',
-          icon: 'weui:pencil-filled',
-          action: (id, index) => {
-            Notify('Action not found to update record ' + id, 'info', 3000)
+            setState((prev: any) => {
+              let obj: InitTopUpType
+              const findData: TopUpModel = prev[statename].data.find((res: TopUpModel) => res.id == id)
+              if(findData){
+                obj = {
+                  currency: findData.currency,
+                  id: findData.id,
+                  org_id: findData.orgId,
+                  status: findData.status,
+                  total_amount: findData.totalAmount,
+                  trans_id: findData.transId
+                }
+                console.log(obj, findData)
+                return { ...prev, initTopUp: obj }
+              }else return prev
+            })
           }
         }
       ],
