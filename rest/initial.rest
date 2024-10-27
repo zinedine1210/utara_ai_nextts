@@ -1,4 +1,4 @@
-### var
+## var
 
 @json = application/json
 @localHost = http://localhost:1899
@@ -9,7 +9,7 @@
 @apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
 @ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNTJRRTM2UlgzUUtGRzNZWjU0WEpXQjIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI0Mzk2MjE2fQ.NOqfW3Ljg80ZvQuoZwHtFY2gVsMjHYvgNXneAq-AbiA
 @partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUoyWllYTjJSWVlHSzc2TlNCUTJSV0owMiIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzIxNDMzNTAyfQ.yomnaf9KczdgQEf7qBe4z3LU38uyZr4VO7kNOZxy7rU
-@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKOTE2NE1GRDZTUE5CRFRXQzlKRTlWWlIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzI5MTQ1Mzg3fQ.pAzvNVLOAbiAdiRsdAGbRJRzjtCmDG-dOXywr2FGn2E
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKOTE2NE1GRDZTUE5CRFRXQzlKRTlWWlIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzMwMTA4NTgyfQ.X37QJvCKt01-qzF84IPUTIwkfslHdjsOU0iUtA-vxQ4
 @token = {{clientToken}}
 
 
@@ -778,6 +778,11 @@ GET {{host}}/v1/client/service/by?status=ACTIVE HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
 
+### fing by type, description, serviceId, channelId, channel, status
+GET {{host}}/v1/client/abtest/by HTTP/1.1
+content-type: {{json}}
+authorization: {{token}}
+
 ### change status
 PUT {{host}}/v1/client/service/status HTTP/1.1
 content-type: {{json}}
@@ -952,3 +957,39 @@ authorization: {{token}}
 
 ### End Partner API Topup ###
 
+
+
+
+
+### _ENUM ###
+### get enume : {{host}}/v1/root/_enum/{model_from}/{model_name}
+# ex: {{host}}/v1/root/_enum/common/TopUpStatus
+GET {{host}}/v1/root/_enum/common/TopUpStatus HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
+
+
+### get enume abtest
+GET {{host}}/v1/root/_enum/ab_test_model/ABTestStatus HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
+
+### get enume unaswered question
+GET {{host}}/v1/root/_enum/unanswered_model/UnansweredStatus HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
+
+### get enume service type
+GET {{host}}/v1/root/_enum/service_model/ServiceType HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
+
+### get enume service
+GET {{host}}/v1/root/_enum/service_model/ServiceStatus HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}

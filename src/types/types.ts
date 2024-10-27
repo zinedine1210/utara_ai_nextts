@@ -84,3 +84,5 @@ export interface FilterOptions {
     key: string,
     value: any
 }
+
+export type UrlEnum = "/unanswered_model/UnansweredStatus" | "/service_model/ServiceType" | "/service_model/ServiceStatus"

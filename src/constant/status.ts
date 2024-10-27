@@ -34,7 +34,7 @@ export const serviceTemplateType = {
     'QNA': '#ff00bf',
     'EVENT': '#fcba03',
 }
-const getFromOptions = (type: {[key: string]: string}): Options[]  => {
+export const getFromOptions = (type: {[key: string]: string}): Options[]  => {
     let arrayOptions: Options[] = []
     Object.entries(type).map((item, index) => {
         arrayOptions.push({

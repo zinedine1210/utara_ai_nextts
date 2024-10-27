@@ -1,0 +1,96 @@
+### var
+
+@json = application/json
+@localHost = http://localhost:1899
+@devHost = https://gai.co.id/gai-ai-service
+@host = {{localHost}}
+@apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
+@ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNkhXODI0WDlDREQ5Rkg2NTRWNFNFUFciLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI2OTAxMzc1fQ.c7mPphsgeFkZZTjEWrC2nQahqxx_93_-l_34CBL6nxw
+@partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUo5TkhWVEhGVkUzM0pSQ1FDOUsyMTBTOSIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzI5MzE3NjI1fQ.6aAWj8NWu_iCDB33lEDj_LbBj66ImZhBbmGWQKg7YIk
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKOTE2NE1GRDZTUE5CRFRXQzlKRTlWWlIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzMwMTA4NTgyfQ.X37QJvCKt01-qzF84IPUTIwkfslHdjsOU0iUtA-vxQ4
+@token = {{clientToken}}
+
+
+### test ==================================================================================================
+
+GET {{host}}/v1/test HTTP/1.1
+
+###
+
+GET {{host}}/v1/database/test HTTP/1.1
+authorization: {{token}}
+
+###
+
+POST {{host}}/v1/database/test/init_db/bxy HTTP/1.1
+authorization: {{token}}
+
+
+### auth ==================================================================================================
+
+### login owner
+
+POST {{host}}/v1/auth/login HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+
+{
+  "username": "gnusa",
+  "password": "123456"
+}
+
+### login partner
+
+POST {{host}}/v1/auth/login HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+
+{
+  "username": "boxy",
+  "password": "123456"
+}
+
+### login client
+
+POST {{host}}/v1/auth/login HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+
+{
+  "username": "tempy",
+  "password": "123456"
+}
+
+
+### _ENUM ###
+### get enume : {{host}}/v1/root/_enum/{model_from}/{model_name}
+# ex: {{host}}/v1/root/_enum/common/TopUpStatus
+GET {{host}}/v1/root/_enum/common/TopUpStatus HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
+
+
+### get enume abtest
+GET {{host}}/v1/root/_enum/ab_test_model/ABTestStatus HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
+
+### get enume unaswered question
+GET {{host}}/v1/root/_enum/unanswered_model/UnansweredStatus HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
+
+### get enume service type
+GET {{host}}/v1/root/_enum/service_model/ServiceType HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}
+
+### get enume service
+GET {{host}}/v1/root/_enum/service_model/ServiceStatus HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+authorization: {{token}}

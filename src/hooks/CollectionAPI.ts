@@ -1,7 +1,7 @@
 import { setCookies } from "@@/app/actions";
 import axios from "axios"
 import { Notify } from "../utils/script";
-import { FilterOptions } from "../types/types";
+import { FilterOptions, UrlEnum } from "../types/types";
 import { PayloadAttachmentType } from "../types/payloadtypes";
 let protocol = '';
 let host = '';
@@ -149,11 +149,10 @@ export const getHistoryTopUp = async (filter: FilterOptions[]) => {
     return responseData
 }
 
-
-
 export const getProfile = async () => {
     const result = await axios.get(`${baseURL}/auth/profile`)
     const responseData = result.data
+    console.log("dapett user data", responseData)
     if(!responseData.success) {
         Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
         responseData.data = responseData.data ?? []
@@ -236,6 +235,37 @@ export const postChat = async (payload: FilterOptions[]) => {
 // TOPUP
 export const initializeTopUp = async (payload: FilterOptions[]) => {
     const result = await axios.post(`${baseURL}/data/topup/initialize`, payload ?? [])
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+
+// ABTEST
+export const getABTest = async (filter: FilterOptions[]) => {
+    const result = await axios.post(`${baseURL}/data/abtest`, filter ?? [])
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+
+
+// ENUM
+export const getEnume = async (url: UrlEnum) => {
+    const payload: FilterOptions[] = [
+        {
+            key: "URL",
+            value: url
+        }
+    ]
+    const result = await axios.post(`${baseURL}/data/enume`, payload ?? [])
     const responseData = result.data
     if(!responseData.success) {
         Notify(responseData.message ?? 'Something went wrong', 'error', 3000)

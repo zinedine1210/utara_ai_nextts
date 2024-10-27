@@ -29,7 +29,7 @@ export default function WhatsappOfficial() {
     }
   }, [initialMount, state])
 
-  const addWhatsappTrigger = () => setState({ ...state, modal: { name: modalName, data: data?.[channelName] }})
+  const addWhatsappTrigger = () => setState({ ...state, modal: { name: modalName, data: data?.[channelName] ?? [] }})
   return (
     <>
       <div className="w-full h-full flex flex-col">

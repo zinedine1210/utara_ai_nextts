@@ -89,7 +89,7 @@ export default function ModalCreateWhatsapp({
             }
         }))
       }
-
+      
   return (
     <>
         <Modal name={name} disableClose={qr ? true : false}>

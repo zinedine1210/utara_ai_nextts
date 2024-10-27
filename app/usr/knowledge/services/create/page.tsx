@@ -2,28 +2,30 @@
 import InputText from '@@/app/components/Input/InputText'
 import Select from '@@/app/components/Input/Select'
 import { ProfileModel } from '@@/app/usr/integration/whatsapp/lib/model'
-import { serviceOptions, statusOptions } from '@@/src/constant/status'
-import { getProfile, getTraining, postServices } from '@@/src/hooks/CollectionAPI'
+import { getFromOptions, serviceOptions, statusOptions } from '@@/src/constant/status'
+import { baseDomain, getEnume, getProfile, getTraining, postServices } from '@@/src/hooks/CollectionAPI'
 import { useGlobalContext } from '@@/src/providers/GlobalContext'
-import React, { FormEvent, useCallback, useEffect, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { TrainingModel } from '../../training/lib/model'
 import { FilterOptions } from '@@/src/types/types'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { IconsCollection } from '@@/src/constant/icons'
 import { Notify } from '@@/src/utils/script'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 export default function ServiceCreatePage() {
     const { state, setState } = useGlobalContext()
     const router = useRouter()
     const [value, setValue] = useState<{[key: string]: string}>({
-        "type": "",
+        "type": "QNA",
         "description": "",
         "channel_id": "",
         "channel": "WHATSAPP",
-        "prompt": "prompt",
+        "prompt": "<s>[INST] Kamu ada asisten AI yang bertugas menjawab pertanyaan berdasarkan konteks dan jika tidak tahu jawab saja 'Tidak tahu' jangan mengarang jawaban - {context} </s>[INST] [INST] Jawab pertanyaan berikut - {question}[/INST]",
         "data": "",
-        "status": "ACTIVE"
+        "status": "ACTIVE",
+        "rec_by": "tempy",
     })
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
@@ -32,6 +34,7 @@ export default function ServiceCreatePage() {
         objPayload.properties = {
             data: objPayload.data
         }
+        console.log(objPayload)
         delete objPayload.data
         saveService(objPayload)
     }
@@ -89,7 +92,25 @@ export default function ServiceCreatePage() {
             }
 
             setState({ ...state, options: state.options })
-        }
+        },
+        'enumServiceType': async () => {
+            if(!state.options.enumServiceType){
+                const result = await getEnume('/service_model/ServiceType')
+                const value = getFromOptions(result.data)
+                state.options.enumServiceType = value
+            }
+
+            setState({ ...state, options: state.options })
+        },
+        'enumServiceStatus': async () => {
+            if(!state.options.enumServiceStatus){
+                const result = await getEnume('/service_model/ServiceStatus')
+                const value = getFromOptions(result.data)
+                state.options.enumServiceStatus = value
+            }
+
+            setState({ ...state, options: state.options })
+        },
     }
     const isValid = () => {
         let valid: boolean = true
@@ -148,7 +169,8 @@ export default function ServiceCreatePage() {
                 <div className='w-full'>
                     <Select 
                         value={value.type}
-                        options={serviceOptions}
+                        options={state.options.enumServiceType ?? []}
+                        onTrigger={() => funcAllOptions['enumServiceType']()}
                         id='typeServices'
                         name='typeServices'
                         label='Type'
@@ -160,12 +182,12 @@ export default function ServiceCreatePage() {
                 <div className='w-full'>
                     <Select 
                         value={value.status}
-                        options={statusOptions}
+                        options={state.options.enumServiceStatus ?? []}
+                        onTrigger={() => funcAllOptions['enumServiceStatus']()}
                         id='statusServices'
                         name='statusServices'
                         label='Status'
                         placeholder='Select status'
-                        disabled={true}
                         onChange={(value) => handleChange(value, 'status')}
                         errorMessage={checkFill('status')}
                     />

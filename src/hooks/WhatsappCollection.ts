@@ -1,5 +1,5 @@
 import axios from "axios"
-const baseWhatsappURL = process.env.BASE_WHATSAPP_URL ?? 'https://wa.gnscenter.com';
+const baseWhatsappURL = process.env.WHATSAPP_API_URL ?? 'https://wa-un.gai.co.id';
 const baseDomain = process.env.BASE_DOMAIN ?? 'http://localhost:3000';
 
 

@@ -6,7 +6,7 @@ const nextConfig = {
         // BASE_DOMAIN: 'https://utara-ai.vercel.app',
         BASE_DOMAIN: 'http://localhost:3000',
         PUBLIC_API_URL: 'https://gai.co.id/gai-ai-service/v1',
-        WHATSAPP_API_URL: 'https://wa.gnscenter.com',
+        WHATSAPP_API_URL: 'https://wa-un.gai.co.id',
         // SERVER: 'production',
         SERVER: 'development',
         NEXT_PUBLIC_MIDTRANS_CLIENT: "SB-Mid-client-7c6iRNGqbUjD539d",
