@@ -1,6 +1,6 @@
 import { useGlobalContext } from "@@/src/providers/GlobalContext"
-import { TopUpModel } from "../lib/model"
 import { topUpStatus } from "@@/src/constant/status"
+import { TopUpModel } from "@@/lib/history/lib/model"
 
 export default function CardTopUp({
     data,

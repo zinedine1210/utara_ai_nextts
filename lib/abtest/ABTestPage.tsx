@@ -132,7 +132,7 @@ export default function ABTestPage({ service_id }: {
     if(!state?.[statename]){
       initialMount(service_id)
     }
-  }, [initialMount, state])
+  }, [initialMount, state, service_id])
 
   const DatatableView = () => {
     if(windowWidth < 820 && windowWidth !== 0){
