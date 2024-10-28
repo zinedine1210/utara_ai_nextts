@@ -39,7 +39,7 @@ export default function Modal({
   if(stateModal?.name == name)
   return (
     <div ref={dropdownRef} className="z-30 absolute top-0 left-0 w-full h-full bg-black/20 backdrop-blur-sm flex items-center justify-center overflow-y-auto px-5">
-      <div className={`${mount ? 'visible opacity-100': 'invisible opacity-0'} transition-all duration-500 ease-in-out block w-full md:w-fit min-w-56 max-w-6xl max-h-full p-5 rounded-md shadow-md bg-white dark:bg-dark relative`}>
+      <div className={`${mount ? 'visible opacity-100': 'invisible opacity-0'} transition-all duration-500 ease-in-out block w-full md:w-fit min-w-56 max-w-6xl p-5 rounded-md shadow-md bg-white dark:bg-dark relative`}>
         {
           children
         }
