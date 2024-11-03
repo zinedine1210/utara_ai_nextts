@@ -70,5 +70,5 @@ authorization: {{token}}
 
 {
   "question": "seperti apa SOP TPTKP?",
-  "collection_name": "01HTKF8FTDJ80M47JGFYNDS615"
+  "collection_name": "01JBDYG3H612C8XV1SS9T0BEDH"
 }

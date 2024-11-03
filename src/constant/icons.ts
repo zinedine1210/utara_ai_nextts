@@ -22,5 +22,7 @@ export const IconsCollection: {[key: string]: string} = {
     'check': 'ph:check-bold',
     'plus': 'oui:plus',
     'money': 'solar:wallet-money-bold-duotone',
-    'request': 'material-symbols-light:request-page-sharp'
+    'request': 'material-symbols-light:request-page-sharp',
+    'unanswered': "uil:comment-question",
+    "abtest": "mdi:ab-testing"
 }

@@ -70,7 +70,7 @@ export interface DialList {
 
 export interface DropdownOptions {
     name: string
-    icon: string
+    icon?: string
     customCss?: string
     action: (id: number | string, index: number) => void
 }

@@ -38,4 +38,13 @@ export class ServicesModel {
             return new ServicesModel(item)
         })
     }
+
+    static toOptions = (array: ServicesType[]) => {
+        return array.map((item: ServicesType) => {
+            return {
+                label: `${item.description}`,
+                value: item.id
+            }
+        })
+    }
 }

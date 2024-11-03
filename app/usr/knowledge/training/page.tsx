@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react"
 import { tableTraining } from "@@/src/constant/table";
 import { FilterOptions, Options, StateType } from "@@/src/types/types";
 import Datatable from "../../../components/Datatable/Datatable";
-import { getTraining } from "@@/src/hooks/CollectionAPI";
+import { changeStatusTraining, getTraining } from "@@/src/hooks/CollectionAPI";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import { TrainingType } from "@@/src/types/datatabletypes";
@@ -18,6 +18,7 @@ import { TrainingModel } from "./lib/model";
 import { IconsCollection } from "@@/src/constant/icons";
 import Simulation from "./components/Simulation";
 import Select from "@@/app/components/Input/Select";
+import { Notify } from "@@/src/utils/script";
 
 export default function TrainingPage() {
   const { state, setState } = useGlobalContext();
@@ -86,31 +87,60 @@ export default function TrainingPage() {
       },
       bulkButton: [
         {
-          name: 'Trained',
-          icon: 'material-symbols:model-training',
-          customCss: 'bg-gradient-to-r from-indigo-600 to-indigo-400 text-white rounded-md',
-          action: (id, index) => {
-            // router.push(`/usr/knowledge/training/information/${id}`)
-          }
-        },
-        {
-          name: 'Inbox',
-          icon: 'solar:inbox-broken',
-          customCss: 'bg-gradient-to-r from-emerald-600 to-emerald-400 text-white rounded-md',
-          action: (id, index) => {
-            // router.push(`usr/inbox/${id}`)
-          }
-        },
-        {
           name: 'Simulation AI',
           icon: 'hugeicons:ai-chat-02',
           customCss: 'bg-gradient-to-r from-teal-600 to-teal-400 text-white rounded-md',
           action: (id, index) => {
-            setState((prev: any) => ({
-              ...prev, 
-              simulation: id
-            }))
+            setState((prev: any) => {
+              const findOne: undefined | TrainingModel = prev[statename].data.find(res => res.id == id)
+              if(!findOne || findOne.status != "ACTIVE"){
+                Notify('You must activated this training data', "info", 3000)
+                return prev
+              }
+              return {
+                ...prev, 
+                simulation: id
+              }
+            })
           }
+        },
+      ],
+      bulk: [
+        {
+          action: async (id, index) => {
+            const payload = {
+              id,
+              status: "ACTIVE"
+            }
+            const result = await changeStatusTraining(payload)
+            if(result.success){
+              Notify('Success update status training', 'success', 3000)
+              setState((prev: any) => {
+                prev[statename].onGet(prev[statename].filter)
+                return prev
+              })
+            }
+            console.log(result)
+          },
+          name: "Active"
+        },
+        {
+          action: async (id, index) => {
+            const payload = {
+              id,
+              status: "INACTIVE"
+            }
+            const result = await changeStatusTraining(payload)
+            if(result.success){
+              Notify('Success update status training', 'success', 3000)
+              setState((prev: any) => {
+                prev[statename].onGet(prev[statename].filter)
+                return prev
+              })
+            }
+            console.log(result)
+          },
+          name: "Inactive"
         },
       ],
       componentMobile: (item, index) => {
@@ -167,7 +197,7 @@ export default function TrainingPage() {
                 justIconOnMobile={true}
                 prefixIcon={IconsCollection.chat}
                 name="simulation"
-                onChange={value => state[statename].bulkButton[2].action(value, 1)}
+                onChange={value => state[statename].bulkButton[0].action(value, 1)}
                 value={state.simulation ?? ''}
                 defaultAll={true}
                 options={optionsSimulation}

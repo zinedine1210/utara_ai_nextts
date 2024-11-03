@@ -152,7 +152,15 @@ export const getHistoryTopUp = async (filter: FilterOptions[]) => {
 export const getProfile = async () => {
     const result = await axios.get(`${baseURL}/auth/profile`)
     const responseData = result.data
-    console.log("dapett user data", responseData)
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+export const changeStatusTraining = async (payload: {[key: string]: any}) => {
+    const result = await axios.post(`${baseURL}/data/knowledge/training/change-status`, payload)
+    const responseData = result.data
     if(!responseData.success) {
         Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
         responseData.data = responseData.data ?? []

@@ -12,7 +12,7 @@ export class TrainingModel {
     public trained_date: string | null
     public tokens: string | null
     public cost: string | null
-    public status: string
+    public status: "ACTIVE" | "INACTIVE" | "IN_QUEUE"
     public rec_by: string
     public rec_date: string
     public mod_by: string | null
@@ -46,7 +46,7 @@ export class TrainingModel {
     static toOptions = (array: TrainingType[]) => {
         return array.map((item: TrainingType) => {
             return {
-                label: item.description,
+                label: `${item.description} (${item.status.toLowerCase()})`,
                 value: item.id
             }
         })

@@ -268,16 +268,9 @@ export default function Datatable({
                                             })
                                         }
                                         {
-                                            bulk && (
-                                                <td className="relative">
-                                                    <Dropdown position={`right-0 ${(key + 1 == display) ? 'relative':'absolute'}`} id={item.id} options={bulk}/>
-                                                </td>
-                                            )
-                                        }
-                                        {
-                                            bulkButton && (
-                                                <td className="h-auto py-2 flex items-center gap-2 relative ">
-                                                    { bulkButton.map((btn: any, index: number) => {
+                                            (bulkButton || bulk) && (
+                                                <td className="h-auto py-2 flex items-center gap-2 relative">
+                                                    { bulkButton && bulkButton.map((btn: any, index: number) => {
                                                         const customCss = btn.customCss ?? 'bg-gradient-to-r from-blue-600 to-blue-400 text-white rounded-md'
                                                         return (
                                                             <button onClick={() => btn.action(item.id, index)} key={index} className={`${customCss} py-1.5 px-3 text-sm flex items-center gap-2`}>
@@ -286,6 +279,11 @@ export default function Datatable({
                                                             </button>
                                                         )
                                                     })}
+                                                    {
+                                                        bulk && (
+                                                            <Dropdown position={`right-0 ${(key + 1 == display) ? 'relative':'absolute'}`} id={item.id} options={bulk}/>
+                                                        )
+                                                    }
                                                 </td>
                                             )
                                         }

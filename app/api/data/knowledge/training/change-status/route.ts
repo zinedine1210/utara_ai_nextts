@@ -1,24 +1,21 @@
 // app/api/data/route.ts
 import client from '@@/src/client/apiClient';
 import { ResponseData } from '@@/src/types/apitypes';
-import { FilterOptions } from '@@/src/types/types';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   const payload = await request.json() ?? []
-  let parameter = `?`
-  payload.map((fil: FilterOptions, index: number) => {
-      const isEnd = index + 1 == payload.length ? '':'&'
-      parameter = parameter + `${fil.key}=${fil.value}${isEnd}`
-  })
+  console.log(payload)
   let timeoutId;
   const timoutInterval = 60000;
   let abortSignal = AbortSignal.timeout(timoutInterval)
   const token = request.cookies.get('auth_token')
-  const requestPromise = await client('/client/abtest/by' + parameter, {
+  const requestPromise = await client('/client/data/status', {
+    method: 'PUT',
     headers: {
-      Authorization: 'Bearer '+ token?.value
-    }
+      Authorization: `Bearer ${token?.value}`
+    },
+    body: payload
   }, abortSignal)
   const timeoutPromise = new Promise((resolve, reject) => {
     timeoutId = setTimeout(() => {
@@ -27,7 +24,6 @@ export async function POST(request: NextRequest) {
   });
   const responseData: ResponseData | any = await Promise.race([requestPromise, timeoutPromise]);
   clearTimeout(timeoutId);
-  console.log(responseData)
   if (responseData.status === -1 && responseData.data === "Timeout") {
     throw new Error("Timeout");
   }else{

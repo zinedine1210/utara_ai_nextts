@@ -8,8 +8,7 @@ const Page = (context: {
     }
 }) => {
     const searchParams = context.searchParams
-    if(!searchParams?.service_id) return redirect('/usr/knowledge/services')
-  return <ABTestPage service_id={searchParams.service_id}/>
+  return <ABTestPage/>
 }
 
 export default Page
