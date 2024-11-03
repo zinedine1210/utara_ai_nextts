@@ -3,13 +3,12 @@ import { useGlobalContext } from '@@/src/providers/GlobalContext';
 import { Notify } from '@@/src/utils/script';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import React, { useEffect, useRef, useState } from 'react'
-import { ChatModel } from '../lib/model';
 import Dropdown from '@@/app/components/Partials/Dropdown';
 import { DropdownOptions } from '@@/src/types/types';
 export default function CardFromContact({
     data
 }: {
-    data: ChatModel
+    data: string
 }) {
     const { state, setState } = useGlobalContext()
     const [open, setOpen] = useState(false);
@@ -30,26 +29,19 @@ export default function CardFromContact({
 
     let optionsChat: DropdownOptions[] = [
         {
-            name: "Reply",
+            name: "AB Test",
             icon: IconsCollection.reply,
             action: (value: any) => {
                 state.setData({ ...state, dataReply: data })
             }
         },
         {
-            name: "Share",
+            name: "Unanswered",
             icon: IconsCollection.share,
             action: (value: any) => {
                 Notify("Action not found", "info")
             }
-        },
-        {
-            name: "Forward",
-            icon: IconsCollection.forward,
-            action: (value: any) => {
-                Notify("Action not found", "info")
-            }
-        },
+        }
     ]
 
   return (
@@ -59,12 +51,12 @@ export default function CardFromContact({
         </span>
         <div className={`pt-3 pb-7 px-3 dark:bg-darkSecondary bg-white leading-1.5 text-white relative shadow-xl max-w-[500px] min-w-56 rounded-e-xl rounded-es-xl`}>
             <span className="text-sm font-semibold text-gray-900 dark:text-white">AI</span>
-            <p className="text-sm font-normal py-1.5 text-gray-900 dark:text-white">{data.getAnswered()}</p>
+            <p className="text-sm font-normal py-1.5 text-gray-900 dark:text-white">{data}</p>
             <div className="absolute bottom-1 right-2 flex items-center gap-2 text-black dark:text-white">
-                <p className="text-xs">{data.getAnsweredDate().split(" ")[3]}</p>
+                {/* <p className="text-xs">{data.getAnsweredDate().split(" ")[3]}</p> */}
             </div>
         </div>
-        <Dropdown position='md:left-0 right-0' options={optionsChat} id={'dropdown'+data.getId()}/>
+        <Dropdown position='md:left-0 right-0' options={optionsChat} id={'dropdown'+data}/>
     </div>
   )
 }

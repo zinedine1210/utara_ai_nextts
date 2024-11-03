@@ -7,10 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   const payload = await request.json() ?? []
-  let objPayload: PayloadTrainingType | any = {}
-  payload.map((fil: FilterOptions, index: number) => {
-    objPayload[fil.key] = fil.value
-  })
+  console.log(payload)
   let timeoutId;
   const timoutInterval = 60000;
   let abortSignal = AbortSignal.timeout(timoutInterval)
@@ -20,7 +17,7 @@ export async function POST(request: NextRequest) {
     headers: {
       Authorization: `Bearer ${token?.value}`
     },
-    body: objPayload
+    body: payload
   }, abortSignal)
   const timeoutPromise = new Promise((resolve, reject) => {
     timeoutId = setTimeout(() => {

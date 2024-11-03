@@ -1,24 +1,55 @@
 'use client'
 import { IconsCollection } from "@@/src/constant/icons";
+import { simulationService } from "@@/src/hooks/CollectionAPI";
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
+import { SimulationChat } from "@@/src/types/types";
 import { Icon } from "@iconify/react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import CardFromMe from "./CardFromMe";
+import CardFromContact from "./CardFromContact";
 
 export default function Simulation({ serviceId }) {
     const { state, setState } = useGlobalContext()
     const [loading, setLoading] = useState<boolean>(false)
     const [data, setData] = useState("")
-    const handlerSubmit = (e: FormEvent) => {
+
+    const simulationChat: undefined | SimulationChat[] = state?.simulation?.[serviceId]
+
+    const handlerSubmit = async (e: FormEvent) => {
         e.preventDefault()
-        // const result = await 
+        setLoading(true)
+        const payload = {
+            collection_name: serviceId,
+            question: data
+        }
+        const result = await simulationService(payload)
+        console.log(result)
+        if(result.success){
+            setState((prev: any) => {
+                return {
+                    ...prev,
+                    simulation: {
+                        [serviceId]: [ ...prev.simulation[serviceId], result.data ]
+                    }
+                }
+            })
+        }
+        setLoading(false)
     }
-  return (
-    <div className="border-2 w-full border-red-500 relative overflow-hidden flex flex-col">
-        <div className="w-full pt-4 pb-8 rounded-b-full flex items-center justify-between bg-blue-100 dark:bg-blue-500 px-2 text-center">
-            {
-                close && <button className="absolute top-2 right-2" onClick={() => setState({...state, simulation: null })}><Icon icon={IconsCollection.close} className="text-xl" /></button>
+
+    useEffect(() => {
+        setState((prev: any) => {
+            return {
+                ...prev,
+                simulation: { [serviceId]: [] }
             }
-            <button className="absolute top-2 right-2 xl:hidden" onClick={() => setState({...state, simulation: null })}><Icon icon={IconsCollection.close} className="text-xl" /></button>
+        })
+    }, [])
+
+    
+  return (
+    <div className="border-2 w-full relative overflow-hidden flex flex-col">
+        <div className="w-full pt-4 pb-8 rounded-b-full flex items-center justify-between bg-blue-100 dark:bg-blue-500 px-2 text-center">
             <div className="w-full">
                 <h1 className="text-xl font-bold font-mono">Chat Simulation AI</h1>
                 <p className="text-sm font-medium text-zinc-600 dark:text-zinc-200">Ask any question our AI will answer!</p>
@@ -26,8 +57,8 @@ export default function Simulation({ serviceId }) {
         </div>
         <div className="h-full overflow-y-hidden hover:overflow-y-auto no-scrollbar px-3 pt-2 pb-20">
             <div className="space-y-2 w-full mx-auto">
-                <div className="flex gap-2">
-                    <span className="w-8 h-8 uppercase rounded-full bg-blue-500 text-white flex items-center justify-center font-bold border-2 border-white"><Icon icon={IconsCollection.chat} /></span>
+                {/* <div className="flex gap-2">
+                    <span className="w-10 h-10 uppercase rounded-full bg-blue-500 text-white flex items-center justify-center font-bold border-2 border-white"><Icon icon={IconsCollection.chat} /></span>
                     <div>
                         <h1 className="text-zinc-500 text-sm font-medium py-1 first-letter:uppercase">ChatBot</h1>
                         <div className="space-y-2">
@@ -37,11 +68,20 @@ export default function Simulation({ serviceId }) {
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </div> */}
+                {
+                    simulationChat && simulationChat.map((chat: SimulationChat, index: number) => {
+                        return (
+                            <>
+                                <CardFromMe data={chat.question}/>
+                                <CardFromContact data={chat.answer}/>
+                            </>
+                        )
+                    })
+                }
             </div>
         </div>
-        <div className="fixed xl:absolute right-1/2 translate-x-1/2 w-full px-5 bottom-0 overflow-hidden rounded-xl">
+        <div className="absolute right-1/2 translate-x-1/2 w-full px-5 bottom-0 overflow-hidden rounded-xl">
             <form onSubmit={(e) => handlerSubmit(e)} className="relative">
                 <input disabled={loading} value={data} id="inputQuestion" type="text" className="outline-none peer p-2 w-full text-sm font-medium border-2 border-blue-200 rounded-xl placeholder:text-zinc-500 pr-10 pl-5 bg-zinc-200 dark:bg-darkPrimary focus:bg-white transition-all duration-300" placeholder="Any Question?" maxLength={100} onChange={(e) => setData(e.target.value)} />
                 <button type="submit" className="absolute peer-focus:translate-x-0 -translate-x-5 opacity-0 peer-focus:opacity-100 hover:scale-125 transition-all duration-300 top-1/2 -translate-y-1/2 right-2 w-8 h-8 flex items-center justify-center peer-focus:visible invisible">

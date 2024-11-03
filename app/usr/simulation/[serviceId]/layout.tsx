@@ -26,7 +26,7 @@ export default function SimulationLayout({
   return (
     <section className="w-full h-full overflow-hidden">
         <div className='flex w-full h-full'>
-          <div className='h-full overflow-y-auto w-96 border border-red-500 flex flex-col'>
+          <div className='h-full overflow-y-auto w-96 flex flex-col'>
             <header className='bg-white border-b border-zinc-500 py-2 px-3'>
               <Select 
                 id='services'
@@ -51,13 +51,13 @@ export default function SimulationLayout({
               />
             </header>
             <div className='flex-1 h-full overflow-auto'>
-              <Link href={``}>
+              <Link href={`/usr/simulation/${params.serviceId}`}>
                 <button type='button' className='py-3 px-5 text-xs hover:bg-primary/20 duration-300 ease-in-out w-full text-start flex items-center gap-2'><Icon icon={IconsCollection.chat} className='text-primary text-xl'/>Chat</button>
               </Link>
-              <Link href={`abtest`}>
+              <Link href={`/usr/simulation/${params.serviceId}/abtest`}>
                 <button type='button' className='py-3 px-5 text-xs hover:bg-primary/20 duration-300 ease-in-out w-full text-start flex items-center gap-2'><Icon icon={IconsCollection.abtest} className='text-primary text-xl'/>AB Test</button>
               </Link>
-              <Link href={`unanswered`}>
+              <Link href={`/usr/simulation/${params.serviceId}/unanswered`}>
                 <button type='button' className='py-3 px-5 text-xs hover:bg-primary/20 duration-300 ease-in-out w-full text-start flex items-center gap-2'><Icon icon={IconsCollection.unanswered} className='text-primary text-xl'/>Unanswered Question</button>
               </Link>
             </div>

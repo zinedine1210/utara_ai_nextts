@@ -139,7 +139,6 @@ export const getHistoryTopUp = async (filter: FilterOptions[]) => {
         }
     }
     const daterangefilter = restructureDateRange(filter)
-    console.log(daterangefilter)
     const result = await axios.post(`${baseURL}/data/topup`, daterangefilter ?? [])
     const responseData = result.data
     if(!responseData.success) {
@@ -274,6 +273,17 @@ export const getEnume = async (url: UrlEnum) => {
         }
     ]
     const result = await axios.post(`${baseURL}/data/enume`, payload ?? [])
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+// Simulation
+export const simulationService = async (payload: {[key: string]: any}) => {
+    const result = await axios.post(`${baseURL}/data/simulation`, payload)
     const responseData = result.data
     if(!responseData.success) {
         Notify(responseData.message ?? 'Something went wrong', 'error', 3000)

@@ -85,4 +85,9 @@ export interface FilterOptions {
     value: any
 }
 
+export interface SimulationChat {
+    answer: string
+    question: string    
+}
+
 export type UrlEnum = "/unanswered_model/UnansweredStatus" | "/service_model/ServiceType" | "/service_model/ServiceStatus"

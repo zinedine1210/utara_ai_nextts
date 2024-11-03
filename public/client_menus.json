@@ -152,7 +152,7 @@
     "parent": "",
     "sortnumber": 80,
     "id": "clm_simulation",
-    "route": "/usr/simulation",
+    "route": "/usr/simulation/all",
     "name": "Simulation",
     "flag": "simulation",
     "show": true

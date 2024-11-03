@@ -19,11 +19,13 @@ import { IconsCollection } from "@@/src/constant/icons";
 import Simulation from "./components/Simulation";
 import Select from "@@/app/components/Input/Select";
 import { Notify } from "@@/src/utils/script";
+import { useRouter } from "next/navigation";
 
 export default function TrainingPage() {
   const { state, setState } = useGlobalContext();
   const statename: string = 'trainingdata'
   const windowWidth = useWindowSize();
+  const router = useRouter()
   const [optionsSimulation, setOptionsSimulation] = useState<Options[]>([])
 
   const initialMount = useCallback(async () => {
@@ -97,10 +99,12 @@ export default function TrainingPage() {
                 Notify('You must activated this training data', "info", 3000)
                 return prev
               }
-              return {
-                ...prev, 
-                simulation: id
+              if(!findOne.collection_name) {
+                Notify("Collection name not found", "info", 3000)
+                return prev
               }
+              router.push(`/usr/simulation/${findOne.collection_name}`)
+              return prev
             })
           }
         },
