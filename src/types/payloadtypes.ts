@@ -9,3 +9,16 @@ export interface PayloadTrainingType {
     version: string
     files: string[]
 }
+
+export interface PayloadABTest {
+    id: string
+    service_id: string
+    question: string
+    rec_by: string
+}
+
+export interface PayloadChangeStatusABTest {
+    id: string
+    status: "NEW" | "IN_QUEUE" | "TESTED" | "CORRECTED" | "IGNORED" | "TRAINED"
+    mod_by: string
+}

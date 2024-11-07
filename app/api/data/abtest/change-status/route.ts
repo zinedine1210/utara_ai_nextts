@@ -1,8 +1,6 @@
 // app/api/data/route.ts
 import client from '@@/src/client/apiClient';
 import { ResponseData } from '@@/src/types/apitypes';
-import { PayloadTrainingType } from '@@/src/types/payloadtypes';
-import { FilterOptions } from '@@/src/types/types';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -11,12 +9,12 @@ export async function POST(request: NextRequest) {
   const timoutInterval = 60000;
   let abortSignal = AbortSignal.timeout(timoutInterval)
   const token = request.cookies.get('auth_token')
-  const requestPromise = await client('/client/abtest/do_test/'+ payload.id, {
-    method: 'POST',
+  const requestPromise = await client('/client/abtest/status', {
+    method: 'PUT',
     headers: {
       Authorization: `Bearer ${token?.value}`
     },
-    body: {}
+    body: payload
   }, abortSignal)
   const timeoutPromise = new Promise((resolve, reject) => {
     timeoutId = setTimeout(() => {

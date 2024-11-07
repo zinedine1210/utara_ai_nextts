@@ -20,7 +20,7 @@ export interface TrainingType {
     trained_date: string | null
     tokens: string | null
     cost: string | null
-    status: string
+    status: "ACTIVE" | "INACTIVE" | "IN_QUEUE"
     rec_by: string
     rec_date: string
     mod_by: string | null
@@ -113,4 +113,19 @@ export interface TopUpType {
     mod_by: null | string
     mod_date: null | Date
     origin_response: null | string
+}
+
+export interface ABTestType {
+    id: string
+    service_id: string
+    question: string
+    answer: string | null
+    answer_date: string | null
+    correction: string | null
+    correction_date: string | null
+    status: "NEW" | "IN_QUEUE" | "TESTED" | "CORRECTED" | "IGNORED" | "TRAINED",
+    rec_by: string | null
+    rec_date: Date
+    mod_by: string | null
+    mod_date: Date | null
 }

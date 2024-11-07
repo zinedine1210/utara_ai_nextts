@@ -77,7 +77,8 @@ export interface DropdownOptions {
 
 export interface Options {
     label: string,
-    value: any
+    value: any,
+    disabled?: boolean
 }
 
 export interface FilterOptions {
@@ -90,4 +91,4 @@ export interface SimulationChat {
     question: string    
 }
 
-export type UrlEnum = "/unanswered_model/UnansweredStatus" | "/service_model/ServiceType" | "/service_model/ServiceStatus"
+export type UrlEnum = "/unanswered_model/UnansweredStatus" | "/service_model/ServiceType" | "/service_model/ServiceStatus" | "/ab_test_model/ABTestStatus"

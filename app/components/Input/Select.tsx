@@ -134,7 +134,7 @@ export default function Select({
                                 return false;
                             }).map((opt, index) => {
                                 return (
-                                    <button type="button" key={index} onClick={() => onChange(opt.value)} className={`${opt.value == value ?"bg-primary text-white font-bold":"dark:text-zinc-400 hover:bg-primary/30"} duration-300 p-2 cursor-pointer flex items-center gap-2 w-full text-start`}>
+                                    <button type="button" disabled={opt.disabled ?? false} key={index} onClick={() => onChange(opt.value)} className={`${opt.value == value ?"bg-primary text-white font-bold disabled:text-black":"dark:text-zinc-400 hover:bg-primary/30"} duration-300 p-2 cursor-pointer flex items-center gap-2 w-full text-start disabled:bg-zinc-300 disabled:cursor-not-allowed`}>
                                         {opt.label}
                                     </button>
                                 )

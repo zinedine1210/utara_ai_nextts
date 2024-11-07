@@ -47,4 +47,12 @@ export class ServicesModel {
             }
         })
     }
+    static toOptionsTrainingData = (array: ServicesType[]) => {
+        return array.map((item: ServicesType) => {
+            return {
+                label: `${item.description}`,
+                value: item.properties.data
+            }
+        })
+    }
 }

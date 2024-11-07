@@ -159,7 +159,7 @@ export default function TrainingPage() {
       prev[statename].onGet(prev[statename].filter)
       return prev
     })
-  }, [setState])
+  }, [setState, router])
 
   useEffect(() => {
     if(!state?.[statename]){

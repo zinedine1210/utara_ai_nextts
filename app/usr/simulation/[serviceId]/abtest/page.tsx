@@ -1,7 +1,7 @@
-import React from 'react'
+import ABTestPage from "@@/lib/abtest/ABTestPage";
 
 export default function ABTest() {
   return (
-    <div>ABTest</div>
+    <ABTestPage />
   )
 }

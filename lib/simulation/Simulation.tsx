@@ -44,7 +44,7 @@ export default function Simulation({ serviceId }) {
                 simulation: { [serviceId]: [] }
             }
         })
-    }, [])
+    }, [setState, serviceId])
 
     
   return (
@@ -73,8 +73,8 @@ export default function Simulation({ serviceId }) {
                     simulationChat && simulationChat.map((chat: SimulationChat, index: number) => {
                         return (
                             <>
-                                <CardFromMe data={chat.question}/>
-                                <CardFromContact data={chat.answer}/>
+                                <CardFromMe data={chat} serviceId={serviceId}/>
+                                <CardFromContact data={chat} serviceId={serviceId}/>
                             </>
                         )
                     })

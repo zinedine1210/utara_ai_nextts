@@ -4,11 +4,15 @@ import { Notify } from '@@/src/utils/script';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import React, { useEffect, useRef, useState } from 'react'
 import Dropdown from '@@/app/components/Partials/Dropdown';
-import { DropdownOptions } from '@@/src/types/types';
+import { DropdownOptions, SimulationChat } from '@@/src/types/types';
+import { postABTest } from '@@/src/hooks/CollectionAPI';
+import { PayloadABTest } from '@@/src/types/payloadtypes';
 export default function CardFromContact({
-    data
+    data,
+    serviceId
 }: {
-    data: string
+    data: SimulationChat,
+    serviceId: string
 }) {
     const { state, setState } = useGlobalContext()
     const [open, setOpen] = useState(false);
@@ -31,8 +35,16 @@ export default function CardFromContact({
         {
             name: "AB Test",
             icon: IconsCollection.reply,
-            action: (value: any) => {
-                state.setData({ ...state, dataReply: data })
+            action: async (value: any) => {
+                console.log(value)
+                const payload: PayloadABTest = {
+                    id: "",
+                    question: data.question,
+                    rec_by: "",
+                    service_id: serviceId
+                }
+                const result = await postABTest(payload)
+                console.log(result)
             }
         },
         {
@@ -51,7 +63,7 @@ export default function CardFromContact({
         </span>
         <div className={`pt-3 pb-7 px-3 dark:bg-darkSecondary bg-white leading-1.5 text-white relative shadow-xl max-w-[500px] min-w-56 rounded-e-xl rounded-es-xl`}>
             <span className="text-sm font-semibold text-gray-900 dark:text-white">AI</span>
-            <p className="text-sm font-normal py-1.5 text-gray-900 dark:text-white">{data}</p>
+            <p className="text-sm font-normal py-1.5 text-gray-900 dark:text-white">{data.answer}</p>
             <div className="absolute bottom-1 right-2 flex items-center gap-2 text-black dark:text-white">
                 {/* <p className="text-xs">{data.getAnsweredDate().split(" ")[3]}</p> */}
             </div>

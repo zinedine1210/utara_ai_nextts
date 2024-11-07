@@ -2,7 +2,7 @@ import { setCookies } from "@@/app/actions";
 import axios from "axios"
 import { Notify } from "../utils/script";
 import { FilterOptions, UrlEnum } from "../types/types";
-import { PayloadAttachmentType } from "../types/payloadtypes";
+import { PayloadABTest, PayloadAttachmentType } from "../types/payloadtypes";
 let protocol = '';
 let host = '';
 let port = '';
@@ -250,20 +250,6 @@ export const initializeTopUp = async (payload: FilterOptions[]) => {
     return responseData
 }
 
-
-// ABTEST
-export const getABTest = async (filter: FilterOptions[]) => {
-    const result = await axios.post(`${baseURL}/data/abtest`, filter ?? [])
-    const responseData = result.data
-    if(!responseData.success) {
-        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
-        responseData.data = responseData.data ?? []
-    }
-    return responseData
-}
-
-
-
 // ENUM
 export const getEnume = async (url: UrlEnum) => {
     const payload: FilterOptions[] = [
@@ -284,6 +270,67 @@ export const getEnume = async (url: UrlEnum) => {
 // Simulation
 export const simulationService = async (payload: {[key: string]: any}) => {
     const result = await axios.post(`${baseURL}/data/simulation`, payload)
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+
+// ABTEST
+export const getABTest = async (filter: FilterOptions[]) => {
+    const result = await axios.post(`${baseURL}/data/abtest`, filter ?? [])
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+export const postABTest = async (payload: PayloadABTest) => {
+    const result = await axios.post(`${baseURL}/data/abtest/create`, payload)
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+export const changeStatusABTest = async (payload: any) => {
+    const result = await axios.post(`${baseURL}/data/abtest/change-status`, payload)
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+export const postDoTestABTest = async (payload: {[key: string]: any}) => {
+    const result = await axios.post(`${baseURL}/data/abtest/do_test`, payload)
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+export const postCorrectionABTest = async (payload: {[key: string]: any}) => {
+    const result = await axios.post(`${baseURL}/data/abtest/correction`, payload)
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+export const postTrainingABTest = async (payload: {[key: string]: any}) => {
+    const result = await axios.post(`${baseURL}/data/abtest/trained`, payload)
     const responseData = result.data
     if(!responseData.success) {
         Notify(responseData.message ?? 'Something went wrong', 'error', 3000)

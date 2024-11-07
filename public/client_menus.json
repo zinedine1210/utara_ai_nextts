@@ -148,23 +148,11 @@
   {
     "description": "",
     "feature": "",
-    "icon": "material-symbols-light:voice-chat-outline",
-    "parent": "",
-    "sortnumber": 80,
-    "id": "clm_simulation",
-    "route": "/usr/simulation/all",
-    "name": "Simulation",
-    "flag": "simulation",
-    "show": true
-  },
-  {
-    "description": "",
-    "feature": "",
     "icon": "mdi:ab-testing",
     "parent": "",
     "sortnumber": 80,
     "id": "clm_abtest",
-    "route": "/usr/ab-test",
+    "route": "/usr/simulation/all",
     "name": "AB Test",
     "flag": "simulation",
     "show": true

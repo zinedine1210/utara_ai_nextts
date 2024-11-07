@@ -24,5 +24,7 @@ export const IconsCollection: {[key: string]: string} = {
     'money': 'solar:wallet-money-bold-duotone',
     'request': 'material-symbols-light:request-page-sharp',
     'unanswered': "uil:comment-question",
-    "abtest": "mdi:ab-testing"
+    "abtest": "mdi:ab-testing",
+    'test': "dashicons:testimonial",
+    'question_mark': "line-md:question"
 }
