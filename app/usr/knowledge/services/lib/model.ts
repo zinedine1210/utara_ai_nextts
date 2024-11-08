@@ -15,6 +15,7 @@ export class ServicesModel {
     public mod_by: null | string
     public mod_date: null | string
     public createdAt: string
+    public properties: any
 
     constructor(props: ServicesType){
         this.description = props.description
@@ -31,6 +32,7 @@ export class ServicesModel {
         this.mod_date = props.mod_date
         this.status = props.status
         this.createdAt = formatDateData(props.rec_date)
+        this.properties = props.properties
     }
 
     static toDatatableResponse = (array: ServicesType[]) => {

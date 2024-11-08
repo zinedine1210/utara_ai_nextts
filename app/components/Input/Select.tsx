@@ -72,7 +72,9 @@ export default function Select({
                 return placeholder ?? 'Select'
             }else{
                 if(options.length > 0){
-                    return options.find(res => res.value == value)?.label
+                    const find = options.find(res => res.value == value)?.label
+                    if(find) return options.find(res => res.value == value)?.label
+                    else return value
                 }else return value
             }
         }else{
@@ -80,7 +82,9 @@ export default function Select({
                 return placeholder ?? 'Select'
             }else{
                 if(options.length > 0){
-                    return options.find(res => res.value == value)?.label
+                    const find = options.find(res => res.value == value)?.label
+                    if(find) return options.find(res => res.value == value)?.label
+                    else return value
                 }else return value
             }
         }

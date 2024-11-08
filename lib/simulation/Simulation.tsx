@@ -1,17 +1,23 @@
 'use client'
 import { IconsCollection } from "@@/src/constant/icons";
-import { simulationService } from "@@/src/hooks/CollectionAPI";
+import { getDetailServices, getDetailTraining, getServices, getTraining, simulationService } from "@@/src/hooks/CollectionAPI";
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
-import { SimulationChat } from "@@/src/types/types";
+import { FilterOptions, SimulationChat } from "@@/src/types/types";
 import { Icon } from "@iconify/react";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import CardFromMe from "./CardFromMe";
 import CardFromContact from "./CardFromContact";
+import { ResponseData } from "@@/src/types/apitypes";
+import { ServicesModel } from "@@/app/usr/knowledge/services/lib/model";
+import { TrainingModel } from "@@/app/usr/knowledge/training/lib/model";
+import { Notify } from "@@/src/utils/script";
+import Loading from "@@/app/loading";
 
 export default function Simulation({ serviceId }) {
     const { state, setState } = useGlobalContext()
     const [loading, setLoading] = useState<boolean>(false)
     const [data, setData] = useState("")
+    const [collection_name, setCollection_name] = useState(null)
 
     const simulationChat: undefined | SimulationChat[] = state?.simulation?.[serviceId]
 
@@ -19,11 +25,10 @@ export default function Simulation({ serviceId }) {
         e.preventDefault()
         setLoading(true)
         const payload = {
-            collection_name: serviceId,
+            collection_name,
             question: data
         }
         const result = await simulationService(payload)
-        console.log(result)
         if(result.success){
             setState((prev: any) => {
                 return {
@@ -37,18 +42,48 @@ export default function Simulation({ serviceId }) {
         setLoading(false)
     }
 
+    const handleInit = useCallback(async () => {
+        const result: ResponseData = await getDetailServices(serviceId)
+        const data: ServicesModel = result.data
+        if(data && result.success){
+            const trainingId: string | undefined = data.properties.data
+            if(trainingId) {
+                const resultTraining: ResponseData = await getDetailTraining(trainingId)
+                const dataTraining: TrainingModel = resultTraining.data
+                if(resultTraining.success && dataTraining && dataTraining.collection_name !== null){
+                    setCollection_name(dataTraining.collection_name)
+                }else{
+                    const payload: FilterOptions[] = [
+                        { key: "page", value: 1 },
+                        { key: "size", value: 100 },
+                        { key: "id", value: trainingId }
+                    ]
+                    const resultTrainAll: ResponseData = await getTraining(payload)
+                    console.log("ini get all", resultTrainAll)
+                    const dataTrainAll: TrainingModel[] = resultTrainAll.data
+                    const find = dataTrainAll.find((res: TrainingModel) => res.id === trainingId)
+                    if(find) setCollection_name(find.collection_name)
+                }
+            }
+            
+        }
+    }, [serviceId])
+
     useEffect(() => {
+        if(!collection_name){
+            handleInit()
+        }
         setState((prev: any) => {
             return {
                 ...prev,
                 simulation: { [serviceId]: [] }
             }
         })
-    }, [setState, serviceId])
+    }, [setState, serviceId, handleInit, collection_name])
 
-    
+    if(!collection_name) return <Loading />
   return (
-    <div className="border-2 w-full relative overflow-hidden flex flex-col">
+    <div className={"border-2 w-full relative overflow-hidden flex flex-col"}>
         <div className="w-full pt-4 pb-8 rounded-b-full flex items-center justify-between bg-blue-100 dark:bg-blue-500 px-2 text-center">
             <div className="w-full">
                 <h1 className="text-xl font-bold font-mono">Chat Simulation AI</h1>

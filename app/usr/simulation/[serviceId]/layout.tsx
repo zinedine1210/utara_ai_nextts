@@ -9,8 +9,6 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Icon } from '@iconify/react'
 import { IconsCollection } from '@@/src/constant/icons'
-import { TrainingModel } from '../../knowledge/training/lib/model'
-import { Notify } from '@@/src/utils/script'
 
 export default function SimulationLayout({
     children,
@@ -20,17 +18,10 @@ export default function SimulationLayout({
     params: { serviceId: string }
 }) {
   const [servicesOpt, setServicesOpt] = useState<Options[]>([])
-  const [trainingOpt, setTrainingOpt] = useState<TrainingModel[]>([])
   const router = useRouter()
 
   const handleChooseService = (value: string) => {
-    const find = trainingOpt.find(res => res.id == value)
-    console.log(find)
-    if(find && find.collection_name){
-      router.push(`/usr/simulation/${find.collection_name}`)
-    }else{
-      Notify('Collection Name not found', 'info', 3000)
-    }
+    router.push(`/usr/simulation/${value}`)
   }
   return (
     <section className="w-full h-full overflow-hidden">
@@ -53,11 +44,7 @@ export default function SimulationLayout({
                     }
                   ]
                   const result: ResponseData = await getServices(filterOptions)
-                  setServicesOpt(ServicesModel.toOptionsTrainingData(result.data))
-
-                  const resultTrainingData: ResponseData = await getTraining(filterOptions)
-                  console.log(resultTrainingData.data)
-                  setTrainingOpt(TrainingModel.toDatatableResponse(resultTrainingData.data))
+                  setServicesOpt(ServicesModel.toOptions(result.data))
                 }}
                 options={servicesOpt}
                 value={params.serviceId}

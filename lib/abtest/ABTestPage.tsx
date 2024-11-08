@@ -11,8 +11,11 @@ import { ABTestType } from "@@/src/types/datatabletypes"
 import { useWindowSize } from "@@/src/hooks/usewindowsize"
 import CardABTest from "./components/CardABTest"
 import { Notify } from "@@/src/utils/script"
+import ModalCreateABTest from "./components/ModalCreateABTest"
+import { Icon } from "@iconify/react"
+import { IconsCollection } from "@@/src/constant/icons"
 
-export default function ABTestPage() {
+export default function ABTestPage({ serviceId }) {
   const { state, setState } = useGlobalContext()
   const statename: string = 'abtest'
   const windowWidth = useWindowSize();
@@ -85,7 +88,9 @@ export default function ABTestPage() {
         }))
         
         const result: ResponseData = await getABTest(filter)
-        const value: ABTestModel[] = ABTestModel.toDatatableResponse(result.data).reverse().sort((a, b) => {
+        const value: ABTestModel[] = ABTestModel.toDatatableResponse(result.data).filter(res => {
+          return res.serviceId == serviceId
+        }).reverse().sort((a, b) => {
           return (statusPriority[a.status] || 999) - (statusPriority[b.status] || 999);
         })
 
@@ -122,7 +127,7 @@ export default function ABTestPage() {
       prev[statename].onGet(prev[statename].filter)
       return prev
     })
-  }, [setState, statusPriority])
+  }, [setState, statusPriority, serviceId])
 
   useEffect(() => {
     if(!state?.[statename]){
@@ -130,7 +135,7 @@ export default function ABTestPage() {
     }
   }, [initialMount, state])
 
-  const handlerDoTest = async (item: ABTestModel) => {
+  const handlerDoTest = async () => {
     setState((prev: any) => {
       return {
         ...prev,
@@ -140,14 +145,14 @@ export default function ABTestPage() {
         }
       }
     })
-    const result = await postDoTestABTest({ id: item.serviceId })
+    const result = await postDoTestABTest({ id: serviceId })
     if(result.success){
       Notify(result.data.message ?? 'Something went wrong', 'info', 3000)
     }
     state[statename].onGet(state[statename].filter)
   }
 
-  const handleTrained = async (item: ABTestModel) => {
+  const handleTrained = async () => {
     setState((prev: any) => {
       return {
         ...prev,
@@ -157,7 +162,7 @@ export default function ABTestPage() {
         }
       }
     })
-    const result = await postTrainingABTest({ id: item.serviceId })
+    const result = await postTrainingABTest({ id: serviceId })
     if(result.success){
       Notify(result.data.message ?? 'Something went wrong', 'info', 3000)
     }
@@ -183,7 +188,8 @@ export default function ABTestPage() {
     <div className="mx-auto w-full md:w-1/2 py-5 overflow-y-auto no-scrollbar">
       <h1 className="text-xl font-semibold">AB Test List</h1>
       <p className="pb-5 text-sm">First, you can {"DO TEST"} first until the status becomes {"TESTED"}, if so, you can correct it by giving the appropriate answer. After that, it is trained to save the {"CORRECTED"} status results into training data</p>
-
+      <button type="button" className="btn-primary" onClick={() => setState({ ...state, modal: { name: "modalcreateabtest", data: { serviceId } }})}><Icon icon={IconsCollection.abtest}/>Create AB Test</button>
+      <ModalCreateABTest name="modalcreateabtest"/>
       {/* <FilterDatatable statename="abtest"/> */}
 
       <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
@@ -216,12 +222,12 @@ export default function ABTestPage() {
             return (
               <div key={index}>
                 <div className="flex items-center justify-between pb-2 border-b border-primary">
-                  <h1 className="font-semibold text-primary">{item[0]}</h1>
+                  <h1 className="font-semibold text-xl text-primary">{item[0]}</h1>
                   {(item[0] == "NEW" || item[0] == "IN_QUEUE") && item[1].length > 0 && (
-                    <button className="btn-primary" type="button" onClick={() => handlerDoTest(item[1][0])}>Do Test</button>
+                    <button className="btn-primary" type="button" onClick={() => handlerDoTest()}>Do Test</button>
                   )}
                   {item[0] == "CORRECTED" && (
-                    <button className="btn-primary" type="button" onClick={() => handleTrained(item[1][0])}>Trained</button>
+                    <button className="btn-primary" type="button" onClick={() => handleTrained()}>Trained</button>
 
                   )}
                 </div>

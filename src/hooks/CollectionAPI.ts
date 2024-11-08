@@ -107,6 +107,16 @@ export const getServices = async (filter: FilterOptions[]) => {
     return responseData
 }
 
+export const getDetailServices = async (id: string) => {
+    const result = await axios.get(`${baseURL}/data/knowledge/services/${id}`)
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
 export const getAttachment = async (filter: FilterOptions[]) => {
     const result = await axios.post(`${baseURL}/data/knowledge/attachment`, filter ?? [])
     const responseData = result.data

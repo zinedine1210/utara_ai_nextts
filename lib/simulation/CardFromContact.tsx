@@ -33,7 +33,7 @@ export default function CardFromContact({
 
     let optionsChat: DropdownOptions[] = [
         {
-            name: "AB Test",
+            name: "Add to AB Test",
             icon: IconsCollection.reply,
             action: async (value: any) => {
                 console.log(value)
@@ -45,13 +45,6 @@ export default function CardFromContact({
                 }
                 const result = await postABTest(payload)
                 console.log(result)
-            }
-        },
-        {
-            name: "Unanswered",
-            icon: IconsCollection.share,
-            action: (value: any) => {
-                Notify("Action not found", "info")
             }
         }
     ]

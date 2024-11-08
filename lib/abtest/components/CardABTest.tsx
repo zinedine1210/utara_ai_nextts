@@ -17,6 +17,7 @@ export default function CardABTest({ item, statename }: {
   item: ABTestModel,
   statename: string
 }) {
+  const [loadingCard, setLoadingCard] = useState(false)
   const { state, setState } = useGlobalContext()
   const context: undefined | StateType<ABTestType> = state[statename]
   const [open, setOpen] = useState<boolean>(false)
@@ -24,15 +25,7 @@ export default function CardABTest({ item, statename }: {
   const [correction, setCorrection] = useState("")
 
   const handleCorrection = async () => {
-    setState((prev: any) => {
-      return {
-        ...prev,
-        [statename]: {
-          ...prev[statename],
-          isLoading: true
-        }
-      }
-    })
+    setLoadingCard(true)
     const payload = {
       id: item.id,
       correction,
@@ -40,20 +33,14 @@ export default function CardABTest({ item, statename }: {
     }
     const result = await postCorrectionABTest(payload)
     if(result.success){
+      setCorrection("")
       context.onGet(context.filter)
     }
+    setLoadingCard(false)
   }
 
   const onChangeStatus = async (value: "NEW" | "IN_QUEUE" | "TESTED" | "CORRECTED" | "IGNORED" | "TRAINED") => {
-    setState((prev: any) => {
-      return {
-        ...prev,
-        [statename]: {
-          ...prev[statename],
-          isLoading: true
-        }
-      }
-    })
+    setLoadingCard(true)
     const payload: PayloadChangeStatusABTest = {
       id: item.id,
       status: value,
@@ -64,9 +51,10 @@ export default function CardABTest({ item, statename }: {
       Notify('Success update status', 'success', 3000)
     }
     context.onGet(context.filter)
+    setLoadingCard(false)
   }
 
-  if(!context.isLoading){
+  if(!context.isLoading || !loadingCard){
     return (
       <div className={`w-full bg-primary shadow-md rounded-md ${disabled && "pointer-events-none"}`}>
         <div className="flex items-center justify-between p-2">

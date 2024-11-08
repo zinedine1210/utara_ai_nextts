@@ -74,9 +74,7 @@ export interface ServicesType {
     channel_id: string
     channel: string
     prompt: string
-    properties: {
-        data: string
-    }
+    properties: any
     status: string
     rec_by: string
     rec_date: string
