@@ -329,6 +329,7 @@ export const postDoTestABTest = async (payload: {[key: string]: any}) => {
     }
     return responseData
 }
+
 export const postCorrectionABTest = async (payload: {[key: string]: any}) => {
     const result = await axios.post(`${baseURL}/data/abtest/correction`, payload)
     const responseData = result.data
@@ -341,6 +342,48 @@ export const postCorrectionABTest = async (payload: {[key: string]: any}) => {
 
 export const postTrainingABTest = async (payload: {[key: string]: any}) => {
     const result = await axios.post(`${baseURL}/data/abtest/trained`, payload)
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+
+// UNANSWERED
+export const getUnanswered = async (filter: FilterOptions[]) => {
+    const result = await axios.post(`${baseURL}/data/unanswered`, filter ?? [])
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+export const changeStatusUnanswered = async (payload: any) => {
+    const result = await axios.post(`${baseURL}/data/unanswered/change-status`, payload)
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+export const postTrainingUnanswered = async (payload: {[key: string]: any}) => {
+    const result = await axios.post(`${baseURL}/data/unanswered/trained`, payload)
+    const responseData = result.data
+    if(!responseData.success) {
+        Notify(responseData.message ?? 'Something went wrong', 'error', 3000)
+        responseData.data = responseData.data ?? []
+    }
+    return responseData
+}
+
+export const putUnanswered = async (payload: {[key: string]: any}) => {
+    const result = await axios.post(`${baseURL}/data/unanswered/correction`, payload)
     const responseData = result.data
     if(!responseData.success) {
         Notify(responseData.message ?? 'Something went wrong', 'error', 3000)

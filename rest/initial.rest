@@ -9,7 +9,7 @@
 @apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
 @ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNTJRRTM2UlgzUUtGRzNZWjU0WEpXQjIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI0Mzk2MjE2fQ.NOqfW3Ljg80ZvQuoZwHtFY2gVsMjHYvgNXneAq-AbiA
 @partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUoyWllYTjJSWVlHSzc2TlNCUTJSV0owMiIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzIxNDMzNTAyfQ.yomnaf9KczdgQEf7qBe4z3LU38uyZr4VO7kNOZxy7rU
-@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKOTE2NE1GRDZTUE5CRFRXQzlKRTlWWlIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzMxMDM4NjA1fQ.TV9RktAo9XptyIv4yAdCIczSBffEAjbOZ8b_M1V8kJA
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKOTE2NE1GRDZTUE5CRFRXQzlKRTlWWlIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzMxMjQxMTk5fQ.EjjFYYUl3RbjnMznAYmD8dvlGUfpl7LVOLZh2WsLbb8
 @token = {{clientToken}}
 
 
@@ -1010,3 +1010,11 @@ authorization: {{token}}
 GET {{host}}/v1/client/abtest/by HTTP/1.1
 content-type: {{json}}
 authorization: {{token}}
+
+
+### Unanswered
+GET {{host}}/v1/client/unanswered/by HTTP/1.1
+content-type: {{json}}
+authorization: {{token}}
+
+

@@ -127,3 +127,16 @@ export interface ABTestType {
     mod_by: string | null
     mod_date: Date | null
 }
+
+export interface UnansweredType {
+    id: string
+    channel_id: string
+    channel: string
+    service_id: string
+    question: string
+    answer: null | string
+    status: "NEW" | "ANSWERED" | "IGNORED" | "TRAINED",
+    rec_date: string | Date
+    mod_by: null | string
+    mod_date: null | Date | string
+}

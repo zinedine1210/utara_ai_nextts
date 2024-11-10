@@ -1,45 +1,40 @@
 'use client'
 
-import { getABTest, getEnume, postDoTestABTest, postTrainingABTest } from "@@/src/hooks/CollectionAPI"
+import { getEnume, getUnanswered, postTrainingUnanswered } from "@@/src/hooks/CollectionAPI"
 import { useGlobalContext } from "@@/src/providers/GlobalContext"
 import { ResponseData } from "@@/src/types/apitypes"
 import { FilterOptions, Options, StateType } from "@@/src/types/types"
 import { useCallback, useEffect, useState } from "react"
-import { ABTestModel } from "./lib/model"
+import { UnansweredModel } from "./lib/model"
 import { tableTopUp } from "@@/src/constant/table"
-import { ABTestType } from "@@/src/types/datatabletypes"
+import { UnansweredType } from "@@/src/types/datatabletypes"
 import { useWindowSize } from "@@/src/hooks/usewindowsize"
-import CardABTest from "./components/CardABTest"
 import { Notify } from "@@/src/utils/script"
-import ModalCreateABTest from "./components/ModalCreateABTest"
-import { Icon } from "@iconify/react"
-import { IconsCollection } from "@@/src/constant/icons"
+import CardUnanswered from "./components/CardUnanswered"
 
-export default function ABTestPage({ serviceId }) {
+export default function UnansweredPage({ serviceId }) {
   const { state, setState } = useGlobalContext()
-  const statename: string = 'abtest'
+  const statename: string = 'unanswered'
   const windowWidth = useWindowSize();
   const [tab, setTab] = useState(1)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const statusPriority = {
     "NEW": 1,
-    "IN_QUEUE": 2,
-    "TESTED": 3,
-    "CORRECTED": 4,
-    "IGNORED": 5,
-    "TRAINED": 6
+    "ANSWERED": 2,
+    "TRAINED": 3,
+    "IGNORED": 4
   };
 
-  const mapData: undefined | ABTestModel[] = state?.[statename]?.data
+  const mapData: undefined | UnansweredModel[] = state?.[statename]?.data
 
   const initialMount = useCallback(async () => {
     let arrayOptionStatus: Options[] = []
-    const getEnum = await getEnume('/ab_test_model/ABTestStatus')
+    const getEnum = await getEnume('/unanswered_model/UnansweredStatus')
     if(getEnum.success){
       Object.entries(getEnum.data).map((item, index: number) => {
         let disabled: boolean = false
-        if(item[0] == "TESTED" || item[0] == "CORRECTED" || item[0] == "TRAINED") disabled = true
+        if(item[0] == "ANSWERED" || item[0] == "TRAINED") disabled = true
         arrayOptionStatus.push({
           label: item[0],
           value: item[1],
@@ -48,7 +43,7 @@ export default function ABTestPage({ serviceId }) {
       })
     }
     
-    let defaultValue: StateType<ABTestType> = {
+    let defaultValue: StateType<UnansweredType> = {
       isLoading: false,
       headers: tableTopUp,
       filter: [
@@ -59,10 +54,6 @@ export default function ABTestPage({ serviceId }) {
         {
           key: 'page',
           value: 1
-        },
-        {
-          key: "service_id",
-          value: serviceId
         }
       ],
       filterKey: [
@@ -91,14 +82,14 @@ export default function ABTestPage({ serviceId }) {
           }
         }))
         
-        const result: ResponseData = await getABTest(filter)
-        const value: ABTestModel[] = ABTestModel.toDatatableResponse(result.data).reverse().sort((a, b) => {
+        const result: ResponseData = await getUnanswered(filter)
+        const value: UnansweredModel[] = UnansweredModel.toDatatableResponse(result.data).reverse().sort((a, b) => {
           return (statusPriority[a.status] || 999) - (statusPriority[b.status] || 999);
         })
 
         // grouping
-        let dataState: {[key: string]: ABTestModel[]} = {}
-        value.forEach((element: ABTestModel) => {
+        let dataState: {[key: string]: UnansweredModel[]} = {}
+        value.forEach((element: UnansweredModel) => {
           if(dataState?.[element.status]){
             dataState[element.status].push(element)
           }else{
@@ -129,30 +120,13 @@ export default function ABTestPage({ serviceId }) {
       prev[statename].onGet(prev[statename].filter)
       return prev
     })
-  }, [setState, statusPriority, serviceId])
+  }, [setState, statusPriority])
 
   useEffect(() => {
     if(!state?.[statename]){
       initialMount()
     }
   }, [initialMount, state])
-
-  const handlerDoTest = async () => {
-    setState((prev: any) => {
-      return {
-        ...prev,
-        [statename]: {
-          ...prev[statename],
-          isLoading: true
-        }
-      }
-    })
-    const result = await postDoTestABTest({ id: serviceId })
-    if(result.success){
-      Notify(result.data.message ?? 'Something went wrong', 'info', 3000)
-    }
-    state[statename].onGet(state[statename].filter)
-  }
 
   const handleTrained = async () => {
     setState((prev: any) => {
@@ -164,7 +138,7 @@ export default function ABTestPage({ serviceId }) {
         }
       }
     })
-    const result = await postTrainingABTest({ id: serviceId })
+    const result = await postTrainingUnanswered({ id: serviceId })
     if(result.success){
       Notify(result.data.message ?? 'Something went wrong', 'info', 3000)
     }
@@ -188,11 +162,8 @@ export default function ABTestPage({ serviceId }) {
 
   return (
     <div className="mx-auto w-full md:w-1/2 py-5 overflow-y-auto no-scrollbar">
-      <h1 className="text-xl font-semibold">AB Test List</h1>
-      <p className="pb-5 text-sm">First, you can {"DO TEST"} first until the status becomes {"TESTED"}, if so, you can correct it by giving the appropriate answer. After that, it is trained to save the {"CORRECTED"} status results into training data</p>
-      <button type="button" className="btn-primary" onClick={() => setState({ ...state, modal: { name: "modalcreateabtest", data: { serviceId } }})}><Icon icon={IconsCollection.abtest}/>Create AB Test</button>
-      <ModalCreateABTest name="modalcreateabtest"/>
-      {/* <FilterDatatable statename="abtest"/> */}
+      <h1 className="text-xl font-semibold">Unanswered Question</h1>
+      {/* <p className="pb-5 text-sm">First, you can {"DO TEST"} first until the status becomes {"TESTED"}, if so, you can correct it by giving the appropriate answer. After that, it is trained to save the {"CORRECTED"} status results into training data</p> */}
 
       <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
           <ul className="flex flex-wrap -mb-px">
@@ -213,7 +184,7 @@ export default function ABTestPage({ serviceId }) {
         {
           mapData ? Object.entries(mapData).filter(res => {
             if(tab == 1){
-              return (res[0] != "TRAINED" && res[0] != "IGNORED")
+              return (res[0] == "NEW" || res[0] == "ANSWERED")
             }else if(tab == 2){
               return res[0] == "TRAINED"
             }else if(tab == 3){
@@ -225,10 +196,7 @@ export default function ABTestPage({ serviceId }) {
               <div key={index}>
                 <div className="flex items-center justify-between pb-2 border-b border-primary">
                   <h1 className="font-semibold text-xl text-primary">{item[0]}</h1>
-                  {(item[0] == "IN_QUEUE") && item[1].length > 0 && (
-                    <button className="btn-primary" type="button" onClick={() => handlerDoTest()}>Do Test</button>
-                  )}
-                  {item[0] == "CORRECTED" && (
+                  {item[0] == "ANSWERED" && (
                     <button className="btn-primary" type="button" onClick={() => handleTrained()}>Trained</button>
 
                   )}
@@ -236,9 +204,9 @@ export default function ABTestPage({ serviceId }) {
 
                 <div className="py-2 space-y-2">
                   {
-                    item[1].length > 0 ? item[1].map((item: ABTestModel, index2: number) => {
+                    item[1].length > 0 ? item[1].map((item: UnansweredModel, index2: number) => {
                       return (
-                        <CardABTest item={item} key={index2} statename={statename}/>
+                        <CardUnanswered item={item} key={index2} statename={statename}/>
                       )
                     })
                     :

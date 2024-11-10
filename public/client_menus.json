@@ -136,18 +136,6 @@
   {
     "description": "",
     "feature": "",
-    "icon": "uil:comment-question",
-    "parent": "",
-    "sortnumber": 402,
-    "id": "clm_qna_unanswered-question",
-    "route": "/usr/qna/unanswered-question",
-    "name": "Unanswered Questions",
-    "flag": "inbox",
-    "show": true
-  },
-  {
-    "description": "",
-    "feature": "",
     "icon": "mdi:ab-testing",
     "parent": "",
     "sortnumber": 80,

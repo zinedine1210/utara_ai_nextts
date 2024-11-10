@@ -2,13 +2,14 @@
 import InputText from "@@/app/components/Input/InputText";
 import Dropdown from "@@/app/components/Partials/Dropdown";
 import { IconsCollection } from "@@/src/constant/icons";
-import { getProfile } from "@@/src/hooks/CollectionAPI";
+import { getProfile, getServices } from "@@/src/hooks/CollectionAPI";
 import { useGlobalContext } from "@@/src/providers/GlobalContext";
-import { DropdownOptions, Options } from "@@/src/types/types";
+import { DropdownOptions, FilterOptions, Options } from "@@/src/types/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ProfileModel } from "../../integration/whatsapp/lib/model";
+import { ServicesModel } from "../../knowledge/services/lib/model";
 
 export default function PanelListChat({
   params
@@ -52,11 +53,44 @@ export default function PanelListChat({
           ...prev,
           options: prev.options
         }))
+    },
+    'getAllServices': async () => {
+      if(!state.services){
+        const payloadFilter: FilterOptions[] = [
+          {
+            key: "page",
+            value: 1
+          },
+          {
+            key: "size",
+            value: 100
+          }
+        ]
+        const result = await getServices(payloadFilter)
+        if(result.success){
+          const data: Options[] = []
+          const dataModel = ServicesModel.toDatatableResponse(result.data)
+          dataModel.forEach((ele: ServicesModel) => {
+            data.push({
+              label: ele.description,
+              value: ele.channel_id
+            })
+          });
+          setState((prev: any) => {
+            return {
+              ...prev,
+              options: {
+                whatsapp: data
+              }
+            }
+          })
+        }
+      }
     }
   }
 
   useEffect(() => {
-    funcAllOptions['getAllChannel']()
+    funcAllOptions['getAllServices']()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -95,9 +129,12 @@ export default function PanelListChat({
         {
           allChannel ? allChannel.length > 0 ? allChannel.map((chan, index) => {
             return (
-              <button onClick={() => router.push(`/usr/chat/${chan.value}`)} className={`${params.roomId == chan.value ? "bg-gradient-to-r from-primary via-primary to-primary/50 text-white":"border border-primary hover:bg-primary/20 duration-300 ease-in-out"} text-base w-full py-2 px-2 text-start rounded-xl font-semibold flex items-center gap-3`} key={index}>
+              <button onClick={() => router.push(`/usr/chat/${chan.value}`)} className={`${params.roomId == chan.value ? "bg-gradient-to-r from-primary via-primary to-primary/50 text-white":"border border-primary hover:bg-primary/20 duration-300 ease-in-out"} text-base w-full py-2 px-2 text-start rounded-xl flex items-center gap-3`} key={index}>
                 <Icon icon={IconsCollection.chat} className={`${params.roomId == chan.value ? 'text-white':'text-primary'} text-2xl`}/>
-                {chan.label}
+                <div className="w-full">
+                  <h1 className="font-semibold text-sm">{chan.label}</h1>
+                  <p className="text-xs font-light text-zinc-500">{chan.value}</p>
+                </div>
               </button>
             )
           })

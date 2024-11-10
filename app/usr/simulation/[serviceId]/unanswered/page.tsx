@@ -1,7 +1,14 @@
-import React from 'react'
+import UnansweredPage from "@@/lib/unanswered/UnansweredPage";
+import { notFound } from "next/navigation";
 
-export default function Unanswered() {
+export default function Page({ params }: {
+  params: {
+    serviceId: string
+  } 
+}) {
+
+  if(params.serviceId == "all") return notFound()
   return (
-    <div>Unanswered</div>
+    <UnansweredPage serviceId={params.serviceId}/>
   )
 }

@@ -87,28 +87,6 @@ export default function TrainingPage() {
           }
         }))
       },
-      bulkButton: [
-        {
-          name: 'Simulation AI',
-          icon: 'hugeicons:ai-chat-02',
-          customCss: 'bg-gradient-to-r from-teal-600 to-teal-400 text-white rounded-md',
-          action: (id, index) => {
-            setState((prev: any) => {
-              const findOne: undefined | TrainingModel = prev[statename].data.find(res => res.id == id)
-              if(!findOne || findOne.status != "ACTIVE"){
-                Notify('You must activated this training data', "info", 3000)
-                return prev
-              }
-              if(!findOne.collection_name) {
-                Notify("Collection name not found", "info", 3000)
-                return prev
-              }
-              router.push(`/usr/simulation/${findOne.collection_name}`)
-              return prev
-            })
-          }
-        },
-      ],
       bulk: [
         {
           action: async (id, index) => {
@@ -159,7 +137,7 @@ export default function TrainingPage() {
       prev[statename].onGet(prev[statename].filter)
       return prev
     })
-  }, [setState, router])
+  }, [setState])
 
   useEffect(() => {
     if(!state?.[statename]){
@@ -196,7 +174,7 @@ export default function TrainingPage() {
           </div>
           <div className="w-full md:w-1/2 flex items-center justify-end gap-2">
             <div className="w-fit md:w-80">
-              <Select 
+              {/* <Select 
                 id="simulation"
                 justIconOnMobile={true}
                 prefixIcon={IconsCollection.chat}
@@ -206,7 +184,7 @@ export default function TrainingPage() {
                 defaultAll={true}
                 options={optionsSimulation}
                 placeholder="Select to simulation"
-              />  
+              />   */}
             </div>
             <button className="btn-secondary" onClick={() => state[statename].onGet(state[statename].filter)}> <h1 className="hidden md:block">Refresh</h1> <Icon icon={'solar:refresh-bold-duotone'} className="text-xl" /></button>
             <Link href={`/usr/knowledge/training/create`} className="inline-block">

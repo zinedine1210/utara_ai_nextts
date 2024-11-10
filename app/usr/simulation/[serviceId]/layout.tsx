@@ -5,7 +5,7 @@ import { FilterOptions, Options } from "@@/src/types/types"
 import { getServices, getTraining } from '@@/src/hooks/CollectionAPI'
 import { ResponseData } from '@@/src/types/apitypes'
 import { ServicesModel } from '../../knowledge/services/lib/model'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Icon } from '@iconify/react'
 import { IconsCollection } from '@@/src/constant/icons'
@@ -19,6 +19,7 @@ export default function SimulationLayout({
 }) {
   const [servicesOpt, setServicesOpt] = useState<Options[]>([])
   const router = useRouter()
+  const pathname = usePathname()
 
   const handleChooseService = (value: string) => {
     router.push(`/usr/simulation/${value}`)
@@ -32,6 +33,8 @@ export default function SimulationLayout({
                 id='services'
                 name='services'
                 onChange={(value) => handleChooseService(value)}
+                defaultAll={false}
+                placeholder='Please select your service first'
                 onTrigger={async () => {
                   const filterOptions: FilterOptions[] = [
                     {
@@ -52,13 +55,13 @@ export default function SimulationLayout({
             </header>
             <div className='flex-1 h-full overflow-auto'>
               <Link href={`/usr/simulation/${params.serviceId}`}>
-                <button type='button' className='py-3 px-5 text-xs hover:bg-primary/20 duration-300 ease-in-out w-full text-start flex items-center gap-2'><Icon icon={IconsCollection.chat} className='text-primary text-xl'/>Chat</button>
+                <button type='button' className={`${pathname == `/usr/simulation/${params.serviceId}` && "bg-primary text-white"} py-3 px-5 text-xs hover:bg-primary/20 duration-300 ease-in-out w-full text-start flex items-center gap-2`}><Icon icon={IconsCollection.chat} className=' text-xl'/>Simulation Chat</button>
               </Link>
               <Link href={`/usr/simulation/${params.serviceId}/abtest`}>
-                <button type='button' className='py-3 px-5 text-xs hover:bg-primary/20 duration-300 ease-in-out w-full text-start flex items-center gap-2'><Icon icon={IconsCollection.abtest} className='text-primary text-xl'/>AB Test</button>
+                <button type='button' className={`${pathname == `/usr/simulation/${params.serviceId}/abtest` && "bg-primary text-white"} py-3 px-5 text-xs hover:bg-primary/20 duration-300 ease-in-out w-full text-start flex items-center gap-2`}><Icon icon={IconsCollection.abtest} className=' text-xl'/>AB Test</button>
               </Link>
               <Link href={`/usr/simulation/${params.serviceId}/unanswered`}>
-                <button type='button' className='py-3 px-5 text-xs hover:bg-primary/20 duration-300 ease-in-out w-full text-start flex items-center gap-2'><Icon icon={IconsCollection.unanswered} className='text-primary text-xl'/>Unanswered Question</button>
+                <button type='button' className={`${pathname == `/usr/simulation/${params.serviceId}/unanswered` && "bg-primary text-white"} py-3 px-5 text-xs hover:bg-primary/20 duration-300 ease-in-out w-full text-start flex items-center gap-2`}><Icon icon={IconsCollection.abtest} className=' text-xl'/>AB Test</button>
               </Link>
             </div>
           </div>

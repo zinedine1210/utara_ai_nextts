@@ -22,3 +22,9 @@ export interface PayloadChangeStatusABTest {
     status: "NEW" | "IN_QUEUE" | "TESTED" | "CORRECTED" | "IGNORED" | "TRAINED"
     mod_by: string
 }
+
+export interface PayloadUnanswered {
+    id: string
+    status: "NEW" | "IGNORED",
+    mod_by: string
+}

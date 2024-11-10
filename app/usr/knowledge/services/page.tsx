@@ -17,11 +17,14 @@ import CardMobileServices from "./components/CardMobileServices";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { IconsCollection } from "@@/src/constant/icons";
 import Link from "next/link";
+import { Notify } from "@@/src/utils/script";
+import { useRouter } from "next/navigation";
 
 export default function ServicesPage() {
   const { state, setState } = useGlobalContext();
   const statename: string = 'services'
   const windowWidth = useWindowSize();
+  const router = useRouter()
 
   const initialMount = useCallback(async () => {
     let defaultValue: StateType<ServicesType> = {
@@ -82,6 +85,24 @@ export default function ServicesPage() {
       totalCount: 0,
       payload: [],
       groupBy: "createdAt",
+      bulkButton: [
+        {
+          name: 'Simulation AI',
+          icon: 'hugeicons:ai-chat-02',
+          customCss: 'bg-gradient-to-r from-teal-600 to-teal-400 text-white rounded-md',
+          action: (id, index) => {
+            setState((prev: any) => {
+              const findOne: undefined | ServicesModel = prev[statename].data.find(res => res.id == id)
+              if(!findOne || findOne.status != "ACTIVE"){
+                Notify('You must activated this training data', "info", 3000)
+                return prev
+              }
+              router.push(`/usr/simulation/${findOne.id}`)
+              return prev
+            })
+          }
+        },
+      ],
       onGet: async (filter: FilterOptions[]) => {
         setState((prev: any) => ({
           ...prev,
