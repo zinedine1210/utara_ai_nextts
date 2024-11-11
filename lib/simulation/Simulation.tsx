@@ -17,6 +17,7 @@ import UsrLoading from "@@/app/usr/loading";
 export default function Simulation({ serviceId }) {
     const { state, setState } = useGlobalContext()
     const [loading, setLoading] = useState<boolean>(false)
+    const [loadingMsg, setLoadingMsg] = useState<boolean>(false)
     const [data, setData] = useState("")
     const [collection_name, setCollection_name] = useState(null)
 
@@ -24,7 +25,7 @@ export default function Simulation({ serviceId }) {
 
     const handlerSubmit = async (e: FormEvent) => {
         e.preventDefault()
-        setLoading(true)
+        setLoadingMsg(true)
         const payload = {
             collection_name,
             question: data
@@ -40,7 +41,7 @@ export default function Simulation({ serviceId }) {
                 }
             })
         }
-        setLoading(false)
+        setLoadingMsg(false)
     }
 
     const handleInit = useCallback(async () => {
@@ -111,18 +112,6 @@ export default function Simulation({ serviceId }) {
               </div>
               <div className="h-full overflow-y-hidden hover:overflow-y-auto no-scrollbar px-3 pt-2 pb-20">
                   <div className="space-y-2 w-full mx-auto">
-                      {/* <div className="flex gap-2">
-                          <span className="w-10 h-10 uppercase rounded-full bg-blue-500 text-white flex items-center justify-center font-bold border-2 border-white"><Icon icon={IconsCollection.chat} /></span>
-                          <div>
-                              <h1 className="text-zinc-500 text-sm font-medium py-1 first-letter:uppercase">ChatBot</h1>
-                              <div className="space-y-2">
-                                  <div className="w-fit bg-white py-3 px-2 shadow-md rounded-md max-w-[300px] relative font-medium text-sm">
-                                      <h1>Hi, there!! this knowledge about: </h1>
-                                      <p className="text-blue-500 mt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, expedita.</p>
-                                  </div>
-                              </div>
-                          </div>
-                      </div> */}
                       {
                           simulationChat && simulationChat.map((chat: SimulationChat, index: number) => {
                               return (
@@ -133,10 +122,17 @@ export default function Simulation({ serviceId }) {
                               )
                           })
                       }
+                      {
+                        loadingMsg && (
+                            <div className="bg-white rounded-2xl shadow-md">
+                                <Icon icon={IconsCollection['elipsis-v']} className="rotate-180"/>
+                            </div>
+                        )
+                      }
                   </div>
               </div>
               <div className="absolute right-1/2 translate-x-1/2 w-full px-5 bottom-0 overflow-hidden rounded-xl">
-                  <form onSubmit={(e) => handlerSubmit(e)} className="relative">
+                  <form onSubmit={(e) => handlerSubmit(e)} className={`${loadingMsg && "pointer-events-none"} relative`}>
                       <input disabled={loading} value={data} id="inputQuestion" type="text" className="outline-none peer p-2 w-full text-sm font-medium border-2 border-blue-200 rounded-xl placeholder:text-zinc-500 pr-10 pl-5 bg-zinc-200 dark:bg-darkPrimary focus:bg-white transition-all duration-300" placeholder="Any Question?" maxLength={100} onChange={(e) => setData(e.target.value)} />
                       <button type="submit" className="absolute peer-focus:translate-x-0 -translate-x-5 opacity-0 peer-focus:opacity-100 hover:scale-125 transition-all duration-300 top-1/2 -translate-y-1/2 right-2 w-8 h-8 flex items-center justify-center peer-focus:visible invisible">
                           {

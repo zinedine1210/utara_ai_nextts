@@ -11,6 +11,9 @@ import { UnansweredType } from "@@/src/types/datatabletypes"
 import { useWindowSize } from "@@/src/hooks/usewindowsize"
 import { Notify } from "@@/src/utils/script"
 import CardUnanswered from "./components/CardUnanswered"
+import { Icon } from "@iconify/react"
+import { IconsCollection } from "@@/src/constant/icons"
+import Loading from "@@/app/loading"
 
 export default function UnansweredPage({ serviceId }) {
   const { state, setState } = useGlobalContext()
@@ -27,6 +30,7 @@ export default function UnansweredPage({ serviceId }) {
   };
 
   const mapData: undefined | UnansweredModel[] = state?.[statename]?.data
+  const isLoading: boolean = state?.[statename]?.isLoading
 
   const initialMount = useCallback(async () => {
     let arrayOptionStatus: Options[] = []
@@ -160,11 +164,29 @@ export default function UnansweredPage({ serviceId }) {
     }
   ]
 
+  const handleRefresh = () => {
+    setState((prev: any) => {
+      if(prev?.[statename]){
+        prev[statename].isLoading = true
+        prev[statename].data = []
+        prev[statename].onGet(prev[statename].filter)
+      }
+      return prev
+    })
+  }
+
   return (
     <div className="mx-auto w-full md:w-1/2 py-5 overflow-y-auto no-scrollbar">
       <h1 className="text-xl font-semibold">Unanswered Question</h1>
-      {/* <p className="pb-5 text-sm">First, you can {"DO TEST"} first until the status becomes {"TESTED"}, if so, you can correct it by giving the appropriate answer. After that, it is trained to save the {"CORRECTED"} status results into training data</p> */}
+      <p className="pb-5 text-sm">Questions that cannot be answered by the AI chat will be automatically entered on this page, you can correct them now</p>
 
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <button type="button" onClick={() => handleRefresh()} className="btn-secondary">
+            <Icon icon={IconsCollection.refresh} className="text-xl"/>
+          </button>
+        </div>
+      </div>
       <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
           <ul className="flex flex-wrap -mb-px">
             {
@@ -182,7 +204,7 @@ export default function UnansweredPage({ serviceId }) {
 
       <div className="space-y-5 mt-5">
         {
-          mapData ? Object.entries(mapData).filter(res => {
+          !isLoading ? mapData ? Object.entries(mapData).filter(res => {
             if(tab == 1){
               return (res[0] == "NEW" || res[0] == "ANSWERED")
             }else if(tab == 2){
@@ -190,15 +212,13 @@ export default function UnansweredPage({ serviceId }) {
             }else if(tab == 3){
               return res[0] == "IGNORED"
             }
-          }).map((item: any, index: number) => {
-            
+          }).map((item: any, index: number) => {   
             return (
               <div key={index}>
                 <div className="flex items-center justify-between pb-2 border-b border-primary">
                   <h1 className="font-semibold text-xl text-primary">{item[0]}</h1>
                   {item[0] == "ANSWERED" && (
                     <button className="btn-primary" type="button" onClick={() => handleTrained()}>Trained</button>
-
                   )}
                 </div>
 
@@ -216,7 +236,13 @@ export default function UnansweredPage({ serviceId }) {
               </div>
             )
           })
-          :""
+          :
+          <div className="text-center text-red-500">
+            <h1 className="font-semibold">Not Found</h1>
+            <p>Not available data in this section</p>
+          </div>
+          :
+          <Loading />
         }
       </div>
     </div>

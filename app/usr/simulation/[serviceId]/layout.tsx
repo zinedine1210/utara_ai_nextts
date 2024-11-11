@@ -27,13 +27,14 @@ export default function SimulationLayout({
   return (
     <section className="w-full h-full overflow-hidden">
         <div className='flex w-full h-full'>
-          <div className='h-full overflow-y-auto w-96 flex flex-col border-r border-zinc-500'>
+          <div className='h-full overflow-y-auto w-full max-w-80 flex flex-col border-r border-zinc-500'>
             <header className='bg-white border-b border-zinc-500 py-2 px-3'>
               <Select 
                 id='services'
                 name='services'
                 onChange={(value) => handleChooseService(value)}
                 defaultAll={false}
+                label='Select Service'
                 placeholder='Please select your service first'
                 onTrigger={async () => {
                   const filterOptions: FilterOptions[] = [
@@ -61,7 +62,7 @@ export default function SimulationLayout({
                 <button type='button' className={`${pathname == `/usr/simulation/${params.serviceId}/abtest` && "bg-primary text-white"} py-3 px-5 text-xs hover:bg-primary/20 duration-300 ease-in-out w-full text-start flex items-center gap-2`}><Icon icon={IconsCollection.abtest} className=' text-xl'/>AB Test</button>
               </Link>
               <Link href={`/usr/simulation/${params.serviceId}/unanswered`}>
-                <button type='button' className={`${pathname == `/usr/simulation/${params.serviceId}/unanswered` && "bg-primary text-white"} py-3 px-5 text-xs hover:bg-primary/20 duration-300 ease-in-out w-full text-start flex items-center gap-2`}><Icon icon={IconsCollection.abtest} className=' text-xl'/>AB Test</button>
+                <button type='button' className={`${pathname == `/usr/simulation/${params.serviceId}/unanswered` && "bg-primary text-white"} py-3 px-5 text-xs hover:bg-primary/20 duration-300 ease-in-out w-full text-start flex items-center gap-2`}><Icon icon={IconsCollection.unanswered} className=' text-xl'/>Unanswered Question</button>
               </Link>
             </div>
           </div>

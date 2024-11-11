@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
         }, timoutInterval);
     });
     const responseData: ResponseData | any = await Promise.race([requestPromise, timeoutPromise]);
+    console.log(responseData)
     clearTimeout(timeoutId);
     if (responseData.status === -1 && responseData.data === "Timeout") {
         throw new Error("Timeout");

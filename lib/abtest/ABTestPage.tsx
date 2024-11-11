@@ -14,6 +14,7 @@ import { Notify } from "@@/src/utils/script"
 import ModalCreateABTest from "./components/ModalCreateABTest"
 import { Icon } from "@iconify/react"
 import { IconsCollection } from "@@/src/constant/icons"
+import Loading from "@@/app/loading"
 
 export default function ABTestPage({ serviceId }) {
   const { state, setState } = useGlobalContext()
@@ -32,6 +33,7 @@ export default function ABTestPage({ serviceId }) {
   };
 
   const mapData: undefined | ABTestModel[] = state?.[statename]?.data
+  const isLoading: boolean = state?.[statename]?.isLoading
 
   const initialMount = useCallback(async () => {
     let arrayOptionStatus: Options[] = []
@@ -186,14 +188,30 @@ export default function ABTestPage({ serviceId }) {
     }
   ]
 
+  const handleRefresh = () => {
+    setState((prev: any) => {
+      if(prev?.[statename]){
+        prev[statename].isLoading = true
+        prev[statename].data = []
+        prev[statename].onGet(prev[statename].filter)
+      }
+      return prev
+    })
+  }
+
   return (
     <div className="mx-auto w-full md:w-1/2 py-5 overflow-y-auto no-scrollbar">
       <h1 className="text-xl font-semibold">AB Test List</h1>
       <p className="pb-5 text-sm">First, you can {"DO TEST"} first until the status becomes {"TESTED"}, if so, you can correct it by giving the appropriate answer. After that, it is trained to save the {"CORRECTED"} status results into training data</p>
-      <button type="button" className="btn-primary" onClick={() => setState({ ...state, modal: { name: "modalcreateabtest", data: { serviceId } }})}><Icon icon={IconsCollection.abtest}/>Create AB Test</button>
       <ModalCreateABTest name="modalcreateabtest"/>
-      {/* <FilterDatatable statename="abtest"/> */}
-
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <button type="button" className="btn-primary" onClick={() => setState({ ...state, modal: { name: "modalcreateabtest", data: { serviceId } }})}><Icon icon={IconsCollection.abtest}/>Create AB Test</button>
+          <button type="button" onClick={() => handleRefresh()} className="btn-secondary">
+            <Icon icon={IconsCollection.refresh} className="text-xl"/>
+          </button>
+        </div>
+      </div>
       <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
           <ul className="flex flex-wrap -mb-px">
             {
@@ -211,7 +229,7 @@ export default function ABTestPage({ serviceId }) {
 
       <div className="space-y-5 mt-5">
         {
-          mapData ? Object.entries(mapData).filter(res => {
+          !isLoading ? mapData ? Object.entries(mapData).filter(res => {
             if(tab == 1){
               return (res[0] != "TRAINED" && res[0] != "IGNORED")
             }else if(tab == 2){
@@ -220,7 +238,6 @@ export default function ABTestPage({ serviceId }) {
               return res[0] == "IGNORED"
             }
           }).map((item: any, index: number) => {
-            
             return (
               <div key={index}>
                 <div className="flex items-center justify-between pb-2 border-b border-primary">
@@ -248,7 +265,13 @@ export default function ABTestPage({ serviceId }) {
               </div>
             )
           })
-          :""
+          :
+          <div className="text-center text-red-500">
+            <h1 className="font-semibold">Not Found</h1>
+            <p>Not available data in this section</p>
+          </div>
+          :
+          <Loading />
         }
       </div>
     </div>
