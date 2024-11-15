@@ -242,7 +242,7 @@ export default function ABTestPage({ serviceId }) {
               <div key={index}>
                 <div className="flex items-center justify-between pb-2 border-b border-primary">
                   <h1 className="font-semibold text-xl text-primary">{item[0]}</h1>
-                  {(item[0] == "IN_QUEUE") && item[1].length > 0 && (
+                  {(item[0] == "NEW") && item[1].length > 0 && (
                     <button className="btn-primary" type="button" onClick={() => handlerDoTest()}>Do Test</button>
                   )}
                   {item[0] == "CORRECTED" && (

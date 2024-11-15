@@ -15,6 +15,7 @@ export const IconsCollection: {[key: string]: string} = {
     'service': 'eos-icons:service-outlined',
     'addressbook': 'ph:address-book',
     'elipsis-v': 'fe:elipsis-v',
+    'elipsis-h': 'fe:elipsis-h',
     'send': 'teenyicons:send-outline',
     'reply': 'bi:reply',
     'share': 'material-symbols-light:share',

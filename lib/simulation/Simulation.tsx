@@ -26,6 +26,7 @@ export default function Simulation({ serviceId }) {
     const handlerSubmit = async (e: FormEvent) => {
         e.preventDefault()
         setLoadingMsg(true)
+        setData("")
         const payload = {
             collection_name,
             question: data
@@ -124,8 +125,8 @@ export default function Simulation({ serviceId }) {
                       }
                       {
                         loadingMsg && (
-                            <div className="bg-white rounded-2xl shadow-md">
-                                <Icon icon={IconsCollection['elipsis-v']} className="rotate-180"/>
+                            <div className="w-fit ml-auto py-3 px-5 text-center bg-white rounded-2xl shadow-md">
+                                <Icon icon={IconsCollection['elipsis-h']} className="rotate-90 text-3xl animate-pulse"/>
                             </div>
                         )
                       }

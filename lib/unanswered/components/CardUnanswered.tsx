@@ -40,7 +40,7 @@ export default function CardUnanswered({ item, statename }: {
     setLoadingCard(false)
   }
 
-  const onChangeStatus = async (value: "IGNORED" | "NEW") => {
+  const onChangeStatus = async (value: "IGNORED") => {
     setLoadingCard(true)
     const payload: PayloadUnanswered = {
       id: item.id,
@@ -64,7 +64,7 @@ export default function CardUnanswered({ item, statename }: {
             <p className="text-sm font-monospace first-letter:uppercase text-white">{item.question}</p>
           </div>
           <div className="flex items-center gap-2">
-            {
+            {/* {
               item.status != "TRAINED" && (
                 <Select 
                   id="selectstatus"
@@ -75,7 +75,7 @@ export default function CardUnanswered({ item, statename }: {
                   customCss="text-sm py-1 px-3"
                 />
               )
-            }
+            } */}
             {/* <button type="button" onClick={() => handlerDoTest()}><Icon className={`${open && "rotate-180"} duration-300 ease-in-out text-white text-3xl`} icon={IconsCollection['test']}/></button> */}
           </div>
         </div>
