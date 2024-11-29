@@ -9,6 +9,7 @@ export interface AttachmentType {
     rec_by: string
     rec_date: string
     status: string
+    url: string
 }
 export interface TrainingType {
     id: string

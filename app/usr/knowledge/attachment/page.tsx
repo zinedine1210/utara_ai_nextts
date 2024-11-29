@@ -139,6 +139,9 @@ export default function AttachmentPage() {
       <div className="p-5">
         <h1 className="font-bold text-xl">Attachment</h1>
         <p className="text-zinc-600 dark:text-zinc-400">Input your file business here to create knowledge</p>
+          <a href="https://minio.gai.co.id/gai-ai/data/files/tmp/01JDRZ67XMAYS152KB0WJA5D7E.docx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20241129%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241129T031544Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=126477f623932e7c71dcf0a88fc68327658b59e95c80c5fe460a5b97372cb558" download="Dokumen.docx">
+      Download Dokumen
+  </a>
 
         <div className="flex md:items-center md:justify-between mt-5">
           <div className="w-auto md:w-1/2">

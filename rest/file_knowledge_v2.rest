@@ -1,0 +1,112 @@
+### var
+
+@json = application/json
+@localHost = http://localhost:1899
+@devHost = https://gai.co.id/gai-ai-service
+@host = {{devHost}}
+@apiKey = eb7d28cc-40cd-4024-9171-09293c588bdb
+@ownerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnbnVzYSIsImlkIjoiMDFKNkhXODI0WDlDREQ5Rkg2NTRWNFNFUFciLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJPV05FUiIsImNvZGUiOiJyb290IiwiZXhwIjoxNzI2OTAxMzc1fQ.c7mPphsgeFkZZTjEWrC2nQahqxx_93_-l_34CBL6nxw
+@partnerToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3h5IiwiaWQiOiIwMUo5TkhWVEhGVkUzM0pSQ1FDOUsyMTBTOSIsInJvbGUiOlsiQURNSU4iXSwiYXV0aCI6IlBBUlRORVIiLCJjb2RlIjoiYm94IiwiZXhwIjoxNzI5MzE3NjI1fQ.6aAWj8NWu_iCDB33lEDj_LbBj66ImZhBbmGWQKg7YIk
+@clientToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZW1weSIsImlkIjoiMDFKOTE2NE1GRDZTUE5CRFRXQzlKRTlWWlIiLCJyb2xlIjpbIkFETUlOIl0sImF1dGgiOiJDTElFTlQiLCJjb2RlIjoidG1wIiwiZXhwIjoxNzMyODc3MDgzfQ.1ZOrvQ6Zm_RwzaopMg3FEA3EFY7j4HnBtHkRXxF6KIA
+@token = {{clientToken}}
+
+
+### test ==================================================================================================
+
+GET {{host}}/v1/test HTTP/1.1
+
+###
+
+GET {{host}}/v1/database/test HTTP/1.1
+authorization: {{token}}
+
+###
+
+POST {{host}}/v1/database/test/init_db/bxy HTTP/1.1
+authorization: {{token}}
+
+
+### auth ==================================================================================================
+
+### login owner
+
+POST {{host}}/v1/auth/login HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+
+{
+  "username": "gnusa",
+  "password": "123456"
+}
+
+### login partner
+
+POST {{host}}/v1/auth/login HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+
+{
+  "username": "boxy",
+  "password": "123456"
+}
+
+### login client
+
+POST {{host}}/v1/auth/login HTTP/1.1
+Accept: {{json}}
+content-type: {{json}}
+
+{
+  "username": "tempy",
+  "password": "123456"
+}
+
+
+### file ==================================================================================================
+### create
+POST {{host}}/v2/client/file HTTP/1.1
+authorization: {{token}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="files"; filename="binluh satresnarkoba baru.docx"
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+
+< /home/ceeze/Documents/files/polres/binluh satresnarkoba baru.docx
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="files"; filename="sample.pdf"
+Content-Type: application/pdf
+
+< /home/ceeze/Documents/files/sample.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="files"; filename="sample.pdf"
+Content-Type: application/pdf
+
+
+# < /home/ceeze/Documents/files/polres/SOP TPTKP.txt
+# ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+
+### find by id
+GET {{host}}/v2/client/file/id/01JCMQJ3MGKK6S3Q91JN123529 HTTP/1.1
+content-type: {{json}}
+authorization: {{token}}
+
+### find by originalFileName, status
+GET {{host}}/v2/client/file/by HTTP/1.1
+content-type: {{json}}
+authorization: {{token}}
+
+
+### training data =========================================================================================
+
+### create
+POST {{host}}/v2/client/data HTTP/1.1
+content-type: {{json}}
+authorization: {{token}}
+
+{
+  "description": "Polres Test",
+  "version": "v1",
+  "files": ["01JD20J6CNBNACEBSTR8ATDF55", "01JD20J70BTW2Q9ET6KRXDCDAP"]
+}

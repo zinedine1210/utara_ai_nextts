@@ -11,7 +11,7 @@ export async function GET(request: NextRequest, { params }) {
     const timoutInterval = 60000;
     let abortSignal = AbortSignal.timeout(timoutInterval)
     const token = request.cookies.get('auth_token')
-    const requestPromise = await client('/client/service/id/' + id, {
+    const requestPromise = await client('/v1/client/service/id/' + id, {
         headers: {
         Authorization: 'Bearer '+ token?.value
         }

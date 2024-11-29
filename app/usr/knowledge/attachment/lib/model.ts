@@ -12,6 +12,8 @@ export class AttachmentDataModel {
     public recdate: string
     public status: string
     public createAt: string
+    public url: string
+    public urlSubstring: string
     public typeFile: string
     public originalfilenamesubstring: string
 
@@ -26,6 +28,8 @@ export class AttachmentDataModel {
         this.recby = props.rec_by
         this.recdate = props.rec_date
         this.status = props.status
+        this.url = props.url
+        this.urlSubstring = props.url.substring(0, 20)+"..."
         this.createAt = formatDateData(props.rec_date)
         this.typeFile = 'application/' + props.description.split(".")[1]
         this.originalfilenamesubstring = props.original_file_name.length > 30 ? props.original_file_name.substring(0, 30) + "..." : props.original_file_name

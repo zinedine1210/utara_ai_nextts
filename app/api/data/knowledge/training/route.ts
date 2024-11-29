@@ -15,11 +15,12 @@ export async function POST(request: NextRequest) {
   const timoutInterval = 60000;
   let abortSignal = AbortSignal.timeout(timoutInterval)
   const token = request.cookies.get('auth_token')
-  const requestPromise = await client('/client/data/by' + parameter, {
+  const requestPromise = await client('/v1/client/data/by' + parameter, {
     headers: {
       Authorization: 'Bearer '+ token?.value
     }
   }, abortSignal)
+  console.log(requestPromise)
   const timeoutPromise = new Promise((resolve, reject) => {
     timeoutId = setTimeout(() => {
       reject({ "status": -1, "data": "Timeout" });

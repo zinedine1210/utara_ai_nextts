@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
   const timoutInterval = 60000;
   let abortSignal = AbortSignal.timeout(timoutInterval)
   const token = request.cookies.get('auth_token')
-  const requestPromise = await client('/root/_enum' + parameter, {
+  const requestPromise = await client('/v1/root/_enum' + parameter, {
     headers: {
       Authorization: 'Bearer '+ token?.value
     }

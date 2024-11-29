@@ -19,6 +19,7 @@ export const tableTraining: TableHeader[] = [
 export const tableAttachment: TableHeader[] = [
     { label: "File Name", copy: "originalfilename", property: "originalfilenamesubstring", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Description", property: "description", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
+    { label: "URL", property: "urlSubstring", copy:"url", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Type", property: "typeFile", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Size", property: "originalfilesize", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },
     { label: "Date", property: "createAt", cssRow: "font-medium text-gray-900 whitespace-nowrap dark:text-white" },

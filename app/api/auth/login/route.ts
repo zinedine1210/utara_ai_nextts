@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   let timeoutId;
   const timoutInterval = 60000;
   let abortSignal = AbortSignal.timeout(timoutInterval)
-  const requestPromise = await client('/auth/login', {
+  const requestPromise = await client('/v1/auth/login', {
     method: 'POST',
     headers: {
     },
