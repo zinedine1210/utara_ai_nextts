@@ -5,7 +5,7 @@ const nextConfig = {
     env: {
         BASE_DOMAIN: 'https://utara-ai.vercel.app',
         // BASE_DOMAIN: 'http://localhost:3000',
-        PUBLIC_API_URL: 'https://gai.co.id/gai-ai-service/v1',
+        PUBLIC_API_URL: 'https://gai.co.id/gai-ai-service',
         WHATSAPP_API_URL: 'https://wa-un.gai.co.id',
         SERVER: 'production',
         // SERVER: 'development',
